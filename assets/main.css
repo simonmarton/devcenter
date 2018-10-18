@@ -117,30 +117,6 @@ header.top-bar {
           cursor: pointer; }
           header.top-bar .middle-aligner .search-bar .input-wrapper .search-clear:before {
             content: ""; }
-      header.top-bar .middle-aligner .search-bar ul#results-container {
-        position: absolute;
-        z-index: 5;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        margin: 1rem 0;
-        border-radius: .2rem;
-        padding-left: 0;
-        box-shadow: 0rem 0rem 2rem rgba(0, 0, 0, 0.5);
-        font-size: 1.5rem;
-        list-style: none;
-        background-color: white;
-        overflow: hidden; }
-        header.top-bar .middle-aligner .search-bar ul#results-container li {
-          box-shadow: 0 -0.1rem 0 rgba(0, 0, 0, 0.07); }
-          header.top-bar .middle-aligner .search-bar ul#results-container li a {
-            display: block;
-            padding: 1.2rem 1.5rem;
-            text-decoration: none;
-            color: black;
-            transition: background-color .25s; }
-            header.top-bar .middle-aligner .search-bar ul#results-container li a:hover, header.top-bar .middle-aligner .search-bar ul#results-container li a:focus {
-              background-color: rgba(124, 77, 255, 0.1); }
     header.top-bar .middle-aligner .source-code {
       display: flex;
       align-items: center;
