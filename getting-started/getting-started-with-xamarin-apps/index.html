@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Starting parallel builds with a single trigger - Bitrise DevCenter
+				Getting started with Xamarin apps - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Starting parallel builds with a single trigger
+							Getting started with Xamarin apps
 						
 					</div>
 				</div>
@@ -299,7 +299,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/getting-started/getting-started-with-xamarin-apps/" title="Getting started with Xamarin apps">Getting started with Xamarin apps</a>
+				<a href="/getting-started/getting-started-with-xamarin-apps/" title="Getting started with Xamarin apps" class="current">Getting started with Xamarin apps</a>
 			
 		
 		
@@ -644,7 +644,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/builds/triggering-builds/trigger-multiple-workflows/" title="Starting parallel builds with a single trigger" class="current">Starting parallel builds with a single trigger</a>
+				<a href="/builds/triggering-builds/trigger-multiple-workflows/" title="Starting parallel builds with a single trigger">Starting parallel builds with a single trigger</a>
 			
 		
 		
@@ -1863,69 +1863,265 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Starting parallel builds with a single trigger</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/builds/triggering-builds/trigger-multiple-workflows.md" target="_blank"></a>
+						<h1>Getting started with Xamarin apps</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/getting-started/getting-started-with-xamarin-apps.md" target="_blank"></a>
 					</div>
 				
-				<p>If you have more than one concurrency, you can run more than one build simultaneously. And since we want to make life as easy for you as possible, these builds can be started automatically, with a single trigger. Let’s go through how it works!</p>
-
-<p>In the example, we have three workflows of a single app set up to run at the same time. Let’s call these workflows <code class="highlighter-rouge">Trigger</code>, <code class="highlighter-rouge">Building</code> and <code class="highlighter-rouge">Testing</code>. The workflow called <code class="highlighter-rouge">Trigger</code> will be triggered by a pull request, and then the workflow will trigger <code class="highlighter-rouge">Building</code> and <code class="highlighter-rouge">Testing</code> which will run simultaneously.</p>
-
-<p>All workflows run on separate, “clean” Virtual Machines. They can also run on different types of stacks: to choose the stack for any workflow, enter the <code class="highlighter-rouge">Workflow Editor</code> of the app and select the <code class="highlighter-rouge">Stack</code> tab.</p>
-
-<p>If any of the builds fail, the build will be considered a failed build. If the build is triggered by a webhook, Bitrise will send a summarized build result to the Git hosting provider. If <strong>any</strong> of the parallel builds fail, a failed status will be reported.</p>
-
-<p><strong>What you need</strong>:</p>
+				<p><a href="/tutorials/xamarin/index/">Xamarin</a> provides a developer with tools that can help them building cross-platform mobile applications. Bitrise supports Xamarin apps, of course: this guide aims to walk you through the procedure of:</p>
 
 <ul>
-  <li>a Personal Access Token</li>
-  <li>a Secret Environment Variable storing the token</li>
-  <li>the <code class="highlighter-rouge">Bitrise Start Build</code> step</li>
-  <li>the <code class="highlighter-rouge">Bitrise Wait for Build</code> step</li>
+  <li>adding a Xamarin app to Bitrise</li>
+  <li>testing the app</li>
+  <li>deploying the app</li>
 </ul>
 
+<p>You can do the entire procedure in one single workflow but we recommend using at least two: one to test your app and one to deploy it. There is no need to have separate workflows for the different project types, though: you can build both an iOS and an Android version of a Xamarin app within a single workflow.</p>
+
+<h2 id="before-you-start">Before you start <a href="#before-you-start" class="anchor-symbol">⚓</a></h2>
+
+<p>Before adding a Xamarin app on Bitrise, you need to prepare your Xamarin solution file. Bitrise detects the solution file and all the available <a href="https://docs.microsoft.com/en-us/visualstudio/ide/understanding-build-configurations?view=vs-2017">solution configurations</a> present in it.</p>
+
+<p>A Xamarin solution file can contain multiple projects. Your solution configuration determines which projects (<em>solution items</em>) should be built and what project configuration type (for example, <em>debug</em> or <em>release</em>) the build should use.</p>
+
+<p><a href="https://docs.microsoft.com/en-us/appcenter/build/xamarin/ios/solution-configuration-mappings">Set up your solution configurations in Visual Studio</a>. The solution file will have to contain all the solution configurations that you want to build on Bitrise. Also, make sure that a solution configuration you wish to build on a given solution platform is compatible with that platform.</p>
+
+<div class="message-box example">
+<div class="message-title">
+    <p>Solution configuration</p>
+  </div>
+
+<div class="message-content">
+    <p>For example, if your solution file contains an Android and an iOS project but you want Bitrise to build only the Android project, set up a solution configuration in Visual Studio that only builds the Android project and use that configuration on Bitrise. Use the appropriate solution platform for that configuration: for example, if you only want to build an Android project, do not set iPhone as your solution platform.</p>
+  </div>
+</div>
+
+<h2 id="adding-a-xamarin-app">Adding a Xamarin app <a href="#adding-a-xamarin-app" class="anchor-symbol">⚓</a></h2>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Do you have a Bitrise account?</p>
+  </div>
+
+<div class="message-content">
+    <p>Make sure you have signed up to <a href="https://www.bitrise.io">bitrise.io</a> and can access your Bitrise account. Here are <a href="/getting-started/index#signing-up-to-bitrise">4 ways</a> on how to connect your Bitrise account to your account found on a Git service provider.</p>
+  </div>
+</div>
+
 <ol>
+  <li>Click the <code class="highlighter-rouge">+</code> sign on the top menu bar and select <code class="highlighter-rouge">Add app</code>.</li>
+  <li>On the Create new App page, choose the account you wish to add the app to.</li>
+  <li>Set the privacy of the app to either Private or <a href="/getting-started/adding-a-new-app/public-apps">Public</a> and click <code class="highlighter-rouge">Next</code>.</li>
+  <li>Select the Git hosting service that hosts your repository, then find and select your repository that hosts the project. Read more about <a href="/getting-started/adding-a-new-app/connecting-your-repository">connecting your repository</a>.</li>
+  <li>When prompted to set up repository access, click <code class="highlighter-rouge">No, auto-add SSH key</code>. Read more about <a href="/getting-started/adding-a-new-app/setting-up-ssh-keys/">SSH keys</a>.</li>
+  <li>Type the name of the branch that includes your project’s configuration - master, for example - then click <code class="highlighter-rouge">Next</code>.</li>
+  <li>Wait while Bitrise is validating your project. We look for your configuration files and set up your app based on them. In the case of a Xamarin app, we’re looking for the Xamarin Solution file.</li>
   <li>
-    <p>Create a <strong>Personal Access Token</strong> for your user.</p>
+    <p>Select the Xamarin solution configuration. The available options are based on the solution file. This will be stored as an <a href="https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/">Environment Variable</a> and it can be changed later.</p>
 
-    <p>Go to <code class="highlighter-rouge">Account settings</code> and select the <code class="highlighter-rouge">Security</code> option on the left side. Click the <code class="highlighter-rouge">Generate new</code> button.</p>
-
-    <p><img src="/img/getting-started/triggering-builds/generate-token.png" alt="Access token" /> <strong>IMPORTANT</strong>: Make sure to copy the code once it is generated. You will not be able to see it again!</p>
+    <p><img src="/img/xamarin-setup-config.png" alt="" /></p>
   </li>
-  <li>
-    <p>Create a Secret Environment Variable on the <code class="highlighter-rouge">Secrets</code> tab of the app’s <code class="highlighter-rouge">Workflow Editor</code> and add the token as its value.</p>
+  <li>Select the Xamarin solution platform. This will be stored as an Environment Variable and it can be changed later.</li>
+  <li>Confirm your build configuration.</li>
+  <li>Register a webhook when prompted so that Bitrise can start a build automatically when code is pushed to your repository, or a pull request is created. This also kicks off your first build - click the message and it will take you to the build page.</li>
+</ol>
 
-    <p><img src="/img/getting-started/triggering-builds/secret_token.png" alt="Secret env" />
-Feel free to use any key you wish for the secret. We recommend something simple like <code class="highlighter-rouge">$ACCESS_TOKEN</code>.</p>
-  </li>
-  <li>
-    <p>Add the <code class="highlighter-rouge">Bitrise Start Build</code> step to the <code class="highlighter-rouge">Trigger</code> workflow.</p>
+<h2 id="installing-dependencies">Installing dependencies <a href="#installing-dependencies" class="anchor-symbol">⚓</a></h2>
 
-    <p><strong>IMPORTANT:</strong> The <code class="highlighter-rouge">Bitrise Start Build</code> step will set an environment variable to all builds it starts: <code class="highlighter-rouge">$SOURCE_BITRISE_BUILD_NUMBER</code>. This means that all builds of the app started by this step will have the same build number despite running with different workflows.</p>
-  </li>
-  <li>
-    <p>Add the secret env storing your personal access token to the <code class="highlighter-rouge">Bitrise Access Token</code> input of the step: click the <code class="highlighter-rouge">Insert variable</code> button and choose the key you created.</p>
+<p>Installing your dependencies with Xamarin apps is taken care of by a dedicated Step: <code class="highlighter-rouge">NuGet restore</code>. This Step is part of every automatically created <a href="/getting-started/getting-started-workflows/">workflow</a> for Xamarin apps and it has one required input: the path to the Xamarin solution file which is stored as an Environment Variable when you add the app.</p>
 
-    <p><img src="/img/getting-started/triggering-builds/access-token-input.png" alt="Secret env" /></p>
-  </li>
+<ol>
+  <li>Enter the Workflow Editor of your app, and click the <code class="highlighter-rouge">Workflows</code> tab.</li>
   <li>
-    <p>Find the <code class="highlighter-rouge">Workflows</code> input of the step, and add <code class="highlighter-rouge">Building</code> and <code class="highlighter-rouge">Testing</code> to it.</p>
+    <p>Make sure you have the <code class="highlighter-rouge">NuGet restore</code> Step in your workflow.</p>
 
-    <p><img src="/img/getting-started/triggering-builds/workflows-input.png" alt="Workflows input" /></p>
-  </li>
-  <li>
-    <p>Add the <code class="highlighter-rouge">Bitrise Wait for Build</code> step as the <strong>last step</strong> of the <code class="highlighter-rouge">Trigger</code> workflow.</p>
-
-    <p><strong>IMPORTANT:</strong> The step checks statuses of the builds defined in the step. The builds are defined in the <code class="highlighter-rouge">Build slugs</code> input: the slugs are the output of the <code class="highlighter-rouge">Bitrise Start Build</code> step. As long as the builds defined by the slugs are running, the step will hold the build it is running in. The build will fail if any of the builds included in the step fail.</p>
-  </li>
-  <li>
-    <p>Add the secret env storing your personal access token to the <code class="highlighter-rouge">Bitrise Access Token</code> input of the step: click the <code class="highlighter-rouge">Insert variable</code> button and choose the key you created.</p>
-
-    <p><img src="/img/getting-started/triggering-builds/access-token-input.png" alt="Secret env" /></p>
+    <p>The Step’s single required input is the path to the Xamarin solution file. By default, the input is an <a href="/getting-started/getting-started-steps/#environment-variables-as-step-inputs">Environment Variable</a>, stored when adding the app to Bitrise. If you want to use a different solution file, click on the <code class="highlighter-rouge">Env Vars</code> tab in the Workflow Editor to change the value of the Environment Variable.</p>
   </li>
 </ol>
 
-<p>And you are done! Once you trigger the <code class="highlighter-rouge">Trigger</code> workflow, the <code class="highlighter-rouge">Bitrise Start Build</code> step of the workflow will trigger two more builds running simultaneously. If those two builds are successful, the <code class="highlighter-rouge">Bitrise Wait for Build</code> step lets the first build finish. A single status report is sent to the git hosting provider, regardless whether the build is successful or not.</p>
+<h2 id="testing-xamarin-apps">Testing Xamarin apps <a href="#testing-xamarin-apps" class="anchor-symbol">⚓</a></h2>
+
+<p>You can run <strong>unit tests</strong> and <strong>UI tests</strong> on Bitrise, both with Android and iOS projects. It is easy to configure and you can use all the testing frameworks available on the Microsoft App Center.</p>
+
+<h3 id="unit-testing">Unit testing <a href="#unit-testing" class="anchor-symbol">⚓</a></h3>
+
+<p>Unit tests of Xamarin apps can be run with the <code class="highlighter-rouge">NUnit Runner</code> Step. The Step runs NUnit 2.x and NUnit 3.0 or higher tests with the NUnit Console Runner (<em>nunit3-console.exe</em>).</p>
+
+<ol>
+  <li>Enter the Workflow Editor of your app, and click the <code class="highlighter-rouge">Workflows</code> tab.</li>
+  <li>
+    <p>Add the <code class="highlighter-rouge">NUnit runner</code> Step to your workflow.</p>
+
+    <p>This Step should be after the <code class="highlighter-rouge">NuGet restore</code> Step: you will want to install all your dependencies before running tests on your app.</p>
+  </li>
+  <li>Fill in the required input variables. By default, all the inputs are <a href="/getting-started/getting-started-steps/#environment-variables-as-step-inputs">Environment Variables</a>. If you want to use a different solution file or solution configuration, click on the <code class="highlighter-rouge">Env Vars</code> tab in the Workflow Editor to change the value of the Environment Variable.
+    <ul>
+      <li><strong>Path to Xamarin Solution</strong>: the location of your Xamarin solution file.</li>
+      <li><strong>Xamarin project configuration</strong>: the solution configuration, set up in Visual Studio, that you want to run on Bitrise. Change the appropriate environment variable if you want to run a different configuration; for example, if you only want to build an iOS project, as opposed to both iOS and Android projects.</li>
+      <li><strong>Xamarin platform</strong>: the target platform of your solution configuration.</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Debug inputs</p>
+  </div>
+
+<div class="message-content">
+    <p>In the Debug input group, you can configure the Step further: set the building tool, set additional flags for the NUnit Console Runner, and configure whether you want to build your test projects before running tests.</p>
+  </div>
+</div>
+
+<h3 id="ui-testing">UI testing <a href="#ui-testing" class="anchor-symbol">⚓</a></h3>
+
+<p>For UI tests, we strongly recommend using our <code class="highlighter-rouge">App Center upload and schedule tests</code> Step. You need to set up the tests in the Visual Studio App Center - <a href="/testing/run-your-tests-in-the-app-center/">read more about it in our guide</a>. Let’s go through the process in brief.</p>
+
+<ol>
+  <li>
+    <p>Add the <code class="highlighter-rouge">App Center upload and schedule tests</code> Step to your workflow.</p>
+
+    <p>This Step should be after the <code class="highlighter-rouge">NuGet restore</code> and the <code class="highlighter-rouge">Xamarin Archive</code> Steps, in order to install all your dependencies and build the app before running tests.</p>
+
+    <p><img src="/img/app-center-test.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Fill in the required inputs of the Step. You can find all these in the App Center after setting up your test run: check the <strong>Submit</strong> tab.</p>
+  </li>
+</ol>
+
+<h2 id="deploying-xamarin-apps">Deploying Xamarin apps <a href="#deploying-xamarin-apps" class="anchor-symbol">⚓</a></h2>
+
+<p>With the help of Bitrise, you can deploy a Xamarin app to:</p>
+
+<ul>
+  <li>Bitrise.io</li>
+  <li>the App Store</li>
+  <li>Google Play</li>
+</ul>
+
+<p>To deploy your app, you need to build, sign and export the application file.</p>
+
+<h3 id="code-signing-xamarin-apps">Code signing Xamarin apps <a href="#code-signing-xamarin-apps" class="anchor-symbol">⚓</a></h3>
+
+<p>Code signing requires different approaches for iOS and Android projects. We’re presenting a brief overview here of code signing for both platforms.</p>
+
+<p>For the purposes of deploying your app, we recommend <a href="/getting-started/getting-started-workflows/">creating a new workflow</a>, based on the automatically created deploy workflow.</p>
+
+<h4 id="android"><strong>Android</strong> <a href="#android" class="anchor-symbol">⚓</a></h4>
+
+<p>For Android, you need an APK and you need to sign that APK. Bitrise makes that happen with the <code class="highlighter-rouge">Sign APK</code> Step. The Step requires a keystore file, a keystore password and a keystore alias.</p>
+
+<ol>
+  <li><a href="https://docs.microsoft.com/en-us/xamarin/android/deploy-test/signing/?tabs=vswin">Create a code signing identity in Visual Studio</a>.</li>
+  <li>Upload the keystore file to Bitrise: open the Workflow Editor of your app, go to the <code class="highlighter-rouge">Code Signing</code> tab and upload the file to the <code class="highlighter-rouge">ANDROID KEYSTORE FILE</code> section.</li>
+  <li>Set a keystore password, a keystore alias and a private key password.</li>
+  <li>On the <code class="highlighter-rouge">Workflows</code> tab, add the <code class="highlighter-rouge">Sign APK</code> Step to your workflow, AFTER the <code class="highlighter-rouge">Xamarin Archive</code> Step.</li>
+</ol>
+
+<p>Read more about using the <code class="highlighter-rouge">Sign APK</code> Step <a href="/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/">in our guide</a>!</p>
+
+<h4 id="ios"><strong>iOS</strong> <a href="#ios" class="anchor-symbol">⚓</a></h4>
+
+<ol>
+  <li>Set up your code signing identity and provisioning profile <a href="https://docs.microsoft.com/en-us/xamarin/ios/deploy-test/provisioning/">on Visual Studio</a>.</li>
+  <li>In the solution file, find the iOS project you want to build and set up its project options. You need to set:
+    <ul>
+      <li>the signing identity you want to use (for example, Developer)</li>
+      <li>the provisioning profile</li>
+    </ul>
+
+    <p>You can also set up custom entitlements in a .plist file.</p>
+  </li>
+  <li>On your own machine, use our <a href="https://github.com/bitrise-tools/codesigndoc">codesigndoc</a> tool to collect the code signing files of your project.</li>
+  <li>Upload the files - the .p12 certificate and the provisioning profile - to Bitrise: open the Workflow Editor of your app and upload the files on the <code class="highlighter-rouge">Code Signing</code> tab.</li>
+  <li>Add the <code class="highlighter-rouge">Certificate and profile installer</code> Step to your workflow.</li>
+</ol>
+
+<p>Read more about iOS code signing <a href="/code-signing/ios-code-signing/create-signed-ipa-for-xamarin/">in our guide</a>!</p>
+
+<h3 id="exporting-the-app-package-file">Exporting the app package file <a href="#exporting-the-app-package-file" class="anchor-symbol">⚓</a></h3>
+
+<p>On Bitrise, it does not matter whether you want to export an .ipa file, an .apk file or an .app file: the process is the same for all Xamarin apps. To make sure you build the correct project type, set up your solution configurations in Visual Studio.</p>
+
+<p>For example, if you want to get an .apk file to upload it to Google Play, use a <strong>Release</strong> project configuration for your Android project in your solution configuration.</p>
+
+<p>For your iOS project, set up the correct code signing identity in Visual Studio: for example, if you want to upload your app to the App Store, use a Distribution identity with an App Store type provisioning profile.</p>
+
+<ol>
+  <li>Enter the Workflow Editor of your app, and click the <code class="highlighter-rouge">Workflows</code> tab.</li>
+  <li>
+    <p>Make sure you have the <code class="highlighter-rouge">Xamarin Archive</code> Step in your workflow.</p>
+
+    <p><img src="/img/xamarin-archive.png" alt="" /></p>
+  </li>
+  <li>Make sure the required inputs of the Step have appropriate values. By default, all the inputs are <a href="/getting-started/getting-started-steps/#environment-variables-as-step-inputs">Environment Variables</a>. Click on the <code class="highlighter-rouge">Env Vars</code> tab in the Workflow Editor to change the value of the Environment Variable.
+    <ul>
+      <li><strong>Path to the Xamarin Solution file</strong>: the location of your Xamarin solution file.</li>
+      <li><strong>Xamarin project configuration</strong>: the solution configuration, set up in Visual Studio, that you want to run on Bitrise. Change the appropriate environment variable if you want to run a different configuration; for example, if you only want to build an iOS project, as opposed to both iOS and Android projects.</li>
+      <li><strong>Xamarin solution platform</strong>: the target platform of your solution configuration.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="deploying-to-the-app-store">Deploying to the App Store <a href="#deploying-to-the-app-store" class="anchor-symbol">⚓</a></h3>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Before you start</p>
+  </div>
+
+<div class="message-content">
+    <p>Make sure that you have the correct solution configuration in Visual Studio! You need to use a Distribution type code signing identity with an App Store provisioning profile. Also, make sure that the Distribution certificate and the provisioning profile are uploaded to Bitrise!</p>
+  </div>
+</div>
+
+<ol>
+  <li>Go to the <code class="highlighter-rouge">Workflows</code> tab of the Workflow Editor.</li>
+  <li>Select the workflow you created for deploying your app.</li>
+  <li>Check that the code signing Steps and the <code class="highlighter-rouge">Xamarin Archive</code> Step are included in the workflow.</li>
+  <li>If you want to use a different solution configuration, change the values of the relevant Environment Variables on the the <code class="highlighter-rouge">Env Var</code> tab. You can check out which Env Vars you need to change in the inputs of the <code class="highlighter-rouge">Xamarin Archive</code> Step.</li>
+  <li>
+    <p>Add the <code class="highlighter-rouge">Deploy to iTunes Connect - Application Loader</code> Step to your workflow.</p>
+
+    <p><img src="/img/itunes-connect.png" alt="" /></p>
+  </li>
+  <li>Click the <code class="highlighter-rouge">Deploy to iTunes Connect - Application Loader</code>  Step, and enter your Apple ID and password in the relevant input field.</li>
+  <li>Start a build!</li>
+</ol>
+
+<h3 id="deploying-to-google-play">Deploying to Google Play <a href="#deploying-to-google-play" class="anchor-symbol">⚓</a></h3>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Before you start</p>
+  </div>
+
+<div class="message-content">
+    <p>Make sure that you have the correct solution configuration in Visual Studio! You need a <strong>Release</strong> configuration.</p>
+  </div>
+</div>
+
+<ol>
+  <li>Go to the <code class="highlighter-rouge">Workflows</code> tab of the Workflow Editor.</li>
+  <li>Select the workflow you created for deploying your app.</li>
+  <li>Check that the code signing Steps and the <code class="highlighter-rouge">Xamarin Archive</code> Step are included in the workflow.</li>
+  <li>If you want to use a different solution configuration, change the values of the relevant Environment Variables on the the <code class="highlighter-rouge">Env Var</code> tab. You can check out which Env Vars you need to change in the inputs of the <code class="highlighter-rouge">Xamarin Archive</code> Step.</li>
+  <li>
+    <p>Add the <code class="highlighter-rouge">Google Play Deploy</code> Step to the workflow.</p>
+
+    <p>The Step needs to be after the <code class="highlighter-rouge">Xamarin Archive</code> Step.</p>
+  </li>
+  <li>
+    <p>Upload the Service Account JSON key file to the <strong>Generic File Storage</strong> on the <code class="highlighter-rouge">Code Signing</code>tab of the Workflow Editor.</p>
+
+    <p>Learn more about <a href="/tutorials/deploy/android-deployment/#set-up-google-play-api-access">how to access your JSON key file</a>.</p>
+  </li>
+  <li>Create a Secret Environment Variable to reference the Service Account’s JSON key file.</li>
+  <li>Click the <code class="highlighter-rouge">Google Play Deploy</code> Step, and add the Service Account’s JSON key file path and the package name in the relevant input field.</li>
+  <li>Start a build!</li>
+</ol>
+
+<p>If the build is successful, congratulations - you’ve just deployed your Xamarin app!</p>
 
 			</main>
 		</div>
