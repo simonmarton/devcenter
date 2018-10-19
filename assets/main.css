@@ -318,6 +318,8 @@ main.content {
     opacity: 0.26; }
     main.content h1:hover a.anchor-symbol:hover, main.content h1:hover a.anchor-symbol:focus, main.content h2:hover a.anchor-symbol:hover, main.content h2:hover a.anchor-symbol:focus, main.content h3:hover a.anchor-symbol:hover, main.content h3:hover a.anchor-symbol:focus, main.content h4:hover a.anchor-symbol:hover, main.content h4:hover a.anchor-symbol:focus, main.content h5:hover a.anchor-symbol:hover, main.content h5:hover a.anchor-symbol:focus, main.content h6:hover a.anchor-symbol:hover, main.content h6:hover a.anchor-symbol:focus {
       opacity: 1; }
+  main.content ol li {
+    margin: 20px; }
   main.content .message-box {
     margin-top: 2rem;
     margin-bottom: 2rem;
