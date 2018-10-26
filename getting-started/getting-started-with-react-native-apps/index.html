@@ -2033,11 +2033,21 @@
 				
 				<p>You can easily set up and configure your React Native project on Bitrise - the power is in your hands if you want to deploy both native versions or just one to distribution platforms! Your React Native repo can consists of an Android and an iOS project so configurations should be done as you would normally do with Android and iOS apps. When running a React Native project, you will see that first an Android, then an iOS build gets built. If your organization has more than one concurrency, you can have Android and iOS builds run simultaneously.</p>
 
+<ul>
+  <li><a href="/getting-started/getting-started-with-react-native-apps/#before-setting-up-a-react-native-project">Before setting up a React Native project</a></li>
+  <li><a href="/getting-started/getting-started-with-react-native-apps/#adding-a-react-native-project-to-bitriseio">Adding a React Native project to bitrise.io</a></li>
+  <li><a href="/getting-started/getting-started-with-react-native-apps/#installing-dependencies">Installing dependencies</a></li>
+  <li><a href="/getting-started/getting-started-with-react-native-apps/#code-signing">Code signing</a></li>
+  <li><a href="/getting-started/getting-started-with-react-native-apps/#testing-your-project">Testing your project</a></li>
+  <li><a href="/getting-started/getting-started-with-react-native-apps/#deploying-to-bitrise">Deploying to Bitrise</a></li>
+  <li><a href="/getting-started/getting-started-with-react-native-apps/#deploying-to-an-app-store">Deploying to an app store</a></li>
+</ul>
+
 <h2 id="before-setting-up-a-react-native-project">Before setting up a React Native project <a href="#before-setting-up-a-react-native-project" class="anchor-symbol">⚓</a></h2>
 
 <p>Make sure you have signed up to <a href="https://www.bitrise.io">bitrise.io</a> and can access your Bitrise account. If you haven’t signed up yet, here are <a href="https://devcenter.bitrise.io/getting-started/index#signing-up-to-bitrise">4 ways</a> to do that.</p>
 
-<h2 id="add-a-react-native-project-to-bitriseio">Add a React Native project to bitrise.io <a href="#add-a-react-native-project-to-bitriseio" class="anchor-symbol">⚓</a></h2>
+<h2 id="adding-a-react-native-project-to-bitriseio">Adding a React Native project to bitrise.io <a href="#adding-a-react-native-project-to-bitriseio" class="anchor-symbol">⚓</a></h2>
 
 <p>In this tutorial, we’re using this <a href="https://github.com/bitrise-samples/sample-apps-react-native-ios-and-android">sample app</a>. Let’s start!</p>
 
@@ -2074,7 +2084,7 @@
 
 <p>You have successfully set up your React Native project on <a href="https://www.bitrise.io">bitrise.io</a>! Your first build gets kicked off automatically using the primary workflow. You can check the generated reports of the first build on the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab of your Build’s page.</p>
 
-<h2 id="install-dependencies">Install dependencies <a href="#install-dependencies" class="anchor-symbol">⚓</a></h2>
+<h2 id="installing-dependencies">Installing dependencies <a href="#installing-dependencies" class="anchor-symbol">⚓</a></h2>
 
 <h3 id="javascript-dependencies">Javascript dependencies <a href="#javascript-dependencies" class="anchor-symbol">⚓</a></h3>
 
@@ -2098,7 +2108,7 @@
 
 <p>Let’s see the process step by step!</p>
 
-<h3 id="sign-your-android-project">Sign your Android project <a href="#sign-your-android-project" class="anchor-symbol">⚓</a></h3>
+<h3 id="signing-your-android-project">Signing your Android project <a href="#signing-your-android-project" class="anchor-symbol">⚓</a></h3>
 
 <ol>
   <li>Select the <code class="highlighter-rouge">deploy</code> workflow at the <code class="highlighter-rouge">WORKFLOW</code> dropdown menu in the top left corner of your apps’ Workflow Editor.</li>
@@ -2125,7 +2135,7 @@
 
 <p>The Android chunk of code signing is done!</p>
 
-<h3 id="sign-and-export-your-ios-project-for-testing">Sign and export your iOS project for testing <a href="#sign-and-export-your-ios-project-for-testing" class="anchor-symbol">⚓</a></h3>
+<h3 id="signing-and-exporting-your-ios-project-for-testing">Signing and exporting your iOS project for testing <a href="#signing-and-exporting-your-ios-project-for-testing" class="anchor-symbol">⚓</a></h3>
 
 <p>Code signing your iOS project depends on what you wish to do with the exported .ipa file. In this section, we describe how to code sign your project if you wish to <strong>install and test it on internal testers’ registered devices</strong>. You will need an .ipa file exported with the <code class="highlighter-rouge">development</code> export method to share your project with testers.</p>
 
@@ -2178,7 +2188,7 @@
   </div>
 </div>
 
-<h3 id="sign-and-export-your-ios-project-for-deployment">Sign and export your iOS project for deployment <a href="#sign-and-export-your-ios-project-for-deployment" class="anchor-symbol">⚓</a></h3>
+<h3 id="signing-and-exporting-your-ios-project-for-deployment">Signing and exporting your iOS project for deployment <a href="#signing-and-exporting-your-ios-project-for-deployment" class="anchor-symbol">⚓</a></h3>
 
 <p>If you set up your code signing files and created an .ipa file for your internal testers, it is time to <strong>involve external testers and then to publish your iOS app to the App Store</strong>.</p>
 
@@ -2202,13 +2212,13 @@
   </li>
 </ol>
 
-<h2 id="test-your-project">Test your project <a href="#test-your-project" class="anchor-symbol">⚓</a></h2>
+<h2 id="testing-your-project">Testing your project <a href="#testing-your-project" class="anchor-symbol">⚓</a></h2>
 
 <p>You can use React Native’s built in testing method, called <code class="highlighter-rouge">jest</code>. Add another <code class="highlighter-rouge">Run nmp command</code> step to your workflow, and type <code class="highlighter-rouge">test</code> in the <code class="highlighter-rouge">npm command with arguments to run</code> input field.</p>
 
 <p><img src="/img/run-nmp-test.png" alt="" /></p>
 
-<h2 id="deploy-to-bitrise">Deploy to Bitrise <a href="#deploy-to-bitrise" class="anchor-symbol">⚓</a></h2>
+<h2 id="deploying-to-bitrise">Deploying to Bitrise <a href="#deploying-to-bitrise" class="anchor-symbol">⚓</a></h2>
 
 <p>The <code class="highlighter-rouge">Deploy to bitrise.io</code> step uploads all the artifacts related to your build into the<a href="https://devcenter.bitrise.io/builds/build-artifacts-online/"> APPS &amp; ARTIFACTS </a>tab on your Build’s page.</p>
 
@@ -2219,11 +2229,11 @@
   <li>In the <code class="highlighter-rouge">Notify: User Roles</code>, add the role so that only those get notified who have been granted with this role. Or fill out the <code class="highlighter-rouge">Notify: Emails</code> field with email addresses of the users you want to notify. Make sure you set those email addresses as <a href="https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/">secret env vars</a>! These details can be also modified under <code class="highlighter-rouge">Notifications</code> if you click the <code class="highlighter-rouge">eye</code> icon next to your generated APK/.ipa file in the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab.</li>
 </ol>
 
-<h2 id="deploy-to-an-app-store">Deploy to an app store <a href="#deploy-to-an-app-store" class="anchor-symbol">⚓</a></h2>
+<h2 id="deploying-to-an-app-store">Deploying to an app store <a href="#deploying-to-an-app-store" class="anchor-symbol">⚓</a></h2>
 
 <p>If you wish to deploy your iOS app, follow the steps in <a href="/getting-started/getting-started-with-react-native-apps/#sign-and-export-your-ios-project-for-deployment">Code sign your iOS project for deployment</a>.</p>
 
-<h3 id="deploy-your-ios-app-to-testflight-and-itunes-connect">Deploy your iOS app to Testflight and iTunes Connect <a href="#deploy-your-ios-app-to-testflight-and-itunes-connect" class="anchor-symbol">⚓</a></h3>
+<h3 id="deploying-your-ios-app-to-testflight-and-itunes-connect">Deploying your iOS app to Testflight and iTunes Connect <a href="#deploying-your-ios-app-to-testflight-and-itunes-connect" class="anchor-symbol">⚓</a></h3>
 
 <div class="message-box important">
 <div class="message-title">
@@ -2255,7 +2265,7 @@
   </li>
 </ol>
 
-<h3 id="deploy-your-android-app-to-google-play-store">Deploy your Android app to Google Play Store <a href="#deploy-your-android-app-to-google-play-store" class="anchor-symbol">⚓</a></h3>
+<h3 id="deploying-your-android-app-to-google-play-store">Deploying your Android app to Google Play Store <a href="#deploying-your-android-app-to-google-play-store" class="anchor-symbol">⚓</a></h3>
 
 <div class="message-box important">
 <div class="message-title">
