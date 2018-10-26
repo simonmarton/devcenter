@@ -2033,7 +2033,14 @@
 				
 				<p>In this guide, we’ll walk you through how to add an Android app to Bitrise, what primary and deploy workflows can do, and finally how to test and deploy your app to <a href="https://www.bitrise.io/">bitrise.io</a> and to the App Store.</p>
 
-<h2 id="add-an-android-app-to-bitriseio">Add an Android app to bitrise.io <a href="#add-an-android-app-to-bitriseio" class="anchor-symbol">⚓</a></h2>
+<ul>
+  <li><a href="/getting-started/getting-started-with-android-apps/#add-an-android-app-to-bitriseio">Adding an Android app to bitrise.io</a></li>
+  <li><a href="/getting-started/getting-started-with-android-apps/#dependencies">Dependencies</a></li>
+  <li><a href="/getting-started/getting-started-with-android-apps/#testing-your-project">Testing your project</a></li>
+  <li><a href="/getting-started-with-android-apps/#deploying-your-project">Deploying your project</a></li>
+</ul>
+
+<h2 id="adding-an-android-app-to-bitriseio">Adding an Android app to bitrise.io <a href="#adding-an-android-app-to-bitriseio" class="anchor-symbol">⚓</a></h2>
 
 <div class="message-box note">
 <div class="message-title">
@@ -2161,7 +2168,7 @@
 
 <p>Luckily, our <code class="highlighter-rouge">Android Build</code> step, which is by default part of your deploy workflow, takes care of all the dependencies which you have listed in your <code class="highlighter-rouge">build.gradle</code> file and installs them for your project.</p>
 
-<h2 id="test-your-project">Test your project <a href="#test-your-project" class="anchor-symbol">⚓</a></h2>
+<h2 id="testing-your-project">Testing your project <a href="#testing-your-project" class="anchor-symbol">⚓</a></h2>
 
 <p>As you can see in the above Android workflows, the <code class="highlighter-rouge">Android Lint</code> and <code class="highlighter-rouge">Android Unit Test</code> steps are by default included in your workflow.</p>
 
@@ -2185,9 +2192,9 @@
   </div>
 </div>
 
-<h2 id="deploy-your-project">Deploy your project <a href="#deploy-your-project" class="anchor-symbol">⚓</a></h2>
+<h2 id="deploying-your-project">Deploying your project <a href="#deploying-your-project" class="anchor-symbol">⚓</a></h2>
 
-<h3 id="deploy-to-bitriseio">Deploy to bitrise.io <a href="#deploy-to-bitriseio" class="anchor-symbol">⚓</a></h3>
+<h3 id="deploying-to-bitriseio">Deploying to bitrise.io <a href="#deploying-to-bitriseio" class="anchor-symbol">⚓</a></h3>
 
 <p>This step uploads all the artifacts related to your build into the<a href="/builds/build-artifacts-online/"> APPS &amp; ARTIFACTS </a>tab on your Build’s page.</p>
 
@@ -2198,7 +2205,7 @@
   <li>In the <code class="highlighter-rouge">Notify: User Roles</code>, add the role so that only those get notified who have been granted with this role. Or fill out the <code class="highlighter-rouge">Notify: Emails</code> field with email addresses of the users you want to notify. Make sure you set those email addresses as <a href="/builds/env-vars-secret-env-vars/">secret env vars</a>! These details can be also modified under <code class="highlighter-rouge">Notifications</code> if you click the <code class="highlighter-rouge">eye</code> icon next to your generated apk in the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab.</li>
 </ol>
 
-<h3 id="deploy-to-marketplace">Deploy to marketplace <a href="#deploy-to-marketplace" class="anchor-symbol">⚓</a></h3>
+<h3 id="deploying-to-marketplace">Deploying to marketplace <a href="#deploying-to-marketplace" class="anchor-symbol">⚓</a></h3>
 
 <p>If you add <code class="highlighter-rouge">Google Play Deploy</code> step to your workflow (after the <code class="highlighter-rouge">Sign APK</code> step), your signed apk will get uploaded to a marketplace of your choice.</p>
 
