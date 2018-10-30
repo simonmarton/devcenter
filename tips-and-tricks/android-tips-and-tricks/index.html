@@ -2021,7 +2021,7 @@ assembleRelease - Assembles all Release builds.
 or by using our <code class="highlighter-rouge">Gradle Runner</code> step (<a href="https://github.com/bitrise-io/steps-gradle-runner">https://github.com/bitrise-io/steps-gradle-runner</a>)
 and specifying the task as the value of the <code class="highlighter-rouge">gradle_task</code> input.</p>
 
-<p><strong>Instead of running</strong> <code class="highlighter-rouge">**gradle**</code> <strong>directly, you should run the gradle commands through</strong> <code class="highlighter-rouge">**gradlew**</code> <strong>(the Gradle Wrapper)!</strong>
+<p><strong>Instead of running</strong> <code class="highlighter-rouge">gradle</code> <strong>directly, you should run the gradle commands through</strong> <code class="highlighter-rouge">gradlew</code> <strong>(the Gradle Wrapper)!</strong>
 The <code class="highlighter-rouge">Gradle Runner</code> step does this, and as you can see it in the related input description of the step:</p>
 
 <blockquote>
@@ -2035,9 +2035,9 @@ in the official guide at: <a href="https://docs.gradle.org/current/userguide/gra
 
 <h2 id="how-to-install-an-additional-android-sdk-package">How to install an additional Android SDK package <a href="#how-to-install-an-additional-android-sdk-package" class="anchor-symbol">⚓</a></h2>
 
-<p><strong>The preferred way to do this is to use the</strong> <code class="highlighter-rouge">**Install missing Android tools**</code>** step.
+<p><strong>The preferred way to do this is to use the</strong> <code class="highlighter-rouge">Install missing Android SDK components</code> <strong>step</strong>.
 Please only use a Script solution if you really have to, as you’ll have to update
-the Script if the Android tools change (which did happen).**</p>
+the Script if the Android tools change (which did happen).</p>
 
 <p>All you have to do is to add a <code class="highlighter-rouge">Script</code> step to your workflow,
 and use the Android <code class="highlighter-rouge">sdkmanager</code> tool to install the additional packages you want to.</p>
@@ -2101,7 +2101,7 @@ which makes sure that the emulator is booted and ready for subsequent steps.</p>
 
 <h3 id="emulator-with-google-apis">Emulator with Google APIs <a href="#emulator-with-google-apis" class="anchor-symbol">⚓</a></h3>
 
-<p><strong>Instead of using a Script step to create an android emulator please use the</strong> <code class="highlighter-rouge">**Create Android emulator**</code>** step!
+<p><strong>Instead of using a Script step to create an android emulator please use the</strong> <code class="highlighter-rouge">Create Android emulator</code> <strong>step</strong>!
 There are simply too many edge cases to cover here, as well as the commands and working configurations change quite frequently.**</p>
 
 <p><em>The section below is kept here for referencing purposes, and might be outdated.</em></p>
