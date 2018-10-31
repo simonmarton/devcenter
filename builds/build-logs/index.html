@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				fastlane tools integration - Bitrise DevCenter
+				Build logs - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							fastlane tools integration
+							Build logs
 						
 					</div>
 				</div>
@@ -758,7 +758,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/builds/build-logs/" title="Build logs">Build logs</a>
+				<a href="/builds/build-logs/" title="Build logs" class="current">Build logs</a>
 			
 		
 		
@@ -1418,7 +1418,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/tutorials/fastlane/fastlane-tools-integration/" title="Fastlane tools integration" class="current">Fastlane tools integration</a>
+				<a href="/tutorials/fastlane/fastlane-tools-integration/" title="Fastlane tools integration">Fastlane tools integration</a>
 			
 		
 		
@@ -1989,87 +1989,117 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>fastlane tools integration</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/tutorials/fastlane/fastlane-tools-integration.md" target="_blank"></a>
+						<h1>Build logs</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/builds/build-logs.md" target="_blank"></a>
 					</div>
 				
-				<p>Having more time to be creative is the key to great inventions.
-We believe that giving developers the chance to work without distractions is the most important thing that can lead to extraordinary creations.
-Our mission is to provide a platform that lets you concentrate on the process of creation,
-instead of the administrative tasks that get in the way of it.</p>
+				<p>Build logs allow users to analyze their builds and find out what went wrong - and what went right! On Bitrise, build logs are easily accessible, they can be viewed on the website in their entirety or they can be downloaded to view them on your own device.</p>
 
-<p>That’s why we created Bitrise. But we’re not alone in this!
-We love how <a href="https://krausefx.com">Felix Krause</a> sought to solve this problem by
-creating <a href="https://fastlane.tools">fastlane</a>. So by the combined force of earth, water, fire and wind…
-we integrated the whole <a href="https://fastlane.tools">fastlane toolkit</a> - booyah! How cool is that!</p>
+<h3 id="finding-a-build-log">Finding a build log <a href="#finding-a-build-log" class="anchor-symbol">⚓</a></h3>
+
+<p>When you run a build, a build log is generated automatically. Every build has its own log, with its own unique build log URL. The build log URL contains the build slug: a hexadecimal identifier for a specific build.</p>
 
 <div class="message-box note">
 <div class="message-title">
-    <p>Bitrise offline CLI</p>
+    <p>Assisting Bitrise Support</p>
   </div>
 
 <div class="message-content">
-    <p>We have an open source, offline CLI, which can be used in a similar way as <em>fastlane</em>. If you’re interested, you can find the CLI’s website <a href="https://www.bitrise.io/cli">here</a>, and its GitHub repository <a href="https://github.com/bitrise-io/bitrise">here</a>. You can use this CLI to run your bitrise configurations locally, which can include runing <em>fastlane</em> too as part of the build, as described below. ;)</p>
+    <p>When Bitrise Support asks for your build logs, the best thing to do is send the build URL.</p>
   </div>
 </div>
 
-<h2 id="what-is-fastlane">What is fastlane? <a href="#what-is-fastlane" class="anchor-symbol">⚓</a></h2>
+<ol>
+  <li>Log in to Bitrise and click on your app on the Apps page.</li>
+  <li>Click the <code class="highlighter-rouge">Builds</code> tab.</li>
+  <li>Select the build you want to check out.</li>
+  <li>
+    <p>Find the log under the <code class="highlighter-rouge">LOGS</code> tab.</p>
 
-<p><em>fastlane</em> lets you define and run your deployment pipelines for different environments.
-It helps you unify and automate your app’s release process.
-<em>fastlane</em> connects all <code class="highlighter-rouge">fastlane tools</code> and third party tools, like CocoaPods and xctool.</p>
-
-<p><em>fastlane</em> is a collection of ruby gems that cover the most usual tasks required during iOS app development
-and upload or update to the App Store.</p>
-
-<h2 id="how-to-get-started">How to get started? <a href="#how-to-get-started" class="anchor-symbol">⚓</a></h2>
-
-<p>Using <em>fastlane</em> for your workflow is easy as pie. Just <a href="/getting-started/manage-your-bitrise-workflow">add the </a><code class="highlighter-rouge">[Fastlane](/getting-started/manage-your-bitrise-workflow)</code><a href="/getting-started/manage-your-bitrise-workflow"> step to your
-workflow</a>,
-after the <code class="highlighter-rouge">Git Clone</code> step (and any other dependency step).</p>
-
-<div class="message-box warning">
-<div class="message-title">
-    <p>Have our Certificate and profile installer step in your workflow!</p>
-  </div>
-
-<div class="message-content">
-    <p>You should also add/keep the <code class="highlighter-rouge">Certificate and profile installer</code> step in the workflow, to download your <em>.p12 Certificates</em> and <em>Provisioning Profiles</em> uploaded to <a href="https://www.bitrise.io">bitrise.io</a> and to install them. <strong>Even if you don’t upload your files to</strong> <a href="https://www.bitrise.io"><strong>bitrise.io</strong></a> <strong>and instead you use a fastlane tool to manage your code signing files you should still keep this step in the workflow</strong>. Read more about <a href="/ios/code-signing/#use-a-third-party-tool-to-manage-your-code-signing-files">iOS Code Signing using third party tools</a>.</p>
-
-  </div>
-</div>
-
-<p>With adding the <em>fastlane</em> step we ensure that you are running on the latest <em>fastlane</em> version, as it is pre-installed on all our VMs. Inside the step you can set the <em>fastlane</em> action and we will run it automatically every time you push a new code change.</p>
-
-<p>For more configuration options see the <code class="highlighter-rouge">Fastlane</code> step’s description in the Workflow Editor!</p>
+    <p><img src="/img/build-logs.png" alt="" /></p>
+  </li>
+</ol>
 
 <div class="message-box info">
 <div class="message-title">
-    <p>iOS code signing guide</p>
+    <p>Opening the full log</p>
   </div>
 
 <div class="message-content">
-    <p>If you want to use <a href="https://www.bitrise.io">bitrise.io</a> to store your code signing files, you should just follow the <a href="/ios/code-signing/">iOS Code Signing guide here</a>.</p>
+    <p>If you have a longer build log then by default, only the end of the log is displayed. Click the bar on the top of the log to expand.</p>
   </div>
 </div>
 
-<h2 id="whats-next">What’s next? <a href="#whats-next" class="anchor-symbol">⚓</a></h2>
+<h3 id="contents-of-a-build-log">Contents of a build log <a href="#contents-of-a-build-log" class="anchor-symbol">⚓</a></h3>
 
-<p><em>fastlane</em>’s greatness comes from its ability to define different lanes for your different deployment needs - hence the name.
-You can combine this with Bitrise and run separate lanes for separate branches, automatically.
-For example you can run a lane for every code push onto the <code class="highlighter-rouge">master</code> branch to update your
-screenshots and metadata on the App Store and to release the distribution version,
-and a separate lane for the <code class="highlighter-rouge">develop</code> branch to deploy your test releases
-and all the others to ensure that nobody has broken anything.
-You can simply clone the workflow as many times as you want to,
-and use the <code class="highlighter-rouge">Trigger</code> feature of <a href="https://www.bitrise.io">bitrise.io</a> to define
-which Workflow to be selected for this branch / tag / pull request.
-You can find more information about the Triggers feature in the
-<a href="/webhooks/trigger-map/">Control what to build when, with the Trigger Map</a> guide.</p>
+<p>All Bitrise build logs have the same basic structure. When opening a full log, under the Bitrise logo you will find:</p>
 
-<p>We hope that you are as happy as we are to have this amazing tool inside Bitrise. Go ahead and try it out!</p>
+<ul>
+  <li>the version of the Bitrise CLI that ran the build</li>
+  <li>the name of the workflow that was run (for example, primary)</li>
+</ul>
 
-<p>And as always, happy building!</p>
+<p>Below this basic information, you will see every Step that was ran as part of the build. For each Step, Bitrise displays:</p>
+
+<ul>
+  <li>the name and version of the Step</li>
+  <li>the running time of the Step</li>
+  <li>a printout of the Step’s commands and their results, including highlighted error messages</li>
+  <li>whether the Step passed or failed</li>
+</ul>
+
+<p><img src="/img/log-start.png" alt="" /></p>
+
+<p>Check your build log carefully when a build fails. Error messages are usually highlighted in red on Bitrise. For failed Steps, an exit code is displayed next to their names. This can tell you more about why the particular Step failed.</p>
+
+<h3 id="downloading-a-build-log">Downloading a build log <a href="#downloading-a-build-log" class="anchor-symbol">⚓</a></h3>
+
+<p>If you need to send your build logs to people who do not have access to the app on Bitrise, or you want to store your logs in your own archives, you can simply download the log file from Bitrise.</p>
+
+<div class="message-box warning">
+<div class="message-title">
+    <p>Log security</p>
+  </div>
+
+<div class="message-content">
+    <p>Please note that your build log can contain sensitive information! Make sure to check its contents before downloading the log file and sending it out to anyone. We recommend using <a href="https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/#about-secrets">Secrets</a> to make sure nothing sensitive appears in build logs.</p>
+  </div>
+</div>
+
+<ol>
+  <li>Log in to Bitrise and click on your app on the Apps page.</li>
+  <li>Click the <code class="highlighter-rouge">Builds</code> tab.</li>
+  <li>Select the build you want to check out.</li>
+  <li>Find the log under the <code class="highlighter-rouge">LOGS</code> tab.</li>
+  <li>Click the <code class="highlighter-rouge">Download Logs</code> button.</li>
+</ol>
+
+<h3 id="deleting-a-build-log">Deleting a build log <a href="#deleting-a-build-log" class="anchor-symbol">⚓</a></h3>
+
+<p>If necessary, you can delete the logs of any build on Bitrise. It can be handy if, for example, you do not want new team members to see potentially sensitive information that is displayed in previous logs.</p>
+
+<p>Not all team members are authorized to delete logs: only those with either <strong>Admin</strong> or <strong>Owner</strong> role in the team can do it.</p>
+
+<div class="message-box info">
+<div class="message-title">
+    <p>Deletion is final</p>
+  </div>
+
+<div class="message-content">
+    <p>Be aware that you cannot undo deleting a log. Once you delete it, there is no way to recover the log file.</p>
+  </div>
+</div>
+
+<p><img src="/img/confirm-delete.png" alt="" /></p>
+
+<ol>
+  <li>Log in to Bitrise and click on your app on the Apps page.</li>
+  <li>Click the <code class="highlighter-rouge">Builds</code> tab.</li>
+  <li>Select the build you want to check out.</li>
+  <li>Find the log under the <code class="highlighter-rouge">LOGS</code> tab.</li>
+  <li>Click the <code class="highlighter-rouge">Delete Logs</code> button.</li>
+  <li>In the pop-up window, click <code class="highlighter-rouge">Yes</code>.</li>
+</ol>
 
 			</main>
 		</div>
