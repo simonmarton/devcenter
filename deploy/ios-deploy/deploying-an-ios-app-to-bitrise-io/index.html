@@ -2032,7 +2032,11 @@
 
     <p><img src="/img/code-signing/ios-code-signing/xcode-archive-export-method.png" alt="" /></p>
   </li>
-  <li>Make sure the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step is in your workflow.</li>
+  <li>
+    <p>Make sure the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step is in your workflow.</p>
+
+    <p>By default, the value of the <code class="highlighter-rouge">Enable public page for the App?</code> input is set to <code class="highlighter-rouge">true</code>. This way, once the build runs, a public install page will be available with a long and random URL which can be shared with others who are not registered on Bitrise. This URL is sent to the users in an email. The <code class="highlighter-rouge">Notify: User Roles</code> and the <code class="highlighter-rouge">Notify: Emails</code> inputs determine which users get the email.</p>
+  </li>
   <li>Start a build.</li>
   <li>When the build is finished, go to the app’s <code class="highlighter-rouge">Builds</code> page and click the latest build.</li>
   <li>Click the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab to find your .ipa file.</li>
