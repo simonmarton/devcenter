@@ -2056,6 +2056,20 @@ deploy:
 
 <p>You have successfully prepared your Google Play Console project. A services credential account has been created which is authorized to manage your releases.</p>
 
+<h2 id="deploying-to-bitriseio">Deploying to bitrise.io <a href="#deploying-to-bitriseio" class="anchor-symbol">⚓</a></h2>
+
+<p>The <code class="highlighter-rouge">Deploy to bitrise.io - Apps, Logs, Artifacts</code> Step attaches all the generated artifacts to your build and uploads them into the <a href="https://devcenter.bitrise.io/builds/build-artifacts-online/"> APPS &amp; ARTIFACTS</a> tab on your Build’s page. By default, the value of the <code class="highlighter-rouge">Enable public page for the App?</code> input field is set to <code class="highlighter-rouge">true</code>. This way, once the build runs, a public install page will be available with a long and random URL which can be shared with others who are not registered on Bitrise.</p>
+
+<p>You can notify user groups or individual users that your APK file has been built by roles or email address. You can share the app’s public install page with anyone if you set the following input fields:</p>
+
+<ol>
+  <li>Go to the <code class="highlighter-rouge">Deploy to bitrise.io</code> step.</li>
+  <li>In the <code class="highlighter-rouge">Notify: User Roles</code> input field, add the role (for example, <code class="highlighter-rouge">testers</code>, <code class="highlighter-rouge">developers</code>, <code class="highlighter-rouge">admins</code>) so that only those get notified who have been granted with this particular role.</li>
+  <li>Or fill out the <code class="highlighter-rouge">Notify: Emails</code> input field with email addresses of the users you want to send the URL to. Make sure you set those email addresses as <a href="https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/">secret env vars</a>! These details can be also modified under <code class="highlighter-rouge">Notifications</code> if you click the <code class="highlighter-rouge">eye</code> icon next to your generated APK file in the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab. Here you can check the URL by clicking <code class="highlighter-rouge">Open Public install page</code>.</li>
+</ol>
+
+<p><img src="/img/public-install-page.png" alt="" /></p>
+
 <h2 id="deploying-to-the-google-play-store">Deploying to the Google Play Store <a href="#deploying-to-the-google-play-store" class="anchor-symbol">⚓</a></h2>
 
 <ol>
