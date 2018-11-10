@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Caching Gradle - Bitrise DevCenter
+				Deploying an iOS app for simulators - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Caching Gradle
+							Deploying an iOS app for simulators
 						
 					</div>
 				</div>
@@ -1007,7 +1007,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/caching/caching-gradle/" title="Caching Gradle" class="current">Caching Gradle</a>
+				<a href="/caching/caching-gradle/" title="Caching Gradle">Caching Gradle</a>
 			
 		
 		
@@ -1187,7 +1187,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/deploy/ios-deploy/deploying-an-ios-app-for-simulators/" title="Deploying an iOS app for simulators">Deploying an iOS app for simulators</a>
+				<a href="/deploy/ios-deploy/deploying-an-ios-app-for-simulators/" title="Deploying an iOS app for simulators" class="current">Deploying an iOS app for simulators</a>
 			
 		
 		
@@ -1998,23 +1998,74 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Caching Gradle</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/caching/caching-gradle.md" target="_blank"></a>
+						<h1>Deploying an iOS app for simulators</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/deploy/ios-deploy/deploying-an-ios-app-for-simulators.md" target="_blank"></a>
 					</div>
 				
-				<p>Before you start, make sure you have the latest version of the <code class="highlighter-rouge">Android Build</code> step in your workflow.</p>
+				<p>You can build and deploy your iOS application to a simulator, to show it off in a browser, for example. On Bitrise, we have <a href="https://www.bitrise.io/integrations/steps/xcode-build-for-simulator">a dedicated Step</a> to build for a simulator: the <code class="highlighter-rouge">Xcode build for simulator</code> Step runs the <code class="highlighter-rouge">xcodebuild</code> command with an iOS simulator destination and generates an .app file.</p>
+
+<p>The .app file can be run on any simulator. On Bitrise, we have a Step to upload your app to Appetize.io: the <code class="highlighter-rouge">Appetize.io deploy</code> Step. With this Step, you can deploy your app so you can run it in a browser.</p>
+
+<p>To build the app for a simulator, you do not need code signing files!</p>
+
+<h3 id="building-an-app-for-a-simulator">Building an app for a simulator <a href="#building-an-app-for-a-simulator" class="anchor-symbol">⚓</a></h3>
 
 <ol>
-  <li>Open your app’s <code class="highlighter-rouge">Workflow Editor</code>.</li>
+  <li>Log in and open the app’s Workflow Editor.</li>
   <li>
-    <p>Insert the <code class="highlighter-rouge">Cache:Pull</code> step after the <code class="highlighter-rouge">Git Clone</code> but before the <code class="highlighter-rouge">Android Build</code> steps.</p>
+    <p>Add the <code class="highlighter-rouge">Xcode build for simulator</code> Step to your workflow.</p>
 
-    <p><strong>IMPORTANT:</strong> Make sure that your step is version 1.0.0 or newer. With the older versions, you have to manually specify paths for caching.</p>
+    <p>The Step should be after the Steps that install dependencies, such as <code class="highlighter-rouge">Run Cocoapods install</code>.</p>
   </li>
-  <li>Insert the <code class="highlighter-rouge">Cache:Push</code> step to the very end of your workflow.</li>
+  <li>
+    <p>Fill in the required inputs for the Step.</p>
+
+    <p><img src="/img/build-for-simulator.png" alt="" /></p>
+    <ul>
+      <li><strong>Project (or Workspace) path</strong>: the path to your project’s <code class="highlighter-rouge">.xcodeproj</code> or <code class="highlighter-rouge">.xworkspace</code> file. By default, this is stored in an Environment Variable when you add your app to Bitrise.</li>
+      <li><strong>Scheme name</strong>: the Xcode scheme of your project. By default, this is stored in an Environment Variable when you add your app to Bitrise.</li>
+      <li><strong>Simulator</strong>: the type of device you want to run the app on. Set it exactly as it appears in the device selection menu in Xcode.</li>
+      <li><strong>OS version</strong>: the version of device operating system you want to run the app on. The default value is <code class="highlighter-rouge">latest</code>.</li>
+      <li><strong>Platform</strong>: the platform you want to run the app on. The default value is <code class="highlighter-rouge">iOS</code>. Make sure that the values of the Simulator input and the Platform input are compatible: for example, if you set Simulator to <code class="highlighter-rouge">Apple TV 1080p</code>, set Platform to <code class="highlighter-rouge">tvOS</code>.</li>
+    </ul>
+  </li>
 </ol>
 
-<p>And you’re done!</p>
+<p>The Step will produce the following outputs:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">BITRISE_APP_DIR_PATH</code>: the path to the generated .app file.</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">BITRISE_APP_DIR_PATH_LIST</code>: the path to the generated .app file and the paths to every dependent target app. The paths are separated with the “</td>
+          <td>” character.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li><code class="highlighter-rouge">BITRISE_XCODE_BUILD_RAW_RESULT_TEXT_PATH</code>: the path to the log file of the raw build results.</li>
+</ul>
+
+<h3 id="deploying-the-app-to-appetizeio">Deploying the app to Appetize.io <a href="#deploying-the-app-to-appetizeio" class="anchor-symbol">⚓</a></h3>
+
+<p>An .app file built with our <code class="highlighter-rouge">Xcode build for simulator</code> Step works with just about any simulator. But if you want to easily and quickly integrate it to a simulator that allows you to run your app in a browser, we recommend using the <code class="highlighter-rouge">Appetize.io deploy</code> Step. It uploads your app to Appetize.io and provides a public URL to use the app in a browser.</p>
+
+<ol>
+  <li>Request an Appetize.io API token.</li>
+  <li>Log in and open the app’s Workflow Editor.</li>
+  <li>Add and configure the <code class="highlighter-rouge">Xcode build for simulator</code> Step to your workflow.</li>
+  <li>
+    <p>Add the <code class="highlighter-rouge">Appetize.io deploy</code> Step to your workflow.</p>
+
+    <p><img src="/img/appetize-deploy.png" alt="" /></p>
+  </li>
+  <li>Add the Appetize.io API token to the <code class="highlighter-rouge">Appetize.io token</code> input.</li>
+  <li>Enter the path to the .app file to the <code class="highlighter-rouge">Application path</code> input. The easiest solution is to use the <code class="highlighter-rouge">BITRISE_APP_DIR_PATH_LIST</code> Environment Variable that is an output of the <code class="highlighter-rouge">Xcode build for simulator</code> Step. Optionally, you can also enable verbose logging for more efficient debugging.</li>
+</ol>
+
+<p>The <code class="highlighter-rouge">Appetize.io deploy</code> Step will produce one output: the <code class="highlighter-rouge">APPETIZE_APP_URL</code> Environment Variable. it is a public URL where you can access your app. Enjoy showing it off!</p>
 
 			</main>
 		</div>
