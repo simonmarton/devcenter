@@ -2020,13 +2020,13 @@
 
 <p>Once the Bitrise CLI is installed, create your own Step with three simple commands.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># If this is the very first time you use the CLI / if you just installed the CLI run this:</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># If this is the very first time you use the CLI / if you just installed the CLI run this:
 bitrise setup
 
-<span class="c"># If you want to update the Step plugin to the latest version:</span>
+# If you want to update the Step plugin to the latest version:
 bitrise plugin update step
 
-<span class="c"># And to generate a new Step, simply run this command and follow the guide it prints:</span>
+# And to generate a new Step, simply run this command and follow the guide it prints:
 bitrise :step create
 </code></pre></div></div>
 
@@ -2054,7 +2054,6 @@ bitrise :step create
 
 <div class="message-content">
     <p>Check out <a href="/bitrise-cli/most-important-concepts/">some important concepts you must be aware of</a>!</p>
-
   </div>
 </div>
 
@@ -2089,7 +2088,30 @@ bitrise :step create
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">inputs</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">ipa-path</span><span class="pi">:</span> <span class="s">$BITRISE_IPA_PATH</span>
     <span class="na">opts</span><span class="pi">:</span>
-        <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">IPA</span><span class="nv"> </span><span class="s">path"</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">IPA</span><span class="nv"> </span><span class="s">path"</span>
+</code></pre></div></div>
+
+<h3 id="secret-environment-variables-in-steps">Secret environment variables in Steps <a href="#secret-environment-variables-in-steps" class="anchor-symbol">⚓</a></h3>
+
+<p>You can mark Step inputs as <strong>Sensitive</strong> to make sure their values do not get exposed. Sensitive inputs only accept <a href="/bitrise-cli/secrets/">Secrets</a> - secret environment variables - as values. This ensures they are not visible in build logs.</p>
+
+<p>To mark a Step input as sensitive, use the <code class="highlighter-rouge">is_sensitive</code> property. It has two values: <code class="highlighter-rouge">true</code> and <code class="highlighter-rouge">false</code>.</p>
+
+<div class="message-box important">
+<div class="message-title">
+    <p>The <code class="highlighter-rouge">is_expand</code> property</p>
+  </div>
+
+<div class="message-content">
+    <p>If you mark an input as sensitive, the <code class="highlighter-rouge">is_expand</code> property of the input also must be <code class="highlighter-rouge">true</code> (which is the default setting)!</p>
+  </div>
+</div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">inputs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">certificate_urls</span><span class="pi">:</span> <span class="s">$BITRISE_CERTIFICATE_URL</span>
+    <span class="na">opts</span><span class="pi">:</span>
+      <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Certificate</span><span class="nv"> </span><span class="s">URL"</span>
+      <span class="na">is_sensitive</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div></div>
 
 <h3 id="submodules-and-dependencies">Submodules and dependencies <a href="#submodules-and-dependencies" class="anchor-symbol">⚓</a></h3>
@@ -2112,13 +2134,11 @@ bitrise :step create
 
 <ol>
   <li>Make sure your Step is stored in a public git repository.</li>
-  <li>Fork the StepLib repository you want to have your step in. The official Bitrise StepLib can be found here: https://github.com/bitrise-io/bitrise-steplib</li>
-  <li>Call <code class="highlighter-rouge">$ bitrise share start -c https://github.com/[your-username]/bitrise-steplib.git</code>, with the git clone URL of your forked StepLib repository. This will prepare your forked StepLib locally for sharing.</li>
+  <li>Fork the StepLib repository you want to have your step in. The official Bitrise StepLib can be found here: <a href="https://github.com/bitrise-io/bitrise-steplib" title="https://github.com/bitrise-io/bitrise-steplib">https://github.com/bitrise-io/bitrise-steplib</a></li>
+  <li>Call <code class="highlighter-rouge">$ bitrise share start -c </code><code class="highlighter-rouge">[https://github.com/](https://github.com/ "https://github.com/")</code><code class="highlighter-rouge">[your-username]/bitrise-steplib.git</code>, with the git clone URL of your forked StepLib repository. This will prepare your forked StepLib locally for sharing.</li>
   <li>Add the step version tag to your Step’s repository.</li>
-  <li>Call <code class="highlighter-rouge">$ bitrise share create --tag [step-version-tag] --git [step-git-uri].git --stepid [step-id]</code>,
-to add your Step to your forked StepLib repository (locally).</li>
-  <li>You can call <code class="highlighter-rouge">$ bitrise audit -c https://github.com/[your-username]/bitrise-steplib.git</code>
-to perform a complete health-check on your forked StepLib.</li>
+  <li>Call <code class="highlighter-rouge">$ bitrise share create --tag [step-version-tag] --git [step-git-uri].git --stepid [step-id]</code>, to add your Step to your forked StepLib repository (locally).</li>
+  <li>You can call <code class="highlighter-rouge">$ bitrise audit -c </code><code class="highlighter-rouge">[https://github.com/](https://github.com/ "https://github.com/")</code><code class="highlighter-rouge">[your-username]/bitrise-steplib.git</code> to perform a complete health-check on your forked StepLib.</li>
   <li>Create a Pull Request in the original StepLib repository.</li>
 </ol>
 
