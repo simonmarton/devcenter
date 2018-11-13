@@ -2026,6 +2026,13 @@
 <ol>
   <li>Add one <code class="highlighter-rouge">Sign APK</code> Step AFTER <code class="highlighter-rouge">Gradle Runner</code> Step if it’s missing from your workflow.</li>
   <li>Set the <code class="highlighter-rouge">$BITRISE_APK_PATH_LIST</code> in the <code class="highlighter-rouge">apk path</code> input field which will make sure all the required APKs will get code signed with the keystore file you uploaded to the <code class="highlighter-rouge">Code Signing</code> tab. Check out <a href="/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/#create-a-signed-apk-with-the-sign-apk-step/">how you can upload your keystore file to bitrise.io</a>. The Step will export a <code class="highlighter-rouge">$BITRISE_SIGNED_APK_PATH</code> env var output which lists all your signed build variants.</li>
+  <li>Make sure you set the following input fields in the <code class="highlighter-rouge">Sign APK</code> Step:
+    <ul>
+      <li><code class="highlighter-rouge">Keystore url</code></li>
+      <li><code class="highlighter-rouge">Keystore password</code></li>
+      <li><code class="highlighter-rouge">Keystore alias</code></li>
+    </ul>
+  </li>
   <li>Add the <code class="highlighter-rouge">Google Play Deploy</code> Step AFTER the <code class="highlighter-rouge">Sign APK</code> step.</li>
   <li>Set the <code class="highlighter-rouge">$BITRISE_SIGNED_APK_PATH</code> env var in the <code class="highlighter-rouge">APK or App Bundle file path</code> Step input field so that <code class="highlighter-rouge">Google Play Deploy</code> can release all your build variants to the app store.</li>
 </ol>
