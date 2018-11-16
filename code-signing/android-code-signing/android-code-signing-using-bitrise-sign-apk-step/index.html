@@ -2011,7 +2011,7 @@
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step.md" target="_blank"></a>
 					</div>
 				
-				<h2 id="create-a-signed-apk-with-the-sign-apk-step">Create a signed APK with the <code class="highlighter-rouge">Sign APK</code> step <a href="#create-a-signed-apk-with-the-sign-apk-step" class="anchor-symbol">⚓</a></h2>
+				<h2 id="creating-a-signed-apk-with-the-sign-apk-step">Creating a signed APK with the Sign APK Step <a href="#creating-a-signed-apk-with-the-sign-apk-step" class="anchor-symbol">⚓</a></h2>
 
 <p>You can create a signed APK using the <code class="highlighter-rouge">Sign APK step</code> in our Bitrise workflow.</p>
 
@@ -2039,9 +2039,9 @@ The <code class="highlighter-rouge">Sign APK</code> step will receive your uploa
 
 <p>Bitrise uploads your keystore file and assigns an environment variable (<code class="highlighter-rouge">BITRISEIO_ANDROID_KEYSTORE_URL</code>) to the download URL (which is a time-limited, read-only download URL) of the file as the value. You can use this URL to download the keystore file during a build in the future. The <code class="highlighter-rouge">Sign APK</code> step in the workflow will track this environment variable and will run if it is set.</p>
 
-<h2 id="download-your-files">Download your files <a href="#download-your-files" class="anchor-symbol">⚓</a></h2>
+<h2 id="downloading-your-files">Downloading your files <a href="#downloading-your-files" class="anchor-symbol">⚓</a></h2>
 
-<p>You can download your files from <code class="highlighter-rouge">GENERIC FILE STORAGE</code>(for example, your keystore file) using the <code class="highlighter-rouge">File-downloader</code> step:</p>
+<p>You can download your files from <code class="highlighter-rouge">GENERIC FILE STORAGE</code> (for example, your keystore file) using the <code class="highlighter-rouge">File-downloader</code> step:</p>
 
 <p>An example for downloading a keystore file” content=”</p>
 
@@ -2052,12 +2052,11 @@ The <code class="highlighter-rouge">Sign APK</code> step will receive your uploa
    - source: $BITRISEIO_ANDROID_KEYSTORE_URL
 
    - destination: "$HOME/keystores/my_keystore.jks" #native android#
-
 </code></pre></div></div>
 
 <p>After this step, <code class="highlighter-rouge">my_keystore.jks</code> will be available at <code class="highlighter-rouge">$HOME/keystores/my_keystore.jks</code>.</p>
 
-<h2 id="run-your-deploy-workflow">Run your deploy workflow <a href="#run-your-deploy-workflow" class="anchor-symbol">⚓</a></h2>
+<h2 id="running-your-deploy-workflow">Running your deploy workflow <a href="#running-your-deploy-workflow" class="anchor-symbol">⚓</a></h2>
 
 <p>You can run a workflow <em>manually</em>.</p>
 
