@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Exporting code signing files without codesigndoc - Bitrise DevCenter
+				Getting started with MacOS apps - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Exporting code signing files without codesigndoc
+							Getting started with MacOS apps
 						
 					</div>
 				</div>
@@ -308,7 +308,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/getting-started/getting-started-with-macos-apps/" title="Getting started with MacOS apps">Getting started with MacOS apps</a>
+				<a href="/getting-started/getting-started-with-macos-apps/" title="Getting started with MacOS apps" class="current">Getting started with MacOS apps</a>
 			
 		
 		
@@ -950,7 +950,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/code-signing/ios-code-signing/exporting-code-signing-files/" title="Exporting code signing files without codesigndoc" class="current">Exporting code signing files without codesigndoc</a>
+				<a href="/code-signing/ios-code-signing/exporting-code-signing-files/" title="Exporting code signing files without codesigndoc">Exporting code signing files without codesigndoc</a>
 			
 		
 		
@@ -2007,75 +2007,180 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Exporting code signing files without codesigndoc</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/code-signing/ios-code-signing/exporting-code-signing-files.md" target="_blank"></a>
+						<h1>Getting started with MacOS apps</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/getting-started/getting-started-with-macos-apps.md" target="_blank"></a>
 					</div>
 				
-				<h3 id="exporting-certificates-using-xcode">Exporting certificates using Xcode <a href="#exporting-certificates-using-xcode" class="anchor-symbol">⚓</a></h3>
+				<p>In this guide, we’ll walk you through how to add a MacOS app to Bitrise, how to run Xcode tests, manage your code signing files and deploy the app to bitrise.io and to the App Store.</p>
 
-<ol>
-  <li>Start Xcode</li>
-  <li>Select Xcode &gt; Preferences from the navigation bar.</li>
-  <li>At the top of the window select <code class="highlighter-rouge">Accounts</code>.</li>
-  <li>Select your Apple ID and your team from the right side bar, then click on <code class="highlighter-rouge">View Details...</code>.</li>
-  <li>A dialog will appear where you will see your code signing identities and the provisioning profiles.</li>
-  <li>Select the certificates and choose <code class="highlighter-rouge">Export</code> from the pop-up menu.
-<img src="/img/code-signing/ios-code-signing/xcode_export_certificate.png" alt="Export certificate" /></li>
-  <li>Enter a filename in the Save As dialog. You can set a password and a verification to store it securely, but it’s not necessary.</li>
-  <li>Xcode will export the requested certificate in .p12 format.</li>
-</ol>
-
-<h3 id="exporting-manually">Exporting manually <a href="#exporting-manually" class="anchor-symbol">⚓</a></h3>
-
-<ol>
-  <li>Start Keychain Access.</li>
-  <li>On the top left sidebar select <code class="highlighter-rouge">login</code> and on the bottom left select <code class="highlighter-rouge">My Certificates</code>.</li>
-  <li>This will list all your installed certificates and the associated private key.</li>
-  <li>Select the one that you would like to export and choose <code class="highlighter-rouge">Export</code> from the pop-up menu.
-<img src="/img/code-signing/ios-code-signing/keychain_access_export.png" alt="Export certificate" /></li>
-  <li>Enter a filename in the Save As dialog. You can set a password and a verification to store it securely, but it’s not necessary.</li>
-  <li>Keychain Access will export the requested certificate in .p12 format.</li>
-</ol>
-
-<h2 id="exporting-provisioning-profiles">Exporting Provisioning Profiles <a href="#exporting-provisioning-profiles" class="anchor-symbol">⚓</a></h2>
-
-<h3 id="exporting-using-xcode">Exporting using Xcode <a href="#exporting-using-xcode" class="anchor-symbol">⚓</a></h3>
-
-<ol>
-  <li>Start Xcode.</li>
-  <li>Select Xcode &gt; Preferences from the navigation bar.</li>
-  <li>At the top of the window select <code class="highlighter-rouge">Accounts</code>.</li>
-  <li>Select your Apple ID and your team from the right side bar, then click on <code class="highlighter-rouge">View Details...</code>.</li>
-  <li>A dialog will appear where you will see your code signing identities and the provisioning profiles.</li>
-  <li>Locate the profile that you are looking for under Provisioning Profiles.</li>
-  <li>If you don’t have it installed on the system, click on the <code class="highlighter-rouge">Download</code> button next to it.</li>
-  <li>Choose <code class="highlighter-rouge">Show in finder</code> from the pop-up menu, that will show you the installed provisioning profile for you.</li>
-</ol>
-
-<h3 id="exporting-manually-1">Exporting manually <a href="#exporting-manually-1" class="anchor-symbol">⚓</a></h3>
-
-<ol>
-  <li>Go to <a href="https://developer.apple.com">https://developer.apple.com</a> and log in.</li>
-  <li>Select Certificates, Identifiers &amp; Profiles from the left sidebar</li>
-  <li>Navigate to Provisioning Profiles &gt; All</li>
-  <li>Find the Provisioning Profile you are looking for from the list or use the search to filter.</li>
-  <li>Click on the selected Provisioning Profile, this will expand the details.</li>
-  <li>If its status is invalid, you can click on the <code class="highlighter-rouge">Edit</code> button and save again.</li>
-  <li>Click on the <code class="highlighter-rouge">Download</code> button to download it and double click to install on your macOS.</li>
-</ol>
+<h2 id="adding-a-macos-app">Adding a MacOS app <a href="#adding-a-macos-app" class="anchor-symbol">⚓</a></h2>
 
 <div class="message-box note">
 <div class="message-title">
-    <p>Locate your Provisioning Profiles</p>
+    <p>Do you have a Bitrise account?</p>
   </div>
 
 <div class="message-content">
-    <p>You can also locate all installed Provisioning Profiles at the following path: <code class="highlighter-rouge">~/Library/MobileDevice/Provisioning Profiles/</code>.</p>
-
+    <p>Make sure you have signed up to <a href="https://www.bitrise.io/">bitrise.io</a> and can access your Bitrise account. Here are <a href="https://devcenter.bitrise.io/getting-started/index#signing-up-to-bitrise">4 ways</a> on how to connect your Bitrise account to your account found on a Git service provider.</p>
   </div>
 </div>
 
-<p>[^1]: Screenshots from https://developer.apple.com/support</p>
+<ol>
+  <li>Click the <code class="highlighter-rouge">+</code> sign on the top menu bar and select <code class="highlighter-rouge">Add app</code>.</li>
+  <li>On the Create new App page, choose the account you wish to add the app to.</li>
+  <li>Set the privacy of the app to either Private or <a href="https://app.forestry.io/getting-started/adding-a-new-app/public-apps">Public</a> and click <code class="highlighter-rouge">Next</code>.</li>
+  <li>Select the Git hosting service that hosts your repository, then find and select your repository that hosts the project. Read more about <a href="https://app.forestry.io/getting-started/adding-a-new-app/connecting-your-repository">connecting your repository</a>.</li>
+  <li>When prompted to set up repository access, click <code class="highlighter-rouge">No, auto-add SSH key</code>. Read more about <a href="https://app.forestry.io/getting-started/adding-a-new-app/setting-up-ssh-keys/">SSH keys</a>.</li>
+  <li>Type the name of the branch that includes your project’s configuration - master, for example - then click <code class="highlighter-rouge">Next</code>.</li>
+  <li>
+    <p>Wait while Bitrise is validating your project. We look for your configuration files and set up your app based on them.</p>
+
+    <p><strong>IMPORTANT</strong>: the validation will fail if you do not have a SHARED scheme in your project. You can still point Bitrise manually to your Xcode scheme but if it’s shared, we automatically detect it for you. <a href="https://app.forestry.io/troubleshooting/frequent-ios-issues/#xcode-scheme-not-found">Read more about schemes and the possible issues with them!</a></p>
+  </li>
+  <li>
+    <p>Select the export method. You can modify this later - for now, select <code class="highlighter-rouge">development</code>.</p>
+
+    <p><img src="https://app.forestry.io/sites/yv69yaruhkt48w/body-media//img/mac-detected.png" alt="/img/mac-detected.png" /></p>
+
+    <p>Once you clicked it, you should see your:</p>
+    <ul>
+      <li>Project or Workspace path</li>
+      <li>Scheme name</li>
+      <li>export method</li>
+      <li>MacOS stack</li>
+    </ul>
+  </li>
+  <li>Register a webhook when prompted so that Bitrise can start a build automatically when code is pushed to your repository, or a pull request is created. This also kicks off your first build - click the message and it will take you to the build page.</li>
+</ol>
+
+<h2 id="running-xcode-tests">Running Xcode tests <a href="#running-xcode-tests" class="anchor-symbol">⚓</a></h2>
+
+<p>Once you created your app, the first build will run based on the automatically created <strong>primary</strong> workflow. You can check it out in the app’s <a href="https://app.forestry.io/getting-started/getting-started-workflows">Workflow Editor</a>: click the app’s name on your Dashboard then click the <code class="highlighter-rouge">Workflow</code> tab.</p>
+
+<div class="message-box important">
+<div class="message-title">
+    <p>Test targets</p>
+  </div>
+
+<div class="message-content">
+    <p>If your app does not have test targets defined, the primary workflow will be the only automatically created workflow and it will NOT include the <code class="highlighter-rouge">Xcode Test for Mac</code> Step.</p>
+  </div>
+</div>
+
+<p>If you have test targets defined, the <code class="highlighter-rouge">primary</code> workflow of a MacOS app includes the two <a href="https://app.forestry.io/getting-started/getting-started-steps">Steps</a> you need to run your Xcode tests, and view their results on <a href="https://bitrise.io/">bitrise.io</a>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Xcode Test for Mac</code></li>
+  <li><code class="highlighter-rouge">Deploy to Bitrise.io</code></li>
+</ul>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Code signing files</p>
+  </div>
+
+<div class="message-content">
+    <p>Running Xcode tests and deploying their results to Bitrise do not require any code signing files. So don’t worry about them just yet!</p>
+  </div>
+</div>
+
+<p>The <code class="highlighter-rouge">Xcode Test for Mac</code> step runs the pre-defined Xcode tests. It has a default configuration that does not need to be modified: if the tests are written correctly, they will work. You can find the same configuration options in Xcode, too.</p>
+
+<p>The <code class="highlighter-rouge">Deploy to Bitrise.io</code> will deploy the following to the <code class="highlighter-rouge">Logs</code> and <a href="https://app.forestry.io/builds/build-artifacts-online/">Apps &amp; Artifacts</a> tab of the build:</p>
+
+<ul>
+  <li>your Xcode test results</li>
+  <li>your raw <code class="highlighter-rouge">xcodebuildoutput</code> log.</li>
+</ul>
+
+<h2 id="code-signing-and-exporting-a-macos-app">Code signing and exporting a MacOS app <a href="#code-signing-and-exporting-a-macos-app" class="anchor-symbol">⚓</a></h2>
+
+<p>To install and test the app on other physical devices, you will need to create and export an .app or .pkg file. This requires setting up code signing. In the example, we’ll be exporting an app with the <code class="highlighter-rouge">development</code> export method: you cannot upload such an app to Testflight but you can test it, for example, on the devices of your internal testers.</p>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Automatic provisioning</p>
+  </div>
+
+<div class="message-content">
+    <p>The example procedure described here uses manual provisioning, with the <code class="highlighter-rouge">Certificate and profile installer</code> Step. However, Bitrise also supports <a href="https://app.forestry.io/code-signing/ios-code-signing/ios-auto-provisioning/">automatic provisioning</a> but it is not in the scope of this guide.</p>
+  </div>
+</div>
+
+<p>You will need:</p>
+
+<ul>
+  <li>the automatically created <code class="highlighter-rouge">deploy</code> workflow</li>
+  <li>a <strong>Development</strong> certificate (a .p12 certificate file)</li>
+  <li>a <strong>Development</strong> type Provisioning Profile. For a MacOS project, the file extension of the provisioning profile is <em>.provisionprofile</em>.</li>
+</ul>
+
+<ol>
+  <li>Set the code signing type of your project in Xcode to either manual or automatic (Xcode managed), and generate the package file locally.</li>
+  <li>
+    <p>Collect and upload the code signing files with <a href="https://app.forestry.io/code-signing/ios-code-signing/collecting-files-with-codesigndoc/">the codesigndoc tool</a>.</p>
+
+    <p>The tool can also upload your code signing files to Bitrise - we recommend doing so! Otherwise, upload them manually: enter the Workflow Editor and select the <code class="highlighter-rouge">Code signing</code> tab, then upload the files in their respective fields.</p>
+  </li>
+  <li>Go to your app’s Workflow Editor, and select the <code class="highlighter-rouge">deploy</code> workflow in the <code class="highlighter-rouge">WORKFLOW</code> dropdown menu in the top left corner.</li>
+  <li>Check that you have the <code class="highlighter-rouge">Certificate and profile installer</code> Step in your workflow. It must be before the <code class="highlighter-rouge">Xcode Archive for Mac</code> Step (you can have other Steps between the two, like <code class="highlighter-rouge">Xcode Test for Mac</code>).</li>
+  <li>
+    <p>Check the <code class="highlighter-rouge">Export method</code> input under the <code class="highlighter-rouge">app/pkg export configs</code> input group of the <code class="highlighter-rouge">Xcode Archive for Mac</code> Step.</p>
+
+    <p>If you selected <code class="highlighter-rouge">development</code> when you added the app to Bitrise, you don’t need to change the input. Otherwise, manually set it to <code class="highlighter-rouge">development</code>.</p>
+
+    <p><img src="https://app.forestry.io/sites/yv69yaruhkt48w/body-media//img/macos-archive.png" alt="/img/macos-archive.png" /></p>
+  </li>
+  <li><a href="https://app.forestry.io/builds/starting-builds-manually/">Start a build</a>.</li>
+</ol>
+
+<p>If you uploaded the correct code signing files, the <code class="highlighter-rouge">Certificate and profile installer</code> Step should install your code signing files and the <code class="highlighter-rouge">Xcode Archive for Mac</code> Step should export an .app or .pkg file with the development export method. If you have the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step in your workflow, you can find the binary package file on the <code class="highlighter-rouge">Apps &amp; Artifacts</code> tab of the build page.</p>
+
+<h2 id="deploying-to-the-app-store">Deploying to the App Store <a href="#deploying-to-the-app-store" class="anchor-symbol">⚓</a></h2>
+
+<p>If you set up your code signing files and created an .app or .pkg file for your internal testers, it is time to involve external testers and then to publish your MacOS app to the App Store. Let’s see how!</p>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Developer ID</p>
+  </div>
+
+<div class="message-content">
+    <p>If you want to distribute your app outside the App Store, you can sign it with <a href="https://developer.apple.com/support/developer-id/">a Developer ID</a>. This method is not in the scope of this guide but on Bitrise, it works the same way: you just need to upload the appropriate code signing files.</p>
+  </div>
+</div>
+
+<p>To deploy to the App Store, you will need more code signing files:</p>
+
+<ul>
+  <li>a <strong>Mac App</strong> <strong>Distribution</strong> Certificate</li>
+  <li>a <strong>Mac</strong> <strong>Installer Distribution</strong> certificate</li>
+</ul>
+
+<ol>
+  <li>On your local machine, set up App Store code signing for your project in Xcode, and export an .app or .pkg file. If this fails locally, it will definitely fail on Bitrise, too!</li>
+  <li>Collect and upload the code signing files with <a href="https://app.forestry.io/code-signing/ios-code-signing/collecting-files-with-codesigndoc/">the codesigndoc tool</a>.</li>
+  <li>Go to the app’s Workflow Editor and create a <a href="https://app.forestry.io/getting-started/getting-started-workflows/">new workflow</a>: click the <code class="highlighter-rouge">+ Workflow</code> button, enter the name of your new workflow and in the <strong>BASED ON</strong> dropdown menu, select <code class="highlighter-rouge">deploy</code>. This way the new workflow will be a copy of the basic <code class="highlighter-rouge">deploy</code> workflow.</li>
+  <li>
+    <p>Set the <code class="highlighter-rouge">Export Method</code> input of the <code class="highlighter-rouge">Xcode Archive for Mac</code> Step to <code class="highlighter-rouge">app-store</code>.</p>
+
+    <p>You can export multiple binaries with different export methods: use the <code class="highlighter-rouge">Export macOS Xcode archive</code> Step in your workflow.</p>
+  </li>
+  <li>Add the <code class="highlighter-rouge">Deploy to iTunes Connect - Application Loader</code> Step to your workflow, after the <code class="highlighter-rouge">Xcode Archive for Mac</code> Step but preferably before the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step.</li>
+  <li>
+    <p>Provide your Apple credentials in the <code class="highlighter-rouge">Deploy to iTunes Connect - Application Loader</code> Step.</p>
+
+    <p>The Step will need your:</p>
+    <ul>
+      <li>Apple ID</li>
+      <li>password or, if you use two-factor authentication on iTunes Connect, your application password.</li>
+    </ul>
+
+    <p>Don’t worry, the password will not be visible in the logs or exposed - <a href="https://app.forestry.io/builds/env-vars-secret-env-vars#about-secrets">that’s why it is marked SENSITIVE</a>.</p>
+  </li>
+</ol>
+
+<p>And that’s it! Start a build - if everything went well, you should see your app on Testflight. From there, you can distribute it to external testers or release it to the App Store.</p>
 
 			</main>
 		</div>
