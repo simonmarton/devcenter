@@ -2026,23 +2026,25 @@
 
 <p>For iOS apps, Firebase Test Lab runs <a href="https://developer.apple.com/documentation/xctest">XCTest</a> tests. Find the list of the available devices <a href="https://firebase.google.com/docs/test-lab/ios/available-testing-devices">here</a>.</p>
 
+<div class="message-box note">
+<div class="message-title">
+    <p>Limitations</p>
+  </div>
+
+<div class="message-content">
+    <p>You might be limited by your overall build time. Also note that a single build can contain only one <code class="highlighter-rouge">iOS Device Testing</code> Step, performing one type of test. This is because Bitrise sends the build slug to Firebase Test Lab. Sending the same build slug results in a <em>Build already exists</em> error.</p>
+  </div>
+</div>
+
 <h2 id="enabling-device-testing">Enabling Device Testing <a href="#enabling-device-testing" class="anchor-symbol">⚓</a></h2>
 
 <p>Before you attempt to use any of our Virtual Device Testing Steps, the feature itself must be enabled for your app.</p>
 
 <ol>
-  <li>
-    <p>Log in to <a href="https://app.bitrise.io/">bitrise.io</a>.</p>
-  </li>
-  <li>
-    <p>Select the app on your Dashboard.</p>
-  </li>
-  <li>
-    <p>Go to the <code class="highlighter-rouge">Settings</code> tab.</p>
-  </li>
-  <li>
-    <p>Scroll down to <code class="highlighter-rouge">Device Testing</code> and toggle <code class="highlighter-rouge">ENABLE UI TESTS ON VIRTUAL DEVICES</code>.</p>
-  </li>
+  <li>Log in to <a href="https://app.bitrise.io/">bitrise.io</a>.</li>
+  <li>Select the app on your Dashboard.</li>
+  <li>Go to the <code class="highlighter-rouge">Settings</code> tab.</li>
+  <li>Scroll down to <code class="highlighter-rouge">Device Testing</code> and toggle <code class="highlighter-rouge">ENABLE UI TESTS ON VIRTUAL DEVICES</code>.</li>
 </ol>
 
 <p><img src="/img/settings-device-testing.png" alt="" /></p>
@@ -2073,9 +2075,7 @@
 <p>The <code class="highlighter-rouge">iOS Device Testing</code> Step takes the path to this .zip file - exported as an Environment Variable - as input to run your tests and export the test results to Bitrise.</p>
 
 <ol>
-  <li>
-    <p>Check that you <a href="/testing/virtual-device-testing-for-ios/#enabling-device-testing">enabled Device Testing</a> for the app.</p>
-  </li>
+  <li>Check that you <a href="/testing/virtual-device-testing-for-ios/#enabling-device-testing">enabled Device Testing</a> for the app.</li>
   <li>
     <p>Add the <code class="highlighter-rouge">Xcode Build for testing for iOS</code> Step to your workflow.</p>
 
@@ -2105,12 +2105,8 @@
 
     <p>Find the list of the available devices <a href="https://firebase.google.com/docs/test-lab/ios/available-testing-devices">here</a>.</p>
   </li>
-  <li>
-    <p>Optionally, you can download all the files generated in the test run: under the <code class="highlighter-rouge">Debug</code> input group, set the <code class="highlighter-rouge">Download files</code> input to <code class="highlighter-rouge">true</code>.</p>
-  </li>
-  <li>
-    <p>Start a build!</p>
-  </li>
+  <li>Optionally, you can download all the files generated in the test run: under the <code class="highlighter-rouge">Debug</code> input group, set the <code class="highlighter-rouge">Download files</code> input to <code class="highlighter-rouge">true</code>.</li>
+  <li>Start a build!</li>
 </ol>
 
 <p>If all goes well, you should be able to view your results on the Build page.</p>
@@ -2130,15 +2126,9 @@
 <p><img src="/img/test-results.png" alt="" /></p>
 
 <ol>
-  <li>
-    <p>Go to the <code class="highlighter-rouge">Build</code> tab of the app.</p>
-  </li>
-  <li>
-    <p>Go to the <code class="highlighter-rouge">DEVICE TESTS</code> tab.</p>
-  </li>
-  <li>
-    <p>Check out the test results per device.</p>
-  </li>
+  <li>Go to the <code class="highlighter-rouge">Build</code> tab of the app.</li>
+  <li>Go to the <code class="highlighter-rouge">DEVICE TESTS</code> tab.</li>
+  <li>Check out the test results per device.</li>
 </ol>
 
 			</main>
