@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Bitbucket webhookの追加 - Bitrise DevCenter
+				Debugging your build on your own machine - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Bitbucket webhookの追加
+							Debugging your build on your own machine
 						
 					</div>
 				</div>
@@ -1868,7 +1868,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/troubleshooting/debugging-your-build-on-your-own-machine/" title="Debugging your build on your own machine">Debugging your build on your own machine</a>
+				<a href="/troubleshooting/debugging-your-build-on-your-own-machine/" title="Debugging your build on your own machine" class="current">Debugging your build on your own machine</a>
 			
 		
 		
@@ -2025,64 +2025,92 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Bitbucket webhookの追加</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/translations/webhooks/adding-a-bitbucket-webhook.md" target="_blank"></a>
+						<h1>Debugging your build on your own machine</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/troubleshooting/debugging-your-build-on-your-own-machine.md" target="_blank"></a>
 					</div>
 				
-				<p>コードをプッシュするたびにBitriseで自動的にビルドを開始するために、ご利用のコードホスティングサービスにコードをリポジトリにプッシュした際に自動的に実行するwebhookを設定することができます。</p>
+				<p>If your build fails on Bitrise, we often recommend to try and run it locally, on your machine. To do this, do the following:</p>
 
-<p>webhookは自動でも手動でも登録することが可能です。このガイドでは <strong>手動</strong> でwebhookを設定する手順をご紹介します。 <a href="/webhooks/#setting-up-incoming-webhooks-automatically">webhookの自動登録についてはこちらをご覧ください</a></p>
+<ul>
+  <li>do a full clean git clone of your project’s online repository</li>
+  <li>run the build on your machine with the Bitrise CLI</li>
+</ul>
 
-<h2 id="bitbucket用webhook-urlの取得">Bitbucket用webhook URLの取得 <a href="#bitbucket用webhook-urlの取得" class="anchor-symbol">⚓</a></h2>
+<p>This helps to eliminate, among other things, a very common issue: that uncommitted or “gitignored” files are in your working directory but they haven’t been committed into your git repository online and therefore they are not available when Bitrise clones the repository for running the build. Other possible issues include:</p>
 
-<ol>
-  <li>
-    <p>appページの <code class="highlighter-rouge">Code</code> タブへ移動し、<code class="highlighter-rouge">INCOMING WEBHOOKS</code> セクションの <code class="highlighter-rouge">SETUP MANUALLY</code> を選択します。</p>
-  </li>
-  <li>
-    <p>ドロップダウンメニューから <code class="highlighter-rouge">Bitbucket</code> を選択してください。</p>
+<ul>
+  <li>code signing files are present on your local machine but not uploaded to Bitrise</li>
+  <li>a difference in the version of the tool(s) used for the build</li>
+</ul>
 
-    <p><img src="/img/webhooks_bitbucket.png" alt="Screenshot" /></p>
-  </li>
-  <li>
-    <p>選択したサービスのwebhook URLをコピーしてください。</p>
-  </li>
-</ol>
-
-<h2 id="bitbucketでのwebhookの設定">Bitbucketでのwebhookの設定 <a href="#bitbucketでのwebhookの設定" class="anchor-symbol">⚓</a></h2>
+<h2 id="testing-with-a-full-clean-git-clone">Testing with a full clean git clone <a href="#testing-with-a-full-clean-git-clone" class="anchor-symbol">⚓</a></h2>
 
 <ol>
-  <li>
-    <p>Bitbucketのリポジトリの <code class="highlighter-rouge">Settings</code> を選択してください。</p>
-
-    <p><img src="/img/webhooks/bitbucket_settings.png" alt="Screenshot" /></p>
+  <li>Open your Terminal / Command Line interface on your machine.</li>
+  <li>Type in: <code class="highlighter-rouge">cd /tmp</code></li>
+  <li>Clone your repository with: <code class="highlighter-rouge">git clone REPOURL ./quick-repo-test --branch BRANCH-YOU-WANT-TO-TEST</code>
+    <ul>
+      <li>example: <code class="highlighter-rouge">git clone </code><code class="highlighter-rouge">[</code><code class="highlighter-rouge">[https://github.com/bitrise-io/bitrise.git](https://github.com/bitrise-io/bitrise.git "https://github.com/bitrise-io/bitrise.git")</code><code class="highlighter-rouge">](</code><code class="highlighter-rouge">[https://github.com/bitrise-io/bitrise.git](https://github.com/bitrise-io/bitrise.git "https://github.com/bitrise-io/bitrise.git")</code><code class="highlighter-rouge"> "</code><code class="highlighter-rouge">[https://github.com/bitrise-io/bitrise.git](https://github.com/bitrise-io/bitrise.git "https://github.com/bitrise-io/bitrise.git")</code><code class="highlighter-rouge">")</code><code class="highlighter-rouge"> ./quick-repo-test --branch master</code></li>
+    </ul>
   </li>
-  <li>
-    <p>左のメニューから <code class="highlighter-rouge">Webhooks</code> を選択してください。</p>
-
-    <p><img src="/img/webhooks/bitbucket_settings_webhooks.png" alt="Screenshot" /></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">Add Webhook</code> を選択してください。</p>
-
-    <p><img src="/img/webhooks/bitbucket_add_webhooks.png" alt="Screenshot" /></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">URL</code> にBitriseの設定画面からコピーしたBitbucketのWebhook URLをペーストし、 <code class="highlighter-rouge">Title</code> を入力してください。</p>
-
-    <p><img src="/img/webhooks/bitbucket_webhook_info.png" alt="Screenshot" /></p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">Choose from a full list of triggers</code> を選択してください。</p>
-
-    <p><img src="/img/webhooks/bitbucket_webhook_trigger.png" alt="Screenshot" /></p>
-  </li>
-  <li>
-    <p>リポジトリ <code class="highlighter-rouge">Push</code> 、プルリクエスト <code class="highlighter-rouge">Created</code> 、 <code class="highlighter-rouge">Updated</code> トリガを選択してください。 <code class="highlighter-rouge">Save</code> ボタンをを押せば準備完了です。</p>
-
-    <p><img src="/img/webhooks/bitbucket_webhook_push_and_pr.png" alt="Screenshot" /></p>
-  </li>
+  <li>Type <code class="highlighter-rouge">cd ./quick-repo-test.</code></li>
 </ol>
+
+<p>Run the commands you want to test, to build your project, or to open the project file from this directory.</p>
+
+<h2 id="testing-with-the-bitrise-cli">Testing with the Bitrise CLI <a href="#testing-with-the-bitrise-cli" class="anchor-symbol">⚓</a></h2>
+
+<p>After doing a full clean git clone, run a build locally, using the <a href="https://www.bitrise.io/cli">Bitrise CLI</a>.</p>
+
+<ol>
+  <li><a href="/bitrise-cli/installation/">Install the Bitrise CLI</a>.</li>
+  <li><a href="/builds/bitrise-yml-online/">Download</a> your app’s <code class="highlighter-rouge">bitrise.yml</code> file from <a href="https://www.bitrise.io/">bitrise.io</a>.</li>
+  <li>Run the build with: <code class="highlighter-rouge">bitrise run &lt;workflow-name&gt;</code> (for example, <code class="highlighter-rouge">bitrise run primary</code>).</li>
+</ol>
+
+<p>This should help reproducing the issues in most cases, and allows you to attempt to debug them on your own machine.</p>
+
+<p>If the build succeeds under these conditions but still fails on Bitrise, contact our support!</p>
+
+<div class="message-box important">
+<div class="message-title">
+    <p>Running iOS tests</p>
+  </div>
+
+<div class="message-content">
+
+    <ul>
+      <li>Make sure that you run the tests in the same simulator as the one <a href="http://bitrise.io/">bitrise.io</a> runs. If you use the Bitrise CLI to run the tests locally this is not required, that uses the same configuration.</li>
+      <li>If you’re debugging an iOS unit/UI test issue, please make sure to <strong>reset the iOS Simulator</strong> (in the Simulator app, select the <strong>Simulator</strong> menu bar item -&gt; then <strong>Reset Content and Setting</strong>).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="message-box important">
+<div class="message-title">
+    <p>Android projects</p>
+  </div>
+
+<div class="message-content">
+    <p>If you still can’t reproduce the issue locally, you might also want to delete the <code class="highlighter-rouge">$HOME/.gradle</code> (hidden) directory, to clear your Gradle caches. (Quick Terminal / Command Line command: <code class="highlighter-rouge">rm -rf $HOME/.gradle</code>)</p>
+  </div>
+</div>
+
+<h2 id="using-the-androidlinux-environment-locally">Using the Android/Linux environment locally <a href="#using-the-androidlinux-environment-locally" class="anchor-symbol">⚓</a></h2>
+
+<p>If your project uses the Android/Linux environment, you can download and use the exact same environment as the one your build is running in on <a href="https://www.bitrise.io/">bitrise.io</a>.</p>
+
+<p><a href="/docker/run-your-build-locally-in-docker/">Follow our guide</a> to make it work!</p>
+
+<div class="message-box info">
+<div class="message-title">
+    <p>Run docker from a clean git clone</p>
+  </div>
+
+<div class="message-content">
+    <p>Ideally, you should first do a <strong>clean git clone</strong> and run <code class="highlighter-rouge">docker</code> from there, so that files which are in your <code class="highlighter-rouge">.gitignore</code> won’t affect the build, and the build can run the the same way as on <a href="https://www.bitrise.io/">bitrise.io</a>.</p>
+  </div>
+</div>
 
 			</main>
 		</div>
