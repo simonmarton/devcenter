@@ -1,6 +1,7 @@
 <hr />
 
 <hr />
+
 <p><strong>IMPORTANT: This guide is intended to be used with the Forestry CMS</strong>. Our external contributors who submit pull requests to the DevCenter repository do NOT need to follow this guide as it is not relevant for them!</p>
 
 <hr />
@@ -60,8 +61,6 @@
 
 <p>And done! Forestry will push your article into the repository and GitHub pages will build it.</p>
 
-<h3 id="images-and-links">Images and links</h3>
-
 <h3 id="note-info-warning">Note, info, warning</h3>
 
 <p>Forestry supports using snippets to quickly add shortcodes to your content. In our case, the snippets include all message boxes which are HTML codes inserted directly into the content, parsed when building the site.</p>
@@ -75,3 +74,16 @@
   <li>Enter the title of your message between the quotation marks after <code class="highlighter-rouge">title=.</code></li>
   <li>Enter the content of your message between the quotation marks after <code class="highlighter-rouge">content=</code>.</li>
 </ol>
+
+<h3 id="tips-and-tricks">Tips and tricks</h3>
+
+<h4 id="the--tag">The  tag</h4>
+
+<p>Jekyll is built on the Liquid templating language and therefore tries to parse anything within double curly brackets {{ such as this }}. The result is the content within simply will not appear once the site is built.</p>
+
+<p>The workaround is to use the {% raw %} tag to indicate to Jekyll that nothing within the tag needs to be parsed. Like this:</p>
+
+<p>{% raw %}</p>
+
+<p>Please, {{ Jekyll }}, just display everything, brackets and all here.</p>
+
