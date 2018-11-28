@@ -2109,8 +2109,7 @@ the Build failed (at that point, when the Step would run):</p>
 can expose environment variables from your scripts too,
 using <a href="https://github.com/bitrise-io/envman/">envman</a>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run_if: |-
-   		    enveq "CUSTOM_ENV_VAR_KEY" "test value to test against"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run_if:
 </code></pre></div></div>
 
 <p>This <code class="highlighter-rouge">run_if</code> will skip the step in every case when the value of <code class="highlighter-rouge">CUSTOM_ENV_VAR_KEY</code>
