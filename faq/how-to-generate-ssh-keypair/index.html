@@ -2035,6 +2035,18 @@ you can generate an appropriate SSH keypair with a simple Command Line / Termina
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen -t rsa -b 4096 -P '' -f ./bitrise-ssh
 </code></pre></div></div>
 
+<div class="message-box info">
+<div class="message-title">
+    <p>Mojave issues</p>
+  </div>
+
+<div class="message-content">
+    <p>If you are on the Mojave OS, and having difficulties with the above command, use the following:</p>
+
+    <p><code class="highlighter-rouge">ssh-keygen -t rsa -b 4096 -P '' -f ./bitrise-ssh -m PEM</code></p>
+  </div>
+</div>
+
 <p>This will generate two files in the current directory (the directory where
 you run the command):</p>
 
