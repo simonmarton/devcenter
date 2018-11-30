@@ -2049,9 +2049,12 @@ you have to add these sources to your NuGet package sources.</p>
 nuget sources add <span class="nt">-Name</span> NAME_FOR_SOURCE <span class="nt">-Source</span> SOURCE_URL
 </code></pre></div></div>
 
-<p>!!! warning
-    Don’t forget to update the <code class="highlighter-rouge">NAME_FOR_SOURCE</code> and <code class="highlighter-rouge">SOURCE_URL</code> parameters,
-    and make sure to place the <code class="highlighter-rouge">Script</code> step before the <code class="highlighter-rouge">NuGet Restore Step</code>.</p>
+<p>Don’t forget to:</p>
+
+<ul>
+  <li>update the <code class="highlighter-rouge">NAME_FOR_SOURCE</code> and <code class="highlighter-rouge">SOURCE_URL</code> parameters</li>
+  <li>make sure to place the <code class="highlighter-rouge">Script</code> step before the <code class="highlighter-rouge">NuGet Restore Step</code></li>
+</ul>
 
 <h3 id="custom-nuget-source-with-credentials">Custom NuGet source with credentials <a href="#custom-nuget-source-with-credentials" class="anchor-symbol">⚓</a></h3>
 
