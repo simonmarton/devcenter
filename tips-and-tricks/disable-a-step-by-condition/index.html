@@ -2054,9 +2054,7 @@
 
 <h2 id="run-a-step-only-in-ci-environment-skip-it-for-local-builds">Run a Step only in CI environment, skip it for local builds <a href="#run-a-step-only-in-ci-environment-skip-it-for-local-builds" class="anchor-symbol">⚓</a></h2>
 
-<p>This is quite similar to how you <a href="#disable-a-step">completely disable a step</a>,
-but instead of specifying <code class="highlighter-rouge">false</code>
-as the <code class="highlighter-rouge">run_if</code> expression, you specify <code class="highlighter-rouge">.IsCI</code>, which will only be true in CI mode.</p>
+<p>This is quite similar to how you <a href="#disable-a-step">completely disable a step</a>, but instead of specifying <code class="highlighter-rouge">false</code> as the <code class="highlighter-rouge">run_if</code> expression, you specify <code class="highlighter-rouge">.IsCI</code>, which will only be true in CI mode.</p>
 
 <p>This method can be useful to debug builds locally, where you don’t want to run
 specific steps on your own Mac/PC. Lots of Steps have this <code class="highlighter-rouge">run_if</code> flag set by default,
@@ -2079,9 +2077,7 @@ step if you want to run it locally too.</p>
 
 <h2 id="run-a-step-only-if-the-build-failed">Run a Step only if the Build failed <a href="#run-a-step-only-if-the-build-failed" class="anchor-symbol">⚓</a></h2>
 
-<p><em>To do this you have to switch to</em> <code class="highlighter-rouge">_bitrise.yml_</code>_ mode
-(open the Workflow Editor on bitrise.io -&gt; left side: click on <em><code class="highlighter-rouge">_bitrise.yml_</code>
-_to switch to the interactive</em> <code class="highlighter-rouge">_bitrise.yml_</code> <em>editor).</em></p>
+<p><em>To do this you have to switch to <code class="highlighter-rouge">bitrise.yml</code> mode (open the Workflow Editor on bitrise.io -&gt; left side: click on <code class="highlighter-rouge">bitrise.yml</code> to switch to the interactive <code class="highlighter-rouge">bitrise.yml</code> editor).</em></p>
 
 <p>You have to add two properties to the Step you <strong>only</strong> want to run when
 the Build failed (at that point, when the Step would run):</p>
