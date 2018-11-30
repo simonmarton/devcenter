@@ -2055,8 +2055,8 @@
   <li>Use a Linux/Android stack and set the environment docker image for the app (<code class="highlighter-rouge">Settings</code> tab)</li>
 </ol>
 
-<p><strong>The first option is strongly preferred, you should not change the base environment docker image (on the</strong> <code class="highlighter-rouge">**Settings**</code>** tab on bitrise.io)
-unless you really have to!** Running the <code class="highlighter-rouge">docker</code> commands yourself during the build is way more flexible,
+<p><strong>The first option is strongly preferred, you should not change the base environment docker image (on the</strong> <code class="highlighter-rouge">**Settings**</code> tab on bitrise.io)
+unless you really have to! Running the <code class="highlighter-rouge">docker</code> commands yourself during the build is way more flexible,
 and provides an overall better control.</p>
 
 <h2 id="run-docker-commands-during-the-build">Run docker commands during the build <a href="#run-docker-commands-during-the-build" class="anchor-symbol">⚓</a></h2>
@@ -2344,9 +2344,7 @@ or the <strong>bitrise-base</strong> (<code class="highlighter-rouge">bitriseio/
         <p>You should only use the <strong>android-ndk</strong> (<code class="highlighter-rouge">bitriseio/android-ndk</code>) image
 as the base image if you actually need the NDK.</p>
 
-        <p>From a performance perspective: you should install the least amount of tools in your image,</p>
-
-        <p>as it’ll make your image smaller, which means faster download &amp; build start.</p>
+        <p>From a performance perspective: you should install the least amount of tools in your image, as it’ll make your image smaller, which means faster download &amp; build start.</p>
       </li>
     </ul>
   </div>
@@ -2363,9 +2361,9 @@ This means that every time you change the repository, commit &amp; push the chan
 <p><strong>One more thing you should do is to Link your image to our base image you use, so that every time our base image is updated your image will update as well.</strong></p>
 
 <p>This is especially important if you base your Docker image on one of our Android images. Those images are quite large, and if we have to do a change in the base Docker image and you don’t build a new image, <strong>your image will require the old base image, which won’t be pre-cached</strong> on the build Virtual Machines anymore!
-This means that to <em><code class="highlighter-rouge">_docker pull_</code> _your image it won’t be enough to download just the diffs anymore,
+This means that to <code class="highlighter-rouge">docker pull</code> your image it won’t be enough to download just the diffs anymore,
 <strong>the whole image will have to be pulled</strong> which might even result in errors like “no space left on the device” -
-to _<code class="highlighter-rouge">_docker pull_</code> _the base Android image, if no cache is available, it already requires ~10GB disk space, and the Android NDK image is even larger!</em></p>
+to <code class="highlighter-rouge">docker pull</code> the base Android image, if no cache is available, it already requires ~10GB disk space, and the Android NDK image is even larger!</p>
 
 <p><strong>Link your image to one of ours</strong>: you can do this on DockerHub, on the <code class="highlighter-rouge">Build Settings</code> tab,
 under the <code class="highlighter-rouge">Repository Links</code> section. Just specify the ID of our Docker image (ex: <code class="highlighter-rouge">bitriseio/docker-android</code>),
