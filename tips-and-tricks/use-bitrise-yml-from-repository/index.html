@@ -2137,7 +2137,7 @@ open it.</li>
     <ul>
       <li>If you already have a configuration which you want to use, download the <code class="highlighter-rouge">bitrise.yml</code> first,
 and save it into the <em>root</em> of your repository.
-<em>There’s a button to quickly download the current <code class="highlighter-rouge">bitrise.yml</code>.</em></li>
+<em>There’s a button to quickly download the current</em> <code class="highlighter-rouge">_bitrise.yml_</code><em>.</em></li>
       <li>Once you’re ready to replace your configuration on bitrise.io,
 copy the <a href="#bitriseyml-content-for-bitriseio">bitrise.yml content for bitrise.io</a> from below and paste
 it into the editor on <a href="https://www.bitrise.io">bitrise.io</a> (in <code class="highlighter-rouge">bitrise.yml</code> mode of the editor)</li>
@@ -2206,17 +2206,17 @@ which <strong>defines what should happen during the builds.</strong></li>
 </ol>
 
 <p><a href="#bitriseyml-content-for-bitriseio">This “wrapper” configuration</a>
-defines a common workflow <code class="highlighter-rouge">run_from_repo</code>,
+defines a common workflow <code class="highlighter-rouge">_run_from_repo</code>,
 which will activate an SSH key (if specified), Git Clone the repository,
 and then switch to use the <code class="highlighter-rouge">bitrise.yml</code> from the repository
 by running <code class="highlighter-rouge">bitrise run "${BITRISE_TRIGGERED_WORKFLOW_ID}"</code>.</p>
 
-<p>This common workflow (<code class="highlighter-rouge">run_from_repo</code>) is then used through other workflows, like
+<p>This common workflow (<code class="highlighter-rouge">_run_from_repo</code>) is then used through other workflows, like
 <code class="highlighter-rouge">ci</code> and <code class="highlighter-rouge">another-workflow</code>, using the <code class="highlighter-rouge">after_run</code>
 <a href="/bitrise-cli/workflows/#chaining-workflows-and-reusing-workflows">workflow chaining</a>
 mechanism. Those workflows do not have any steps, the only thing
 the <code class="highlighter-rouge">ci</code> and <code class="highlighter-rouge">another-workflow</code> workflows do is running the
-common <code class="highlighter-rouge">run_from_repo</code> workflow.</p>
+common <code class="highlighter-rouge">_run_from_repo</code> workflow.</p>
 
 <p>The trick is <code class="highlighter-rouge">bitrise run "${BITRISE_TRIGGERED_WORKFLOW_ID}"</code>.
 The <code class="highlighter-rouge">BITRISE_TRIGGERED_WORKFLOW_ID</code> environment variable is set to the
@@ -2231,8 +2231,9 @@ repository) to <a href="https://www.bitrise.io">bitrise.io</a>, all you have to 
   <li>Define the workflow in your <code class="highlighter-rouge">bitrise.yml</code> (in your repository).</li>
   <li>Clone the <code class="highlighter-rouge">ci</code> workflow (or the <code class="highlighter-rouge">another-workflow</code>) with a name matching the workflow
 in your <code class="highlighter-rouge">bitrise.yml</code> (in your repository), or create a new empty workflow
-with a matching name and add the <code class="highlighter-rouge">run_from_repo</code> as an <code class="highlighter-rouge">after_run</code> workflow.
-<em>Note: in the Workflow Editor UI you can quickly clone a workflow by selecting the workflow, then clicking the “add new workflow” (<code class="highlighter-rouge">_+_</code>) button.</em></li>
+with a matching name and add the <code class="highlighter-rouge">_run_from_repo</code> as an <code class="highlighter-rouge">after_run</code> workflow.
+<em>Note: in the Workflow Editor UI you can quickly clone a workflow by
+selecting the workflow, then clicking the “add new workflow” (</em><code class="highlighter-rouge">_+_</code><em>) button.</em></li>
 </ol>
 
 <h3 id="step-by-step-usage-guide-of-the-wrapper-config">Step by step usage guide of the wrapper config: <a href="#step-by-step-usage-guide-of-the-wrapper-config" class="anchor-symbol">⚓</a></h3>
@@ -2245,7 +2246,7 @@ once you <a href="#bitriseyml-content-for-bitriseio">prepared your wrapper confi
 the <code class="highlighter-rouge">bitrise.yml</code> changes!)</li>
   <li>Then create a new workflow with the same name (<code class="highlighter-rouge">deploy</code>) <strong>on</strong> <a href="https://www.bitrise.io"><strong>bitrise.io</strong></a></li>
   <li>Make sure that the <code class="highlighter-rouge">deploy</code> workflow on <a href="https://www.bitrise.io">bitrise.io</a> has
-the <code class="highlighter-rouge">run_from_repo</code> as an <code class="highlighter-rouge">after_run</code> workflow.</li>
+the <code class="highlighter-rouge">_run_from_repo</code> as an <code class="highlighter-rouge">after_run</code> workflow.</li>
   <li>Define <a href="/webhooks/trigger-map/">Triggers</a> for the <code class="highlighter-rouge">deploy</code> workflow <strong>on</strong> <a href="https://www.bitrise.io"><strong>bitrise.io</strong></a>
 if you want to automate the triggering of that workflow.</li>
 </ol>
@@ -2296,7 +2297,7 @@ code push on the <code class="highlighter-rouge">master</code> branch, the <code
 every code push on other branches as well as for Pull Requests,
 and it will never run <code class="highlighter-rouge">another-workflow</code> automatically, but you will be able
 to start manual builds with <code class="highlighter-rouge">another-workflow</code>, which will invoke
-the <code class="highlighter-rouge">another-workflow</code> workflow <em>from the <code class="highlighter-rouge">bitrise.yml</code> in your repository</em>.</p>
+the <code class="highlighter-rouge">another-workflow</code> workflow <em>from the</em> <code class="highlighter-rouge">_bitrise.yml_</code> <em>in your repository</em>.</p>
 
 			</main>
 		</div>
