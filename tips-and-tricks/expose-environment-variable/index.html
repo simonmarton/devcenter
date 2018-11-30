@@ -2038,12 +2038,7 @@
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/tips-and-tricks/expose-environment-variable.md" target="_blank"></a>
 					</div>
 				
-				<p>You can expose Environment Variables from one Step,
-to make it available for every other Step performed after the Step during the build.
-An example might be that you want to generate a
-release note which you want to use in a message or deploy step.
-Exposing environment variables is really easy,
-you just have to use <a href="https://github.com/bitrise-io/envman/">envman</a> if you want to make it available for every other Step.</p>
+				<p>You can expose Environment Variables from one Step, to make it available for every other Step performed after the Step during the build. An example might be that you want to generate a release note which you want to use in a message or deploy step. Exposing environment variables is really easy, you just have to use <a href="https://github.com/bitrise-io/envman/">envman</a> if you want to make it available for every other Step.</p>
 
 <p>A very simple example might be:</p>
 
@@ -2065,7 +2060,7 @@ pipe the value:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>envman add --key MY_RELEASE_NOTE --valuefile ./some/file/path
 </code></pre></div></div>
 
-<p><em>You can read more about how</em> <code class="highlighter-rouge">_envman_</code>can be used on it’s <a href="https://github.com/bitrise-io/envman/"><em>GitHub page</em></a>.</p>
+<p>You can read more about how <code class="highlighter-rouge">envman </code>can be used on it’s <a href="https://github.com/bitrise-io/envman/">GitHub page</a>.</p>
 
 <div class="message-box warning">
 <div class="message-title">
