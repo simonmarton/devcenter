@@ -2041,15 +2041,9 @@
 				<p>Starting a build manually on Bitrise takes literally two clicks - if you leave everything on the default settings. If you do not wish to do that, or at least want to be sure what the default settings are, read on! We’ll walk you through the process.</p>
 
 <ol>
-  <li>
-    <p>Log in to Bitrise and go to the <a href="https://app.bitrise.io/dashboard">Dashboard</a>.</p>
-  </li>
-  <li>
-    <p>Select the app you wish to build.</p>
-  </li>
-  <li>
-    <p>Click <code class="highlighter-rouge">Start/Schedule a Build</code>.</p>
-  </li>
+  <li>Log in to Bitrise and go to the <a href="https://app.bitrise.io/dashboard">Dashboard</a>.</li>
+  <li>Select the app you wish to build.</li>
+  <li>Click <code class="highlighter-rouge">Start/Schedule a Build</code>.</li>
 </ol>
 
 <p><img src="/img/start-build.png" alt="Start a build" /></p>
@@ -2092,12 +2086,8 @@
 </div>
 
 <ul>
-  <li>
-    <p><strong>Message</strong>: The build message. Please note that entering the git commit message of a specific commit does <strong>not</strong> trigger a build of that commit!</p>
-  </li>
-  <li>
-    <p><strong>Workflow</strong>: This is an optional setting. You can select the workflow you wish to run. By default, it is based on the trigger map: for example, if you wish to run the <code class="highlighter-rouge">test</code> branch, and the <code class="highlighter-rouge">test</code> branch is configured in the trigger map to trigger the <code class="highlighter-rouge">testing</code> workflow. You can configure the trigger map either <a href="/builds/triggering-builds/trigger-code-push">on the website</a> or <a href="/builds/triggering-builds/trigger-map">directly in the bitrise.yml of the app</a>.</p>
-  </li>
+  <li><strong>Message</strong>: The build message. Please note that entering the git commit message of a specific commit does <strong>not</strong> trigger a build of that commit!</li>
+  <li><strong>Workflow</strong>: This is an optional setting. You can select the workflow you wish to run. By default, it is based on the trigger map: for example, if you wish to run the <code class="highlighter-rouge">test</code> branch, and the <code class="highlighter-rouge">test</code> branch is configured in the trigger map to trigger the <code class="highlighter-rouge">testing</code> workflow. You can configure the trigger map either <a href="/builds/triggering-builds/trigger-code-push">on the website</a> or <a href="/builds/triggering-builds/trigger-map">directly in the bitrise.yml of the app</a>.</li>
 </ul>
 
 <h3 id="advanced-configuration">Advanced configuration <a href="#advanced-configuration" class="anchor-symbol">⚓</a></h3>
@@ -2107,19 +2097,23 @@
 <p><img src="/img/advanced-window1.png" alt="Advanced config window" /></p>
 
 <ul>
-  <li>
-    <p><strong>Git Tag</strong>: Builds a particular branch or commit that is tagged with the Tag you enter.</p>
-  </li>
-  <li>
-    <p><strong>Commit Hash</strong>: Copy a specific commit’s hash here to build that particular commit. This option can even send a build status update to your git hosting service.</p>
-  </li>
-  <li>
-    <p><strong>Custom Environment Variables</strong>: Set up a custom Environment Variable that is used in the build. You can enable the <code class="highlighter-rouge">Replace variables in input?</code> option: this replaces the Environment Variables in your input with the assigned value. You need to do this if your custom variable references other Environment Variables.</p>
-  </li>
-  <li>
-    <p><strong>Generated cURL command</strong>: Based on the options you set in the Build configuration window, we provide an automatically generated cURL command. This can be copied and pasted, and you can run it on any platform that has cURL installed.</p>
-  </li>
+  <li><strong>Git Tag</strong>: Builds a particular branch or commit that is tagged with the Tag you enter.</li>
+  <li><strong>Commit Hash</strong>: Copy a specific commit’s hash here to build that particular commit. This option can even send a build status update to your git hosting service.</li>
+  <li><strong>Custom Environment Variables</strong>: Set up a custom Environment Variable that is used in the build. You can enable the <code class="highlighter-rouge">Replace variables in input?</code> option: this replaces the Environment Variables in your input with the assigned value. You need to do this if your custom variable references other Environment Variables.</li>
+  <li><strong>Generated cURL command</strong>: Based on the options you set in the Build configuration window, we provide an automatically generated cURL command. This can be copied and pasted, and you can run it on any platform that has cURL installed.</li>
 </ul>
+
+<div class="message-box info">
+<div class="message-title">
+    <p>Conflicting input</p>
+  </div>
+
+<div class="message-content">
+    <p>If, for example, you specify a commit hash, you will notice that the Git Tag option disappears. This ensures that you cannot enter conflicting input values.</p>
+
+    <p>If you specify a commit hash and a branch where that commit does not exist (for example, <strong>master</strong>), Bitrise will find the branch that does have the given commit (for example, <strong>testing</strong>) and run a build with that branch.</p>
+  </div>
+</div>
 
 			</main>
 		</div>
