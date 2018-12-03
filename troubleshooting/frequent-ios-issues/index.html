@@ -2055,7 +2055,7 @@
   </div>
 
 <div class="message-content">
-    <p>The solutions presented here apply only to the raw, unfiltered output of Xcode. Every official Bitrise Xcode step has an <code class="highlighter-rouge">Output Tool</code> input with an <code class="highlighter-rouge">xcodebuild</code> option_._ If you can’t find the error reason in the logs, make sure to switch the <code class="highlighter-rouge">Output Tool</code> option any Xcode Step you use to <code class="highlighter-rouge">xcodebuild</code> (Xcode’s Command Line Tool). This results in a verbose output but will include everything the way it’s produced by <code class="highlighter-rouge">xcodebuild</code>.</p>
+    <p>The solutions presented here apply only to the raw, unfiltered output of Xcode. Every official Bitrise Xcode step has an <code class="highlighter-rouge">Output Tool</code> input with an <code class="highlighter-rouge">xcodebuild</code> option. If you can’t find the error reason in the logs, make sure to switch the <code class="highlighter-rouge">Output Tool</code> option of any Xcode Step you use to <code class="highlighter-rouge">xcodebuild</code> (Xcode’s Command Line Tool). This results in a verbose output but will include everything the way it’s produced by <code class="highlighter-rouge">xcodebuild</code>.</p>
   </div>
 </div>
 
@@ -2063,7 +2063,7 @@
 
 <p>If that doesn’t work, search for <code class="highlighter-rouge">warning:</code>. In rare cases Xcode doesn’t print an <code class="highlighter-rouge">error:</code> even if it fails.</p>
 
-<p>If you have the logs on your own machine then you can run something like this in your Terminal:</p>
+<p>If you have the logs on your own machine, then you can run something like this in your Terminal:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep --color 'error:' my.log
 grep --color 'warning:' my.log
@@ -2075,8 +2075,8 @@ grep --color 'warning:' my.log
 
 <ul>
   <li>Check if the desired Scheme is shared - Bitrise only works with shared schemes.</li>
-  <li>When you share your scheme the Xcode project changes. Don’t forget to <strong>commit</strong> and to <strong>push</strong> your changes!</li>
-  <li>If the related validation is still running on Bitrise abort it and try to run it again.</li>
+  <li>When you share your scheme, the Xcode project changes. Don’t forget to <strong>commit</strong> and to <strong>push</strong> your changes!</li>
+  <li>If the related validation is still running on Bitrise, abort it and try to run it again.</li>
 </ul>
 
 <p><img src="/img/ios/xcode-shared-scheme.png" alt="Xcode shared scheme" /></p>
@@ -2170,7 +2170,7 @@ Error Domain=IDEDistributionErrorDomain Code=14 "No applicable devices found." U
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo /usr/bin/gem install bundler
 </code></pre></div></div>
 
-<p>This will install bundler on the system Ruby and when the fastlane plugin calls bundle install then system Ruby will also install the neccessary dependencies.</p>
+<p>This will install bundler on the system Ruby and when the fastlane plugin calls bundle install, then system Ruby will also install the neccessary dependencies.</p>
 
 <h2 id="the-build-works-in-local-but-not-on-bitriseio">The build works in local but not on bitrise.io <a href="#the-build-works-in-local-but-not-on-bitriseio" class="anchor-symbol">⚓</a></h2>
 
@@ -2211,7 +2211,7 @@ Error Domain=IDEDistributionErrorDomain Code=14 "No applicable devices found." U
 <p>Most frequent sources of this issue with an iOS project:</p>
 
 <ul>
-  <li>Trying to build a Scheme which is not marked as <strong>shared</strong>. Usually, it hangs right after you start any <code class="highlighter-rouge">xcodebuild</code> command (e.g. <code class="highlighter-rouge">xcodebuild -list</code> or <code class="highlighter-rouge">xcodebuild .. archive</code>).
+  <li>Trying to build a Scheme which is not marked as <strong>shared</strong>. Usually, it hangs right after you start any <code class="highlighter-rouge">xcodebuild</code> command (for example, <code class="highlighter-rouge">xcodebuild -list</code> or <code class="highlighter-rouge">xcodebuild .. archive</code>).
     <ul>
       <li><strong>Solution</strong>: Make sure that you marked the Scheme as <strong>shared</strong>, and that you actually committed &amp; pushed it into your repository.</li>
     </ul>
@@ -2344,7 +2344,7 @@ end
 
 <h3 id="solution-1-skip-install-xcode-settings">Solution 1: <code class="highlighter-rouge">Skip Install</code> Xcode Settings <a href="#solution-1-skip-install-xcode-settings" class="anchor-symbol">⚓</a></h3>
 
-<p>If you get this error in the Xcode Archive step you should check your Xcode Projects settings. Most likely you have the <code class="highlighter-rouge">Skip Install</code> option set to <code class="highlighter-rouge">YES</code>.</p>
+<p>If you get this error in the Xcode Archive step, you should check your Xcode Projects settings. Most likely you have the <code class="highlighter-rouge">Skip Install</code> option set to <code class="highlighter-rouge">YES</code>.</p>
 
 <p>This should only be used for iOS frameworks! <strong>For iOS apps this should be set to</strong> <code class="highlighter-rouge">NO</code>.</p>
 
@@ -2360,7 +2360,7 @@ end
 
 <h2 id="duplicated-schemes">Duplicated Schemes <a href="#duplicated-schemes" class="anchor-symbol">⚓</a></h2>
 
-<p>If you have multiple Schemes in your Xcode Project or Workspace with the <strong>exact same name</strong>, Xcode will select one of these Schemes/Configurations <strong>randomly</strong> when building your project. This can result in random build success / failure, and if you check the raw Xcode output you’ll see something like this: <code class="highlighter-rouge">xcodebuild: error: Scheme YOUR_DUPLICATED_SCHEME is not currently configured for the test action</code> when it fails.</p>
+<p>If you have multiple Schemes in your Xcode Project or Workspace with the <strong>exact same name</strong>, Xcode will select one of these Schemes/Configurations <strong>randomly</strong> when building your project. This can result in random build success / failure, and if you check the raw Xcode output, you’ll see something like this: <code class="highlighter-rouge">xcodebuild: error: Scheme YOUR_DUPLICATED_SCHEME is not currently configured for the test action</code> when it fails.</p>
 
 <p>This can also happen if you use CocoaPods and one of your Pods have the same name as your project.</p>
 
@@ -2374,7 +2374,7 @@ end
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcodebuild -project ./path/to/project/file -list
 </code></pre></div></div>
 
-<p>There should be no duplicated Scheme in the printed list. To run this command on bitrise.io, add it to a Script step. Compare the results after running it both on your computer and on bitrise.io: the lists should be identical.</p>
+<p>There should be no duplicated Scheme in the printed list. To run this command on <a href="https://www.bitrise.io/">bitrise.io</a>, add it to a Script step. Compare the results after running it both on your computer and on <a href="https://www.bitrise.io/">bitrise.io</a>: the lists should be identical.</p>
 
 <h2 id="system-dialog-blocks-the-tests-to-run">System dialog blocks the tests to run <a href="#system-dialog-blocks-the-tests-to-run" class="anchor-symbol">⚓</a></h2>
 
@@ -2393,9 +2393,9 @@ end
 
 <ol>
   <li>Unit tests run and pass. However, a few of the unit tests are FBSnapshotTestCase tests which are kind of UI Tests but are still kept in the unit test bundle. They launch the app and compare screens with reference images of the screen.</li>
-  <li>When a FBSnapshot TestCase is run it launches the app and launches a system alert dialog asking the user for permission for push notifications (this is just something that’s done in the AppDelegate in my app every fresh install).</li>
-  <li>When the UITests start the permissions dialog is still visible and overlaying the screen.</li>
-  <li>The application tries to access some XCUIElements but fails because of the overlaying permissions dialog and eventually fails</li>
+  <li>When a FBSnapshot TestCase is run, it launches the app and launches a system alert dialog asking the user for permission for push notifications (this is just something that’s done in the AppDelegate in my app at every fresh install).</li>
+  <li>When the UITests start, the permissions dialog is still visible and overlaying the screen.</li>
+  <li>The application tries to access some XCUIElements but fails because of the overlaying permissions dialog and eventually fails.</li>
 </ol>
 
 <p>Solution:</p>
