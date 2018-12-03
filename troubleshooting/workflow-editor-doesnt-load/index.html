@@ -2047,25 +2047,30 @@
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/troubleshooting/workflow-editor-doesnt-load.md" target="_blank"></a>
 					</div>
 				
-				<p>This can happen if you modified the <code class="highlighter-rouge">bitrise.yml</code> / workflow configuration in a way which crashes the Workflow Editor UI.</p>
+				<p>If Workflow Editor doesn’t load for you, chances are your <code class="highlighter-rouge">bitrise.yml</code> or a workflow which you have configured crashes the Workflow Editor’s UI.</p>
 
-<p>If this would happen please <a href="https://www.bitrise.io/contact">contact us</a> so we can fix the issue in the UI code,
-then you can fix the <code class="highlighter-rouge">bitrise.yml</code> through our API.</p>
+<p>If you face the above issue please first:</p>
 
-<p>You can find an example of how the API works <a href="https://github.com/bitrise-io/bitrise/blob/master/_examples/experimentals/upload_download_bitrise_io/bitrise.yml">on GitHub</a>.
-In short, you can use a simple <code class="highlighter-rouge">curl</code> call to download &amp; to upload an app’s config / <code class="highlighter-rouge">bitrise.yml</code> to <a href="https://www.bitrise.io">bitrise.io</a>.</p>
+<ol>
+  <li><a href="https://www.bitrise.io/contact">contact us</a> so we can fix the issue in the UI code</li>
+  <li>then you can fix the <code class="highlighter-rouge">bitrise.yml</code> through our API</li>
+</ol>
 
-<p>With the Bitrise API you can download the <code class="highlighter-rouge">bitrise.yml</code> from <a href="https://www.bitrise.io">bitrise.io</a> even if it breaks the Workflow Editor UI,
-fix it locally and then upload the fixed <code class="highlighter-rouge">bitrise.yml</code> with another API call. For this all you need is a Personal Access Token, which you can generate on your <a href="https://www.bitrise.io/me/profile#/security">account’s security tab</a>.</p>
+<h2 id="managing-bitriseyml-with-api">Managing bitrise.yml with API <a href="#managing-bitriseyml-with-api" class="anchor-symbol">⚓</a></h2>
 
-<p>To download the <code class="highlighter-rouge">bitrise.yml</code> please check the <a href="/api/v0.1/#get-appsapp-slugbitriseyml">related section of the Bitrise API documentation</a>.</p>
+<p>In short, you can use a simple <code class="highlighter-rouge">curl</code> call to <strong>download</strong> and to <strong>upload</strong> an app’s configuration or <code class="highlighter-rouge">bitrise.yml</code> to <a href="https://www.bitrise.io">bitrise.io</a>. You can find an example of how the API works on <a href="https://github.com/bitrise-io/bitrise/blob/master/_examples/experimentals/upload_download_bitrise_io/bitrise.yml">GitHub</a>.</p>
 
-<p>Save the <code class="highlighter-rouge">bitrise.yml</code> into a file, fix it, then you can upload it with another <code class="highlighter-rouge">curl</code> call.</p>
+<p>Before you start</p>
 
-<p>To upload the <code class="highlighter-rouge">bitrise.yml</code> please also follow the <a href="/api/v0.1/#post-appsapp-slugbitriseyml">related part of the Bitrise API documentation</a>.</p>
+<ul>
+  <li>Make sure you have a Personal Access Token which you can generate on your <a href="https://www.bitrise.io/me/profile#/security">account’s security tab</a>.</li>
+</ul>
 
-<p><em>Note: make sure that you set the right <code class="highlighter-rouge">path/to/bitrise.yml</code> - specify the path of
-the <code class="highlighter-rouge">bitrise.yml</code> file where you saved the fixed <code class="highlighter-rouge">bitrise.yml</code>!</em></p>
+<ol>
+  <li>Download the <code class="highlighter-rouge">bitrise.yml</code> with an <a href="/api/v0.1/#get-appsapp-slugbitriseyml">API call</a> (even if it breaks the Workflow Editor UI)Check out the respective API. You will get a response in YML format.</li>
+  <li>Save the <code class="highlighter-rouge">bitrise.yml</code> into a file and modify it.</li>
+  <li>Upload the <code class="highlighter-rouge">bitrise.yml</code> for your application with <a href="/api/v0.1/#post-appsapp-slugbitriseyml">another API</a> call. Make sure the path to your fixed or modified <code class="highlighter-rouge">bitrise.yml</code> is correctly set! You will get a response in JSON format.</li>
+</ol>
 
 			</main>
 		</div>
