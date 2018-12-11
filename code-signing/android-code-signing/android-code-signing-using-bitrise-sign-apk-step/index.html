@@ -2060,35 +2060,56 @@
 
 <p>You can create a signed APK using the <code class="highlighter-rouge">Sign APK step</code> in your Bitrise workflow.</p>
 
-<p>Bitrise Project Scanner provides a <code class="highlighter-rouge">deploy workflow</code> which contains the <code class="highlighter-rouge">Sign APK step</code>. With this step, you can digitally sign your APK as part of your workflow. This step is configured to run if you have already uploaded your keystore file to Bitrise. All you have to do is upload your keystore file in the <code class="highlighter-rouge">Code signing</code> tab of the Workflow Editor.</p>
+<p>Bitrise Project Scanner provides a <code class="highlighter-rouge">deploy workflow</code> which contains the <code class="highlighter-rouge">Sign APK step</code>. With this step, you can digitally sign your APK as part of your workflow. This Step is configured to run if you have already uploaded your keystore file to Bitrise. All you have to do is upload your keystore file in the <code class="highlighter-rouge">Code signing</code> tab of the Workflow Editor.</p>
 
 <p>In this section, we walk you through the code signing steps using our <code class="highlighter-rouge">android-multiple-test-results-sample</code> demo app.</p>
 
+<p>Before you start:</p>
+
+<ul>
+  <li>Make sure you have the <code class="highlighter-rouge">Sign APK</code> Step in your deploy workflow right after your build steps but before <code class="highlighter-rouge">Google Play deploy</code> Step.</li>
+</ul>
+
 <ol>
   <li>Log into <a href="https://www.bitrise.io/">bitrise.io</a> and click on your app.</li>
-  <li>On your Bitrise <code class="highlighter-rouge">Dashboard</code>, click on <code class="highlighter-rouge">Workflow</code>.</li>
-  <li>Click on <code class="highlighter-rouge">Code signing</code>.</li>
+  <li>On your <code class="highlighter-rouge">Dashboard</code>, click <code class="highlighter-rouge">Workflow</code>.</li>
+  <li>Click <code class="highlighter-rouge">Code signing</code>.</li>
   <li>
     <p>Click or drag-and-drop your keystore file on the <code class="highlighter-rouge">Upload file</code> field of the <code class="highlighter-rouge">ANDROID KEYSTORE FILE</code> section.</p>
 
     <p><img src="/img/android-code-signing/upload-file.png" alt="Screenshot" /></p>
+
+    <p>A keystore URL automatically gets generated once you upload the keystore file. Bitrise assigns an environment variable (<code class="highlighter-rouge">BITRISEIO_ANDROID_KEYSTORE_URL</code>) to the download URL (which is a time-limited, read-only download URL) of the file as the value. You can use this URL to download the keystore file during a build in the future.</p>
   </li>
-  <li>
-    <p>Fill out the displayed three input fields: <code class="highlighter-rouge">keystore password</code>, <code class="highlighter-rouge">keystore alias</code> and <code class="highlighter-rouge">private key password</code>.</p>
+  <li>Fill out the displayed three input fields with your credentials:
+    <ul>
+      <li><code class="highlighter-rouge">keystore password</code></li>
+      <li><code class="highlighter-rouge">keystore alias</code></li>
+      <li><code class="highlighter-rouge">private key password</code></li>
+    </ul>
 
     <p><img src="/img/android-code-signing/three-fields.png" alt="Screenshot" /></p>
   </li>
-  <li>Click on <code class="highlighter-rouge">Save metadata</code>.
-The <code class="highlighter-rouge">Sign APK</code> step will receive your uploaded files.</li>
-</ol>
+  <li>
+    <p>Click on <code class="highlighter-rouge">Save metadata</code>.</p>
 
-<p>Bitrise uploads your keystore file and assigns an environment variable (<code class="highlighter-rouge">BITRISEIO_ANDROID_KEYSTORE_URL</code>) to the download URL (which is a time-limited, read-only download URL) of the file as the value. You can use this URL to download the keystore file during a build in the future. The <code class="highlighter-rouge">Sign APK</code> step in the workflow will track this environment variable and will run if it is set.</p>
+    <p>When you have successfully uploaded a keystore file in the <code class="highlighter-rouge">ANDROID KEYSTORE FILE</code> section and you have all the fields filled out, Bitrise will automatically export the following env vars based on your input:</p>
+    <ul>
+      <li><code class="highlighter-rouge">$BITRISEIO_ANDROID_KEYSTORE_ALIAS</code></li>
+      <li><code class="highlighter-rouge">$BITRISEIO_ANDROID_KEYSTORE_PASSWORD</code></li>
+      <li><code class="highlighter-rouge">$BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD</code></li>
+      <li><code class="highlighter-rouge">$BITRISEIO_ANDROID_KEYSTORE_URL</code></li>
+    </ul>
+
+    <p>Bitrise uses the above env vars and sets them as inputs into the respective fields of the <code class="highlighter-rouge">Sign APK</code> step. Once the Step runs, it produces a signed APK which will be used as the input value of the <code class="highlighter-rouge">APK or App Bundle file path</code> field in the <code class="highlighter-rouge">Google Play Deploy</code> Step.</p>
+  </li>
+</ol>
 
 <h2 id="downloading-your-files">Downloading your files <a href="#downloading-your-files" class="anchor-symbol">⚓</a></h2>
 
 <p>You can download your files from <code class="highlighter-rouge">GENERIC FILE STORAGE</code> (for example, your keystore file) using the <code class="highlighter-rouge">File-downloader</code> step:</p>
 
-<p>An example for downloading a keystore file” content=”</p>
+<p>An example for downloading a keystore file:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- file-downloader:
 
@@ -2101,26 +2122,13 @@ The <code class="highlighter-rouge">Sign APK</code> step will receive your uploa
 
 <p>After this step, <code class="highlighter-rouge">my_keystore.jks</code> will be available at <code class="highlighter-rouge">$HOME/keystores/my_keystore.jks</code>.</p>
 
-<h2 id="running-your-deploy-workflow">Running your deploy workflow <a href="#running-your-deploy-workflow" class="anchor-symbol">⚓</a></h2>
+<p>You might find these guides helpful as well:</p>
 
-<p>You can run a workflow <em>manually</em>.</p>
-
-<ol>
-  <li>Open your app’s <code class="highlighter-rouge">Builds</code> page.</li>
-  <li>Click on <code class="highlighter-rouge">Start/Schedule a Build</code>.</li>
-  <li>In the popup window, select <code class="highlighter-rouge">deploy</code> in the Workflow dropdown list.</li>
-  <li>Click <code class="highlighter-rouge">Start Build</code>.</li>
-</ol>
-
-<p>You can also run it through a <em>GIT event</em> if you set the trigger map for the workflow.</p>
-
-<ol>
-  <li>Click on the <code class="highlighter-rouge">Triggers</code> tab.</li>
-  <li>Set up your event (push/tag/pull) and select <code class="highlighter-rouge">deploy</code> workflow.</li>
-  <li>Click on <code class="highlighter-rouge">Done</code> and then <code class="highlighter-rouge">Save</code>.</li>
-</ol>
-
-<p>The next change in your repository that matches any of your trigger map event will start your <code class="highlighter-rouge">deploy</code> workflow.</p>
+<ul>
+  <li><a href="/tutorials/how-to-use-the-generic-file-storage/">How to use the Generic File Storage</a></li>
+  <li><a href="/code-signing/android-code-signing/downloading-a-keystore-file/">Downloading a keystore file</a></li>
+  <li><a href="/getting-started/managing-files-on-bitrise/">Managing files on Bitrise</a></li>
+</ul>
 
 			</main>
 		</div>
