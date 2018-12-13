@@ -2132,6 +2132,53 @@
 
 <p>You can read more about <a href="/builds/build-artifacts-online/">build artifacts</a> in our detailed guide!</p>
 
+<h3 id="using-encrypted-files">Using encrypted files <a href="#using-encrypted-files" class="anchor-symbol">⚓</a></h3>
+
+<p>You can use encrypted files on Bitrise, easily and securely. All you need to do is encrypt the file on your computer, upload it to your repo and use a Step to decrypt it when you need it.</p>
+
+<p>In this example, we’ll show how to do this. We use the <strong>pwgen</strong> password generator tool and <strong>GPG</strong> as the encryption software.</p>
+
+<div class="message-box important">
+<div class="message-title">
+    <p>GPG</p>
+  </div>
+
+<div class="message-content">
+    <p>Please note that the <code class="highlighter-rouge">Decrypt file</code> Step only decrypts files encrypted with GPG. If you use other encryption software, you will not be able to decrypt files on Bitrise.</p>
+  </div>
+</div>
+
+<ol>
+  <li>Open your Terminal/Command Line.</li>
+  <li>
+    <p>Create a 32 character passphrase for encryption.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pwgen -s 32 1
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Encrypt your file.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg -c my_secret_file
+</code></pre></div>    </div>
+
+    <p>Optionally, you can encrypt your file(s) in a non-interactive way.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg --batch --passphrase &lt;passphrase&gt; -c my_secret_file
+</code></pre></div>    </div>
+  </li>
+  <li>Upload <code class="highlighter-rouge">my_secret_file</code> to the Generic File Storage on Bitrise.</li>
+  <li>Add the <code class="highlighter-rouge">Decrypt file</code> Step to your workflow.</li>
+  <li>Add your passphrase as a <a href="/builds/env-vars-secret-env-vars/">secret Environment Variable</a> and insert it to the relevant Step input.</li>
+  <li>
+    <p>Add the encrypted file path and the output file path to the relevant Step inputs.</p>
+
+    <p>You can find the Environment Variable for the encrypted file path in the Generic File Storage.</p>
+  </li>
+</ol>
+
+<p>That’s it! Once you run the build, the Step will decrypt your file and you can use it for whatever you need it for!</p>
+
 			</main>
 		</div>
 		<footer>
