@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Device testing for Android - Bitrise DevCenter
+				Androidのデバイステスト - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Device testing for Android
+							Androidのデバイステスト
 						
 					</div>
 				</div>
@@ -1121,7 +1121,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/testing/device-testing-for-android/" title="Device testing for Android" class="current">Device testing for Android</a>
+				<a href="/testing/device-testing-for-android/" title="Device testing for Android">Device testing for Android</a>
 			
 		
 		
@@ -2070,52 +2070,52 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Device testing for Android</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/testing/device-testing-for-android.md" target="_blank"></a>
+						<h1>Androidのデバイステスト</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/translations/testing/device-testing-for-android.md" target="_blank"></a>
 					</div>
 				
-				<p>With Bitrise’s Android virtual device testing solution, you can run UI tests on emulators without having to set up and register your own devices: you just need to use our dedicated Steps and set the device type(s) on which you want to test your app.</p>
+				<p>BitriseのAndroidデバイステストソリューションを用いることで、デバイスのセットアップや登録を行うことなく、エミュレータ上でUIテストを実行できます。 専用のステップを使用し、テストするデバイスタイプを設定するだけで済みます。</p>
 
 <div class="message-box note">
 <div class="message-title">
-    <p>Limitations</p>
+    <p>制限</p>
   </div>
 
 <div class="message-content">
-    <p>You might be limited by your overall build time. Also note that a single build can contain only one <code class="highlighter-rouge">[BETA] Virtual Device Testing</code> Step performing one type of test (<code class="highlighter-rouge">instrumentation</code>, <code class="highlighter-rouge">robo</code> or <code class="highlighter-rouge">gameloop</code>.</p>
+    <p>ビルド時間によって制限される場合があります。また、1つのビルドには1種類のテスト(<code class="highlighter-rouge">instrumentation</code>、<code class="highlighter-rouge">robo</code>または<code class="highlighter-rouge">gameloop</code>）を実行する<code class="highlighter-rouge">[BETA] Virtual Device Testing</code>ステップを1つだけ含めることができます。</p>
   </div>
 </div>
 
-<p>Our device testing solution is based on <a href="https://firebase.google.com/docs/test-lab/">Firebase Test Lab</a>. You can find the resulting logs, videos and screenshots on Bitrise.</p>
+<p>デバイステストソリューションは<a href="https://firebase.google.com/docs/test-lab/">Firebase Test Lab</a>をベースとしています。 実行結果のログ、ビデオ、スクリーンショットはBitriseで閲覧することができます。</p>
 
-<h2 id="enabling-device-testing">Enabling device testing <a href="#enabling-device-testing" class="anchor-symbol">⚓</a></h2>
+<h2 id="デバイステストを有効化">デバイステストを有効化 <a href="#デバイステストを有効化" class="anchor-symbol">⚓</a></h2>
 
-<p>First you need to enable device testing to your app, then select a build whose primary workflow Bitrise will extend with our <code class="highlighter-rouge">Gradle Runner</code> and <code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step.</p>
+<p>まず、アプリのデバイステストを有効にし、<code class="highlighter-rouge">Gradle Runner</code>と<code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code>ステップを拡張したビルドを選択する必要があります。</p>
 
 <ol>
   <li>
-    <p>First you have to turn on <code class="highlighter-rouge">Device Testing</code> on the app’s <code class="highlighter-rouge">Settings</code> tab. Toggle the switch to the right in the upper right corner of <code class="highlighter-rouge">Device Testing</code>.</p>
+    <p>はじめにアプリの<code class="highlighter-rouge">Settings</code>タブ上で<code class="highlighter-rouge">Device Testing</code>をONにします。<code class="highlighter-rouge">Device Testing</code>の右上隅にあるスイッチを右に切り替えます。</p>
 
     <p><img src="/img/settings-device-testing.png" alt="" /></p>
   </li>
-  <li>From <code class="highlighter-rouge">Settings</code> go to your app’s <code class="highlighter-rouge">Build</code> page.</li>
-  <li>Click on a build you want to test.</li>
+  <li><code class="highlighter-rouge">Settings</code> ページからアプリの <code class="highlighter-rouge">Build</code> ページに移動します。</li>
+  <li>テストを行うビルドをクリックします。</li>
   <li>
-    <p>If you have enabled device testing in Step 1., you should find <code class="highlighter-rouge">DEVICE TESTS BETA</code> next to <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> as a third tab. Click it!</p>
+    <p>もし<code class="highlighter-rouge">Step 1</code>でデバイステストを有効にしていれば、<code class="highlighter-rouge">APPS &amp; ARTIFACTS</code>の次に3番目のタブ<code class="highlighter-rouge">DEVICE TESTS BETA</code> が出現するのでこれをクリックします。</p>
 
     <p><img src="/img/build-device-test.jpg" alt="" /></p>
   </li>
-  <li>Click <code class="highlighter-rouge">add step to primary workflow</code> to add two steps that you need for device testing to your primary workflow:
+  <li><code class="highlighter-rouge">add step to primary workflow</code>をクリックして、デバイステストに必要な2つのステップを<code class="highlighter-rouge">primary workflow</code>に追加します。
     <ul>
-      <li><code class="highlighter-rouge">Android Build</code> Step to generate an APK for testing</li>
-      <li><code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step to run the tests and create the test reports<img src="/img/primary-virtual-device.png" alt="" /></li>
+      <li><code class="highlighter-rouge">Android Build</code> - テストのためにapkを生成するステップ</li>
+      <li><code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> - テストを実行しテストレポートを生成するステップ<img src="/img/primary-virtual-device.png" alt="" /></li>
     </ul>
   </li>
 </ol>
 
-<h2 id="running-tests">Running tests <a href="#running-tests" class="anchor-symbol">⚓</a></h2>
+<h2 id="テストの実行">テストの実行 <a href="#テストの実行" class="anchor-symbol">⚓</a></h2>
 
-<p>With Bitrise, you can choose from 3 different test types:</p>
+<p>Bitriseでは3つのテストタイプから選択可能です。</p>
 
 <ul>
   <li>robo (default test type in Bitrise)</li>
@@ -2123,46 +2123,45 @@
   <li>gameloop</li>
 </ul>
 
-<p>If you want to read up on the difference between these test types, take a look at <a href="https://firebase.google.com/docs/test-lab/android/overview">Firebase’s documentation</a>.</p>
+<p>もしテストタイプの違いを知りたい場合は<a href="https://firebase.google.com/docs/test-lab/android/overview">Firebase’s documentation</a>をご覧ください。
+<code class="highlighter-rouge">robo</code>テストと<code class="highlighter-rouge">instrumentation</code>テストでは設定方法に少し違いがありますので、別々に見てみましょう！</p>
 
-<p>There is a small difference between configuring your workflow for <code class="highlighter-rouge">robo</code> and <code class="highlighter-rouge">instrumentation</code> tests, so let’s see them separately!</p>
-
-<h3 id="running-robo-tests">Running robo tests <a href="#running-robo-tests" class="anchor-symbol">⚓</a></h3>
+<h3 id="roboテストの実行"><code class="highlighter-rouge">robo</code>テストの実行 <a href="#roboテストの実行" class="anchor-symbol">⚓</a></h3>
 
 <ol>
-  <li>Open the primary workflow of your build in <code class="highlighter-rouge">Workflow Editor</code>.</li>
-  <li>Add an <code class="highlighter-rouge">Android Build</code> Step after the <code class="highlighter-rouge">Android Unit Test</code> Step to export an APK.</li>
+  <li><code class="highlighter-rouge">Workflow Editor</code>でビルドの<code class="highlighter-rouge">primary workflow</code>を開きます。</li>
+  <li>APKをエクスポートするため、<code class="highlighter-rouge">Android Unit Test</code>ステップの後に<code class="highlighter-rouge">Android Build</code>ステップを追加します。</li>
   <li>
-    <p>Add the <code class="highlighter-rouge">Debug</code> task to the <code class="highlighter-rouge">Variant</code> Step input field. This will prepare an env var containing the APK path of your build. You will need this env var in the next step.</p>
+    <p><code class="highlighter-rouge">Variant</code>の入力欄に<code class="highlighter-rouge">Debug</code>を追加してください。これにより、ビルドのAPKパスを含む環境変数が準備されます。この環境変数は次のステップで必要になります。</p>
 
     <p><img src="/img/robo-test.png" alt="" /></p>
   </li>
-  <li>Add <code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step after <code class="highlighter-rouge">Android Build</code> Step.</li>
-  <li>Set the <code class="highlighter-rouge">APK path</code> input field.</li>
-  <li>Check if <code class="highlighter-rouge">robo</code> is the selected <code class="highlighter-rouge">Test type</code>. It should be since it is the default test type.</li>
+  <li><code class="highlighter-rouge">Android Build</code>ステップの後に<code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code>を追加します。</li>
+  <li><code class="highlighter-rouge">APK path</code>の入力欄を設定します。</li>
+  <li><code class="highlighter-rouge">Test type</code>に<code class="highlighter-rouge">robo</code>が選択されていることを確認してください。これはデフォルトのテストタイプです。</li>
   <li>
-    <p>Add the type of test device in the <code class="highlighter-rouge">Test devices</code> input field. If choosing a different device than the default, your input should have the format of <code class="highlighter-rouge">deviceID,version,language,orientation</code> separated with <code class="highlighter-rouge">,</code>.</p>
+    <p><code class="highlighter-rouge">Test devices</code>入力欄にテストデバイスのタイプを追加します。デフォルト以外のデバイスを選択する場合、<code class="highlighter-rouge">,</code>で区切った <code class="highlighter-rouge">deviceID,version,language,orientation</code>のフォーマットで入力する必要があります。</p>
 
     <p><img src="/img/test-devices-android.png" alt="" /></p>
 
-    <p>Find the list of the available devices <a href="https://firebase.google.com/docs/test-lab/android/available-testing-devices">here</a>.</p>
+    <p>利用可能なデバイスの一覧は<a href="https://firebase.google.com/docs/test-lab/android/available-testing-devices">こちら</a>で確認してください。</p>
   </li>
-  <li>Start a build.</li>
+  <li>ビルドを開始します。</li>
 </ol>
 
-<h3 id="running-instrumentation-tests">Running instrumentation tests <a href="#running-instrumentation-tests" class="anchor-symbol">⚓</a></h3>
+<h3 id="instrumentationテストの実行"><code class="highlighter-rouge">instrumentation</code>テストの実行 <a href="#instrumentationテストの実行" class="anchor-symbol">⚓</a></h3>
 
 <ol>
-  <li>Open the <code class="highlighter-rouge">primary workflow</code> of your build in <code class="highlighter-rouge">Workflow Editor</code>.</li>
-  <li>Add two <code class="highlighter-rouge">Android Build</code> Steps after <code class="highlighter-rouge">Android Unit Test</code> Step. We will export an APK in the first build step and a test APK in the second build step.</li>
-  <li>In the first <code class="highlighter-rouge">Android Build</code> Step, add the <code class="highlighter-rouge">Debug</code> task to the <code class="highlighter-rouge">Variant</code> field.</li>
+  <li><code class="highlighter-rouge">Workflow Editor</code>でビルドの<code class="highlighter-rouge">primary workflow</code>を開きます。</li>
+  <li><code class="highlighter-rouge">Android Unit Test</code>ステップの後に2つの<code class="highlighter-rouge">Android Build</code>ステップを追加してください。1番目のビルドステップでAPKをエクスポートし、2番目のビルドステップでテストAPKをエクスポートします。</li>
+  <li>1番目の<code class="highlighter-rouge">Android Build</code>ステップで、<code class="highlighter-rouge">Variant</code>の入力欄に<code class="highlighter-rouge">Debug</code>を追加します。</li>
   <li>
-    <p>In the second <code class="highlighter-rouge">Android Build</code> Step, add the <code class="highlighter-rouge">DebugAndroidTest</code> task into the <code class="highlighter-rouge">Variant</code> field.</p>
+    <p>2番目の<code class="highlighter-rouge">Android Build</code>ステップで、<code class="highlighter-rouge">Variant</code>の入力欄に<code class="highlighter-rouge">DebugAndroidTest</code>を追加します。</p>
 
     <p><img src="/img/instrumentation-test-1.png" alt="" /></p>
   </li>
   <li>
-    <p>Click <code class="highlighter-rouge">bitrise.yml</code> tab and edit the primary workflow by adding the <a href="https://devcenter.bitrise.io/bitrise-cli/step-outputs/#exporting-step-outputs-in-output-aliases/">output alias</a> for instrumentation testing to your second <code class="highlighter-rouge">Android Build</code> step. This will replicate to the <code class="highlighter-rouge">Test APK path</code> field of the <code class="highlighter-rouge">Instrumentation Test</code> section of the <code class="highlighter-rouge">[BETA] Virtual Device Testing</code> step. With this little trick, you will be able to output a test APK as well.</p>
+    <p><code class="highlighter-rouge">bitrise.yml</code>タブをクリックして、<code class="highlighter-rouge">primary workflow</code>を編集します。2番目の<code class="highlighter-rouge">Android Build</code>ステップに<code class="highlighter-rouge">instrumentation</code>テストのための<a href="https://devcenter.bitrise.io/bitrise-cli/step-outputs/#exporting-step-outputs-in-output-aliases/">output alias</a>を追加します。 これは、<code class="highlighter-rouge">[BETA] Virtual Device Testing</code>ステップ内<code class="highlighter-rouge">Instrumentation Test</code>セクションの<code class="highlighter-rouge">Test APK path</code>にコピーします。この変更によって、テストAPKを出力することができます。</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> - android-build@0.9.5:
         inputs:
@@ -2178,29 +2177,29 @@
 
     <p><img src="/img/virtual-device.png" alt="" /></p>
   </li>
-  <li>Select <code class="highlighter-rouge">instrumentation</code> as <code class="highlighter-rouge">Test type</code> in <code class="highlighter-rouge">[BETA] Virtual Device Testing</code> step.</li>
+  <li><code class="highlighter-rouge">[BETA] Virtual Device Testing</code>ステップ内の<code class="highlighter-rouge">Test type</code>で<code class="highlighter-rouge">instrumentation</code>を選択します。</li>
   <li>
-    <p>Add the type of test device in the <code class="highlighter-rouge">Test devices</code> input field. If choosing a different device than the default, your input should have the format of  <code class="highlighter-rouge">deviceID,version,language,orientation</code> separated with <code class="highlighter-rouge">,</code>.</p>
+    <p><code class="highlighter-rouge">Test devices</code>入力欄にテストデバイスのタイプを追加します。デフォルト以外のデバイスを選択する場合、<code class="highlighter-rouge">,</code>で区切った <code class="highlighter-rouge">deviceID,version,language,orientation</code>のフォーマットで入力する必要があります。</p>
 
     <p><img src="/img/instrumentation-test.png" alt="" /></p>
   </li>
   <li>Start a build.</li>
 </ol>
 
-<h2 id="checking-test-results">Checking test results <a href="#checking-test-results" class="anchor-symbol">⚓</a></h2>
+<h2 id="テスト結果の確認">テスト結果の確認 <a href="#テスト結果の確認" class="anchor-symbol">⚓</a></h2>
 
-<p>You can check UI test result on the <code class="highlighter-rouge">DEVICE TESTS</code> tab of your app’s build page.</p>
+<p>UIテストの結果は、ビルドページの <code class="highlighter-rouge">DEVICE TESTS</code>タブで確認できます。</p>
 
 <ol>
-  <li>Go back to your <code class="highlighter-rouge">Builds</code> page, select your build, and click <code class="highlighter-rouge">DEVICE TESTS</code> tab to check your test result.</li>
+  <li><code class="highlighter-rouge">Builds</code>ページに戻りビルドを選択し、<code class="highlighter-rouge">DEVICE TESTS</code>タブをクリックしてテスト結果を確認します。</li>
   <li>
-    <p>Click the device you’ve tested your project on.</p>
+    <p>プロジェクトをテストしたデバイスをクリックします。</p>
 
     <p><img src="/img/device-test-page.jpg" alt="" /></p>
   </li>
 </ol>
 
-<p>You can view test cases and downloadable logs if you’ve selected <code class="highlighter-rouge">instrumentation</code> test and a video and screenshots if you’ve selected <code class="highlighter-rouge">robo</code> as test type. Or scroll down and download all your reports in <code class="highlighter-rouge">FILES GENERATED</code>.</p>
+<p><code class="highlighter-rouge">instrumentation</code>テストを選択した場合はテストケースとダウンロード可能なログを、<code class="highlighter-rouge">robo</code>テストを選択した場合はビデオとスクリーンショットを見ることができます。または下にスクロールして、すべてのレポートを<code class="highlighter-rouge">FILES GENERATED</code>でダウンロードできます。</p>
 
 			</main>
 		</div>
