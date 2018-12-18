@@ -2080,7 +2080,7 @@
   </div>
 
 <div class="message-content">
-    <p>The API is work-in-progress, we’ll add docs for new endpoints here as we progress, and might change things a bit if required.</p>
+    <p>The API is work-in-progress: we will add new endpoints and possibly update the existing ones in the future.</p>
   </div>
 </div>
 
@@ -2394,8 +2394,8 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 <p>There are two available sorting parameter for this endpoint:</p>
 
 <ul>
-  <li><strong><code class="highlighter-rouge">created_at</code>:</strong> descending order by the <code class="highlighter-rouge">created_at</code> attribute (default)</li>
-  <li><strong><code class="highlighter-rouge">last_build_at</code>:</strong> it’s ordered by <code class="highlighter-rouge">last_build_at</code> attribute in descending order,</li>
+  <li><code class="highlighter-rouge">**created_at**</code><strong>:</strong> descending order by the <code class="highlighter-rouge">created_at</code> attribute (default)</li>
+  <li><code class="highlighter-rouge">**last_build_at**</code><strong>:</strong> it’s ordered by <code class="highlighter-rouge">last_build_at</code> attribute in descending order,</li>
 </ul>
 
 <h5 id="example-curl-request-5">Example <code class="highlighter-rouge">curl</code> request <a href="#example-curl-request-5" class="anchor-symbol">⚓</a></h5>
@@ -2574,6 +2574,7 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 <h3 id="post-appsregister">POST /apps/register <a href="#post-appsregister" class="anchor-symbol">⚓</a></h3>
 
 <p>Add a new application. The parameters in the request body are the following:</p>
+
 <ul>
   <li><strong>provider</strong>(string): the git provider you are using, it can be <code class="highlighter-rouge">github</code>, <code class="highlighter-rouge">bitbucket</code>, <code class="highlighter-rouge">gitlab</code>, <code class="highlighter-rouge">gitlab-self-hosted</code> or <code class="highlighter-rouge">custom</code></li>
   <li><strong>is_public</strong>(boolean): if <code class="highlighter-rouge">true</code> then the repository visibility setting will be public, in case of <code class="highlighter-rouge">false</code> it will be private</li>
@@ -2599,6 +2600,7 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 <h3 id="post-appsapp-slugregister-ssh-key">POST /apps/APP-SLUG/register-ssh-key <a href="#post-appsapp-slugregister-ssh-key" class="anchor-symbol">⚓</a></h3>
 
 <p>Register an SSH key to a specific application. There are three parameters to use:</p>
+
 <ul>
   <li><strong>auth_ssh_private_key</strong>(string): the private part of the SSH key you would like to use</li>
   <li><strong>auth_ssh_public_key</strong>(string): the public part of the SSH key you would like to use</li>
@@ -2753,7 +2755,6 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
         </span><span class="err">-</span><span class="w"> </span><span class="err">project_path</span><span class="p">:</span><span class="w"> </span><span class="err">$BITRISE_PROJECT_PATH</span><span class="w">
         </span><span class="err">-</span><span class="w"> </span><span class="err">scheme</span><span class="p">:</span><span class="w"> </span><span class="err">$BITRISE_SCHEME</span><span class="w">
     </span><span class="err">-</span><span class="w"> </span><span class="err">deploy-to-bitrise-io@</span><span class="mf">1.2</span><span class="err">.</span><span class="mi">9</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-
 </span></code></pre></div></div>
 
 <h3 id="post-appsapp-slugbitriseyml">POST /apps/{APP-SLUG}/bitrise.yml <a href="#post-appsapp-slugbitriseyml" class="anchor-symbol">⚓</a></h3>
@@ -2997,6 +2998,7 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
+
 <div class="message-box note">
 <div class="message-title">
 
@@ -3225,11 +3227,11 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 <p>Build times:</p>
 
 <ul>
-  <li>the actual build time is the difference of <strong><code class="highlighter-rouge">finished_at</code></strong> and <strong><code class="highlighter-rouge">environment_prepare_finished_at</code></strong></li>
-  <li><strong><code class="highlighter-rouge">triggered_at</code></strong> is the time when the build was registered, it’s always set, for every build. <strong>Other build times might be <code class="highlighter-rouge">nil</code></strong>, if the build did not get to that point yet.</li>
-  <li><strong><code class="highlighter-rouge">started_on_worker_at</code></strong> is the time of when a worker started to process the build. The difference between <code class="highlighter-rouge">started_on_worker_at</code> and <code class="highlighter-rouge">triggered_at</code> is usually for how long the build was <strong>“on hold”</strong> (rarely it can also include “waiting for worker” but that shouldn’t happen under usual circumstances).</li>
-  <li><strong><code class="highlighter-rouge">environment_prepare_finished_at</code></strong> is the time when the environment of the build was fully prepared; the build starts right after this, usually under a second.</li>
-  <li><strong><code class="highlighter-rouge">finished_at</code></strong> is when the build finished (with success or error, or the time of the “abort” if it was aborted). <code class="highlighter-rouge">finished_at</code> is <code class="highlighter-rouge">nil</code> in case of a running build.</li>
+  <li>the actual build time is the difference of <code class="highlighter-rouge">**finished_at**</code> and <code class="highlighter-rouge">**environment_prepare_finished_at**</code></li>
+  <li><code class="highlighter-rouge">**triggered_at**</code> is the time when the build was registered, it’s always set, for every build. <strong>Other build times might be</strong> <code class="highlighter-rouge">**nil**</code>, if the build did not get to that point yet.</li>
+  <li><code class="highlighter-rouge">**started_on_worker_at**</code> is the time of when a worker started to process the build. The difference between <code class="highlighter-rouge">started_on_worker_at</code> and <code class="highlighter-rouge">triggered_at</code> is usually for how long the build was <strong>“on hold”</strong> (rarely it can also include “waiting for worker” but that shouldn’t happen under usual circumstances).</li>
+  <li><code class="highlighter-rouge">**environment_prepare_finished_at**</code> is the time when the environment of the build was fully prepared; the build starts right after this, usually under a second.</li>
+  <li><code class="highlighter-rouge">**finished_at**</code> is when the build finished (with success or error, or the time of the “abort” if it was aborted). <code class="highlighter-rouge">finished_at</code> is <code class="highlighter-rouge">nil</code> in case of a running build.</li>
 </ul>
 
 <h4 id="example-curl-request-27">Example <code class="highlighter-rouge">curl</code> request <a href="#example-curl-request-27" class="anchor-symbol">⚓</a></h4>
@@ -3341,20 +3343,20 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 <h5 id="available-parameters">Available parameters: <a href="#available-parameters" class="anchor-symbol">⚓</a></h5>
 
 <ul>
-  <li><strong><code class="highlighter-rouge">status</code></strong> (integer): In the response there will be only the builds with a certain status.</li>
-  <li><strong><code class="highlighter-rouge">branch</code></strong> (string): Retrieves the builds from the given branch.</li>
-  <li><strong><code class="highlighter-rouge">trigger_event_type</code></strong> (string): With this parameter the builds can be filtered based on the trigger event. Data type: <em>string</em> The available values are the following:
+  <li><code class="highlighter-rouge">**status**</code> (integer): In the response there will be only the builds with a certain status.</li>
+  <li><code class="highlighter-rouge">**branch**</code> (string): Retrieves the builds from the given branch.</li>
+  <li><code class="highlighter-rouge">**trigger_event_type**</code> (string): With this parameter the builds can be filtered based on the trigger event. Data type: <em>string</em> The available values are the following:
     <ul>
-      <li><em><code class="highlighter-rouge">push</code></em>: when the response contains only the builds which were triggered by a commit push</li>
-      <li><em><code class="highlighter-rouge">pull-request</code></em>: when the response contains only the builds which were triggered by a pull request</li>
+      <li><code class="highlighter-rouge">_push_</code>: when the response contains only the builds which were triggered by a commit push</li>
+      <li><code class="highlighter-rouge">_pull-request_</code>: when the response contains only the builds which were triggered by a pull request</li>
     </ul>
   </li>
-  <li><strong><code class="highlighter-rouge">pull_request_id</code></strong> (integer): This parameter specifies the pull request id of the actual build, works only if <code class="highlighter-rouge">trigger_event_type</code> parameter is specified with the value <em><code class="highlighter-rouge">pull-request</code></em></li>
-  <li><strong><code class="highlighter-rouge">after</code></strong> (integer): Giving this parameter, in the response there will be only those builds which were triggered after or at the given time. The value has to be passed as UNIX timestamp.</li>
-  <li><strong><code class="highlighter-rouge">before</code></strong> (integer): Similar to the previous one this filters by the time when the build was triggered, but this retrieves the ones before or at the given time. The value has to be passed as UNIX timestamp.</li>
-  <li><strong><code class="highlighter-rouge">workflow</code></strong> (string): The response will contain only the builds triggered with the specified workflow.</li>
-  <li><strong><code class="highlighter-rouge">commit_message</code></strong> (string): In the result set there will be the builds with the given commit message, this parameter is case insensitive and also retrieves the partial matches.</li>
-  <li><strong><code class="highlighter-rouge">build_number</code></strong> (string): Retrieves build with the specified actual build number parameter.</li>
+  <li><code class="highlighter-rouge">**pull_request_id**</code> (integer): This parameter specifies the pull request id of the actual build, works only if <code class="highlighter-rouge">trigger_event_type</code> parameter is specified with the value <code class="highlighter-rouge">_pull-request_</code></li>
+  <li><code class="highlighter-rouge">**after**</code> (integer): Giving this parameter, in the response there will be only those builds which were triggered after or at the given time. The value has to be passed as UNIX timestamp.</li>
+  <li><code class="highlighter-rouge">**before**</code> (integer): Similar to the previous one this filters by the time when the build was triggered, but this retrieves the ones before or at the given time. The value has to be passed as UNIX timestamp.</li>
+  <li><code class="highlighter-rouge">**workflow**</code> (string): The response will contain only the builds triggered with the specified workflow.</li>
+  <li><code class="highlighter-rouge">**commit_message**</code> (string): In the result set there will be the builds with the given commit message, this parameter is case insensitive and also retrieves the partial matches.</li>
+  <li><code class="highlighter-rouge">**build_number**</code> (string): Retrieves build with the specified actual build number parameter.</li>
 </ul>
 
 <h5 id="example-curl-requests">Example <code class="highlighter-rouge">curl</code> requests <a href="#example-curl-requests" class="anchor-symbol">⚓</a></h5>
@@ -5895,8 +5897,8 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 <p>There are two available sorting parameter for this endpoint:</p>
 
 <ul>
-  <li><strong><code class="highlighter-rouge">created_at</code>:</strong> descending order by the <code class="highlighter-rouge">created_at</code> attribute (default setting)</li>
-  <li><strong><code class="highlighter-rouge">running_first</code>:</strong> it’s also ordered by <code class="highlighter-rouge">created_at</code> in descending order, but all running builds are listed first and then the builds with other status</li>
+  <li><code class="highlighter-rouge">**created_at**</code><strong>:</strong> descending order by the <code class="highlighter-rouge">created_at</code> attribute (default setting)</li>
+  <li><code class="highlighter-rouge">**running_first**</code><strong>:</strong> it’s also ordered by <code class="highlighter-rouge">created_at</code> in descending order, but all running builds are listed first and then the builds with other status</li>
 </ul>
 
 <div class="message-box note">
@@ -7578,9 +7580,9 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 
 <p>Get a specific build’s data.</p>
 
-<p>Status codes (<code class="highlighter-rouge">status</code>) and related status texts (<code class="highlighter-rouge">status_text</code>): <strong>See the <a href="#get-appsapp-slugbuilds"><code class="highlighter-rouge">GET /apps/{APP-SLUG}/builds</code> endpoint description</a></strong></p>
+<p>Status codes (<code class="highlighter-rouge">status</code>) and related status texts (<code class="highlighter-rouge">status_text</code>): <strong>See the</strong> <code class="highlighter-rouge">[**GET /apps/{APP-SLUG}/builds**](#get-appsapp-slugbuilds)</code> <a href="#get-appsapp-slugbuilds"><strong>endpoint description</strong></a></p>
 
-<p>Build times: <strong>See the <a href="#get-appsapp-slugbuilds"><code class="highlighter-rouge">GET /apps/{APP-SLUG}/builds</code> endpoint description</a></strong></p>
+<p>Build times: <strong>See the</strong> <code class="highlighter-rouge">[**GET /apps/{APP-SLUG}/builds**](#get-appsapp-slugbuilds)</code> <a href="#get-appsapp-slugbuilds"><strong>endpoint description</strong></a></p>
 
 <h4 id="example-curl-request-29">Example <code class="highlighter-rouge">curl</code> request <a href="#example-curl-request-29" class="anchor-symbol">⚓</a></h4>
 
@@ -7754,7 +7756,6 @@ There is also a <code class="highlighter-rouge">limit</code> parameter which has
 
             </span><span class="err">sleep</span><span class="w"> </span><span class="mi">30</span><span class="w">
         </span><span class="err">title</span><span class="p">:</span><span class="w"> </span><span class="err">Sleep</span><span class="w">
-
 </span></code></pre></div></div>
 
 <h3 id="get-appsapp-slugbuildsbuild-slugartifacts">GET /apps/{APP-SLUG}/builds/{BUILD-SLUG}/artifacts <a href="#get-appsapp-slugbuildsbuild-slugartifacts" class="anchor-symbol">⚓</a></h3>
