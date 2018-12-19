@@ -2074,14 +2074,14 @@
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/tutorials/docker/run-your-build-locally-in-docker.md" target="_blank"></a>
 					</div>
 				
-				<p>To be able to run your Linux stack builds locally you’ll need <a href="https://www.docker.com/">docker</a>.</p>
+				<p>To be able to run your Linux stack builds locally, you’ll need <a href="https://www.docker.com/">docker</a>:</p>
 
-<p>For Linux just follow the <a href="https://docs.docker.com/engine/installation/linux/">official install instructions</a>.</p>
+<ul>
+  <li>For Linux just follow the <a href="https://docs.docker.com/engine/installation/linux/">official install instructions</a>.</li>
+  <li>For Mac you can use <a href="https://www.docker.com/products/docker#/mac">Docker for Mac</a>, which is the easiest way to get started.</li>
+</ul>
 
-<p>For Mac you can use <a href="https://www.docker.com/products/docker#/mac">Docker for Mac</a>,
-which is probably the easiest way to get started.</p>
-
-<p>For this example we’ll use <a href="https://github.com/bitrise-samples/sample-apps-android-sdk22">this Bitrise Android sample project</a>.</p>
+<p>In this guide we’ll use <a href="https://github.com/bitrise-samples/sample-apps-android-sdk22">this Bitrise Android sample project</a>.</p>
 
 <div class="message-box warning">
 <div class="message-title">
@@ -2089,121 +2089,98 @@ which is probably the easiest way to get started.</p>
   </div>
 
 <div class="message-content">
-
-    <p>The official Bitrise Docker images are quite large, due to the fact that it includes a wide variety of preinstalled tools. You’ll need at <strong>least</strong> 20-25 GB free disk space!</p>
+    <p>The official Bitrise Docker images are quite large because they include a wide variety of preinstalled tools. You’ll need at <strong>least</strong> 20-25 GB free disk space!</p>
   </div>
 </div>
 
-<p>If you’re not familiar with the <a href="https://www.bitrise.io/cli">Bitrise CLI</a>
-you should try that first. You don’t have to master the CLI,
-if you know what <code class="highlighter-rouge">bitrise run WORKFLOW</code> does, that should be enough for this tutorial.</p>
+<p>If you’re not familiar with the <a href="https://www.bitrise.io/cli">Bitrise CLI</a> you should try that first. You don’t have to master the CLI, if you know what <code class="highlighter-rouge">bitrise run WORKFLOW</code> does, that should be enough for this tutorial.</p>
 
-<h2 id="tldr">TL;DR; <a href="#tldr" class="anchor-symbol">⚓</a></h2>
-
-<p>If you’re familiar with <code class="highlighter-rouge">docker</code> and the <code class="highlighter-rouge">bitrise</code> CLI:</p>
+<h2 id="downloading-docker-images-from-quayio">Downloading Docker images from quay.io <a href="#downloading-docker-images-from-quayio" class="anchor-symbol">⚓</a></h2>
 
 <ol>
-  <li>Install <a href="https://www.docker.com/">docker</a></li>
-  <li>Make sure you have your <code class="highlighter-rouge">bitrise.yml</code> in your repository (you don’t have to commit it, but the file have to exist in your repository’s root directory)</li>
-  <li><code class="highlighter-rouge">cd</code> into your repository’s directory on your Mac/Linux
-    <ul>
-      <li><em>If you try to reproduce an issue, you should</em> <code class="highlighter-rouge">_git clone_</code> <em>your repository into a <strong>new directory</strong>,
-so that the directory will only contain the files which are committed into the repository!</em></li>
-    </ul>
+  <li>Install <a href="https://www.docker.com/">docker</a>.</li>
+  <li>
+    <p>Make sure you have your <code class="highlighter-rouge">bitrise.yml</code> in your repository.</p>
+
+    <p>You don’t have to commit it, but the file must exist in your repository’s root directory.</p>
   </li>
-  <li><code class="highlighter-rouge">docker pull bitriseio/docker-android:latest</code></li>
-  <li><code class="highlighter-rouge">docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" --rm bitriseio/docker-android:latest bitrise run WORKFLOW</code>
-    <ul>
-      <li>Note: if you want to just jump into the container and experiment inside, you can replace <code class="highlighter-rouge">--rm bitriseio/docker-android:latest bitrise run WORKFLOW</code> with <code class="highlighter-rouge">-it bitriseio/docker-android:latest bash</code> to start an interactive bash shell inside the container. E.g.: <code class="highlighter-rouge">docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" -it bitriseio/docker-android:latest bash</code>.</li>
-    </ul>
+  <li><code class="highlighter-rouge">cd</code> into your repository’s directory on your Mac/Linux.</li>
+  <li>
+    <p>Pull the image from its registry:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull quay.io/bitriseio/android:latest
+</code></pre></div>    </div>
   </li>
+  <li>
+    <p>Run the following command:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" --rm quay.io/bitriseio/android:latest bitrise run WORKFLOW`
+</code></pre></div>    </div>
+
+    <p>If you want to just jump into the container and experiment inside, you can replace <code class="highlighter-rouge">--rm quay.io/bitriseio/android:latest bitrise run WORKFLOW</code> with <code class="highlighter-rouge">-it quay.io/bitriseio/android:latest bash</code> to start an interactive bash shell inside the container. For example:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" -it quay.io/bitriseio/android:latest bash
+</code></pre></div>    </div>
+
+    <p>In general, if your project is an Android project but you don’t use Android NDK, to preserve precious disk space, you should use the <a href="https://quay.io/repository/bitriseio/android">quay.io/bitriseio/android</a> docker image. You can find other official Bitrise docker images on our <a href="https://quay.io/organization/bitriseio">Quay page</a>. In this example, we’re using the <code class="highlighter-rouge">quay.io/bitriseio/android</code> one.</p>
+  </li>
+  <li>
+    <p>Download docker images from the <a href="https://quay.io/organization/bitriseio">Quay</a>:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull quay.io/bitriseio/android:latest`
+</code></pre></div>    </div>
+
+    <p>Be aware that this can take quite a bit of time, as this image is over 10 GB. If the 			download fails or hangs, you can restart it any time by running the same command again.</p>
+  </li>
+  <li>
+    <p>Download your Bitrise build configuration (<code class="highlighter-rouge">bitrise.yml</code>) to the root directory of your repository.</p>
+
+    <p>You can download your project’s <code class="highlighter-rouge">bitrise.yml</code> from the <code class="highlighter-rouge">bitrise.yml</code> tab of your Workflow Editor on <a href="https://www.bitrise.io">bitrise.io</a>.</p>
+  </li>
+  <li>In your Terminal / Command Line go to (<code class="highlighter-rouge">cd</code>) the root directory of your repository. Check if your <code class="highlighter-rouge">bitrise.yml</code> is at this location.</li>
 </ol>
 
-<p><em>Keep reading if you want to read more details and notes about the process and commands!</em></p>
+<p><strong>If you try to reproduce an issue, you should</strong> <code class="highlighter-rouge">git clone</code> <strong>your repository into a new directory</strong>, so that the directory will only contain the files which are committed into the repository! It’s a frequent reproducibility issue that you try to run the commands in your normal working directory, where you most likely have files which are not committed into your repository, for example, files which are in <code class="highlighter-rouge">.gitignore</code>.</p>
 
-<h2 id="getting-started">Getting started <a href="#getting-started" class="anchor-symbol">⚓</a></h2>
+<h2 id="running-your-builds">Running your builds <a href="#running-your-builds" class="anchor-symbol">⚓</a></h2>
 
-<p>Open your Terminal / Command Line, and download the docker image you want to use.
-In general, if your project is an Android project but you don’t use the Android NDK,
-to preserve precious disk space you should use the
-<a href="https://hub.docker.com/r/bitriseio/docker-android/">bitriseio/docker-android</a> docker image.
-You can find other official Bitrise docker images <a href="https://hub.docker.com/u/bitriseio/">on our Docker Hub page</a>.
-For this example we’ll use the <code class="highlighter-rouge">bitriseio/docker-android</code> one.</p>
+<p>Run your build with the following command:</p>
 
-<p>Downloading docker images from the <a href="https://hub.docker.com">Docker Hub</a> is quite easy:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull bitriseio/docker-android:latest
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" --rm quay.io/bitriseio/android:latest bitrise run WORKFLOW
 </code></pre></div></div>
 
-<p>Be prepared, this can take quite a bit of time, as this image is over 10 GB.
-<em>If the download would fail or hang, you can restart it any time by running
-the same command again.</em></p>
+<ul>
+  <li>
+    <p>If you want to jump into the container and experiment inside, you can replace:</p>
 
-<p>Once the download succeeds you have everything prepared to run your build
-in Docker! The last thing you have to do is to download your Bitrise build
-configuration (<code class="highlighter-rouge">bitrise.yml</code>).</p>
+    <p><code class="highlighter-rouge">--rm quay.io/bitriseio/android:latest bitrise run WORKFLOW</code></p>
 
-<div class="message-box note">
-<div class="message-title">
-    <p><code class="highlighter-rouge">bitrise.yml</code></p>
-  </div>
+    <p>with <code class="highlighter-rouge">-it quay.io/bitriseio/android:latest bash</code> to start an interactive bash shell inside the container.</p>
 
-<div class="message-content">
+    <p>For example:</p>
 
-    <p>You can download your project’s <code class="highlighter-rouge">bitrise.yml</code> from the <strong>Workflow Editor</strong> on <a href="https://www.bitrise.io">bitrise.io</a>, under the <code class="highlighter-rouge">bitrise.yml</code> section.</p>
-  </div>
-</div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" -it quay.io/bitriseio/android:latest bash`.
+</code></pre></div>    </div>
 
-<p>In your Terminal / Command Line go to (<code class="highlighter-rouge">cd</code>) the root directory
-of <em>your repository</em>, and make sure your <code class="highlighter-rouge">bitrise.yml</code> is at this location.</p>
+    <p>After this, you can run <code class="highlighter-rouge">bitrise run WORKFLOW</code>, which will run the workflow inside the container. To exit from the container, just run <code class="highlighter-rouge">exit</code>.</p>
+  </li>
+  <li>
+    <p>Don’t forget to replace <code class="highlighter-rouge">WORKFLOW</code> with the actual ID of your workflow in your <code class="highlighter-rouge">bitrise.yml</code>, with something like <code class="highlighter-rouge">primary</code>!</p>
+  </li>
+</ul>
 
-<p><strong>If you try to reproduce an issue, you should</strong> <code class="highlighter-rouge">**git clone**</code> your repository into a new directory,
-so that the directory will only contain the files which are committed into the repository!**
-It’s a frequent reproducibility issue that you try to run the commands in your
-normal working directory, where you most likely have files which are not
-committed into your repository, e.g. files which are in <code class="highlighter-rouge">.gitignore</code>.</p>
+<p>This command will share the current directory (the directory of your repository) as a shared volume with the docker container, and will make it available <strong>inside</strong> the container at the path <code class="highlighter-rouge">/bitrise/src</code>.</p>
 
-<h2 id="run-your-builds">Run your builds <a href="#run-your-builds" class="anchor-symbol">⚓</a></h2>
+<ul>
+  <li>The <code class="highlighter-rouge">--env CI=false</code> flag sets the environment variable <code class="highlighter-rouge">CI</code> to <code class="highlighter-rouge">false</code> - this will make Bitrise CLI skip certain steps that only make sense to run in a CI environment. For example, our <code class="highlighter-rouge">Git Clone</code> Step - you already have your code, so there’s no need to git clone it again inside the docker container (that’s why we shared the code directory as a <code class="highlighter-rouge">--volume</code>).</li>
+  <li>
+    <p>The <code class="highlighter-rouge">--rm</code> flag tells docker to discard the container after the <code class="highlighter-rouge">docker run</code> command finishes. This means that if you run the command again, the only thing which will persist between the <code class="highlighter-rouge">docker run ..</code> commands are the files stored at the shared <code class="highlighter-rouge">--volume</code> (in your repository’s directory). Every other file that is generated into a temp or any other location will be discarded / won’t be kept.</p>
 
-<p>The only thing left to do is to actually run a build:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" --rm bitriseio/docker-android:latest bitrise run WORKFLOW
-</code></pre></div></div>
-
-<p>If you want to just jump into the container and experiment inside, you can replace <code class="highlighter-rouge">--rm bitriseio/docker-android:latest bitrise run WORKFLOW</code> with <code class="highlighter-rouge">-it bitriseio/docker-android:latest bash</code> to start an interactive bash shell inside the container. As an example: <code class="highlighter-rouge">docker run --privileged --env CI=false --volume "$(pwd):/bitrise/src" --volume "/var/run/docker.sock:/var/run/docker.sock" -it bitriseio/docker-android:latest bash</code>. After this, if you want to, you can run <code class="highlighter-rouge">bitrise run WORKFLOW</code>, which will run the workflow inside the container. To exit from the container, just run <code class="highlighter-rouge">exist</code>.</p>
-
-<p><em>Don’t forget to replace <code class="highlighter-rouge">WORKFLOW_</code> with the actual ID of your workflow in your <code class="highlighter-rouge">bitrise.yml</code>,
-with something like <code class="highlighter-rouge">primary</code></em>!</p>
-
-<p>This command will share the current directory (the directory of your repository)
-as a shared volume with the docker container, and will make it available <strong>inside</strong> the
-container at the path <code class="highlighter-rouge">/bitrise/src</code>.</p>
-
-<p>The <code class="highlighter-rouge">--env CI=false</code> flag sets the environment variable <code class="highlighter-rouge">CI</code> to <code class="highlighter-rouge">false</code> - this will
-make Bitrise CLI to skip certain steps which only make sense to run in a Continuous Integration
-environment. An example is the <code class="highlighter-rouge">Git Clone</code> step - you already have your code, so there’s
-no need to git clone it again inside the docker container (that’s why we
-shared the code directory as a <code class="highlighter-rouge">--volume</code>).</p>
-
-<p>The <code class="highlighter-rouge">--rm</code> flag tells docker to discard the container after the <code class="highlighter-rouge">docker run</code>
-command finishes. This means that if you run the command again, the only thing which will
-persist between the <code class="highlighter-rouge">docker run ..</code> commands are the files stored at the shared <code class="highlighter-rouge">--volume</code>
-(in your repository’s directory). Every other file which is generated into a temp
-or any other location will be discarded / won’t be kept. If you want to
-debug the container after a failed build feel free to remove the <code class="highlighter-rouge">--rm</code> flag,
-and check out a Docker tutorial about how you can connect to an existing
-docker container - <em>Note: simply running the command again <strong>will not</strong> use the same container,
-but <strong>will create a new one</strong></em>!</p>
-
-<p>The <code class="highlighter-rouge">--privileged</code> flag allows access control of the host (!) from the docker container,
-so you should never use this flag unless you trust the docker image you will use!
-This flag is required for allowing VPNs to work (to change network configs
-of the host) for example.</p>
-
-<p>The <code class="highlighter-rouge">--volume "/var/run/docker.sock:/var/run/docker.sock"</code> flag exposes the
-docker socket from the host for the container - this is required
-if you want to run other docker containers from whithin the container,
-or if you want to run any <code class="highlighter-rouge">docker</code> command during your build / inside the container.</p>
+    <p>If you want to debug the container after a failed build, feel free to remove the <code class="highlighter-rouge">--rm</code> flag, and check out a Docker tutorial about how you can connect to an existing docker container. Please note that simply <strong>running the command again</strong> will not use the same container, but will create a new one!</p>
+  </li>
+  <li>The <code class="highlighter-rouge">--privileged</code> flag allows access control of the host (!) from the docker container, so you should never use this flag unless you trust the docker image you will use! This flag is required for allowing VPNs to work (to change network configs of the host) for example.</li>
+  <li>The <code class="highlighter-rouge">--volume "/var/run/docker.sock:/var/run/docker.sock"</code> flag exposes the docker socket from the host for the container - this is required if you want to run other docker containers from within the container, or if you want to run any <code class="highlighter-rouge">docker</code> command during your build / inside the container.</li>
+</ul>
 
 			</main>
 		</div>
