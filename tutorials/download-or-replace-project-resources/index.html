@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Download or replace project resources - Bitrise DevCenter
+				Downloading or replacing project resources - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Download or replace project resources
+							Downloading or replacing project resources
 						
 					</div>
 				</div>
@@ -1634,7 +1634,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/tutorials/download-or-replace-project-resources/" title="Download or replace project resources" class="current">Download or replace project resources</a>
+				<a href="/tutorials/download-or-replace-project-resources/" title="Downloading or replacing project resources" class="current">Downloading or replacing project resources</a>
 			
 		
 		
@@ -2070,16 +2070,16 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Download or replace project resources</h1>
+						<h1>Downloading or replacing project resources</h1>
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/tutorials/download-or-replace-project-resources.md" target="_blank"></a>
 					</div>
 				
-				<p>You can do this in quite a few ways, these are probably the easiest ones:</p>
+				<p>There are multiple ways of downloading or replacing project resources. We’ll go through the following examples:</p>
 
 <ul>
-  <li>use the <code class="highlighter-rouge">ZIP resource archive downloader</code> step for downloading and extracting a ZIP file</li>
-  <li>use the <code class="highlighter-rouge">File Downloader</code> step to download a single file</li>
-  <li>use a <code class="highlighter-rouge">Script</code> Step</li>
+  <li>using the <code class="highlighter-rouge">ZIP resource archive downloader</code> step for downloading and extracting a ZIP file</li>
+  <li>using the <code class="highlighter-rouge">File Downloader</code> step to download a single file</li>
+  <li>using a <code class="highlighter-rouge">Script</code> Step</li>
 </ul>
 
 <div class="message-box note">
@@ -2092,44 +2092,42 @@
   </div>
 </div>
 
-<h2 id="using-the-zip-resource-archive-downloader-step">Using the <code class="highlighter-rouge">ZIP resource archive downloader</code> step <a href="#using-the-zip-resource-archive-downloader-step" class="anchor-symbol">⚓</a></h2>
+<h2 id="using-the-zip-resource-archive-downloader-step">Using the <code class="highlighter-rouge">ZIP resource archive downloader</code> Step <a href="#using-the-zip-resource-archive-downloader-step" class="anchor-symbol">⚓</a></h2>
 
-<p>If you have your resources on your server in a zip archive, all you have to do
-is to add the <code class="highlighter-rouge">ZIP resource archive downloader</code> Step to your Workflow,
-specify the URL of the ZIP and the destination where the zip’s content should be uncompressed.</p>
+<p>If you have your resources on your server in a zip archive, it’s very simple to download it:</p>
+
+<ol>
+  <li>Add the <code class="highlighter-rouge">ZIP resource archive downloader</code> Step to your Workflow.</li>
+  <li>Specify the URL of the ZIP and the destination where the zip’s content should be uncompressed.</li>
+</ol>
 
 <p>The <em>source code of your app</em> will be (by default) downloaded into the folder
 defined in the <code class="highlighter-rouge">$BITRISE_SOURCE_DIR</code> environment variable.</p>
 
-<p>If you want to place the content of your ZIP archive into a folder called <em>myresource</em>
-inside your app’s source code directory, you can define the extract target folder
-(of the <code class="highlighter-rouge">ZIP resource archive downloader</code> step) as <code class="highlighter-rouge">${BITRISE_SOURCE_DIR}/myresource</code>,
-or <code class="highlighter-rouge">./myresource</code> (as the default working directory is the source code directory).</p>
+<p>You can also place the content of your ZIP archive into a specific folder within your app’s source code directory. Just define the destination folder of the  <code class="highlighter-rouge">ZIP resource archive downloader</code> Step like this: <code class="highlighter-rouge">${BITRISE_SOURCE_DIR}/folder_name</code> or <code class="highlighter-rouge">.folder_name</code>.</p>
 
-<h2 id="single-file---using-the-file-downloader-step">Single file - using the <code class="highlighter-rouge">File Downloader</code> step <a href="#single-file---using-the-file-downloader-step" class="anchor-symbol">⚓</a></h2>
+<h2 id="using-the-file-downloader-step">Using the <code class="highlighter-rouge">File Downloader</code> Step <a href="#using-the-file-downloader-step" class="anchor-symbol">⚓</a></h2>
 
-<p>If you only want to download a single file, you can of course ZIP it up and
-use the <code class="highlighter-rouge">ZIP resource archive downloader</code> step as described in the previous section,
-but there’s also a step for single file downloads.</p>
+<p>If you only want to download a single file, use the <code class="highlighter-rouge">File Downloader</code> Step.</p>
 
-<p>The <code class="highlighter-rouge">File Downloader</code> step can be used for this use case. Works very similarly as the
-<code class="highlighter-rouge">ZIP resource archive downloader</code> step, except it does not require a ZIP file,
-it simply downloads the specified file to the location you set.</p>
+<ol>
+  <li>Add the <code class="highlighter-rouge">File Downloader</code> Step to your Workflow.</li>
+  <li>
+    <p>Specify the URL of the file and the destination where the file should be downloaded to.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
-- file-downloader:
-    inputs:
-    - source: $BITRISEIO_my_file_id_URL
-    - destination: "$BITRISE_SOURCE_DIR/path/to/store/the/file"
-...
-</code></pre></div></div>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">-</span> <span class="na">file-downloader</span><span class="pi">:</span>
+     <span class="na">inputs</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="na">source</span><span class="pi">:</span> <span class="s">$BITRISEIO_my_file_id_URL</span>
+     <span class="pi">-</span> <span class="na">destination</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$BITRISE_SOURCE_DIR/path/to/store/the/file"</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<h2 id="the-manual-way">The “manual” way <a href="#the-manual-way" class="anchor-symbol">⚓</a></h2>
+<h2 id="using-a-script-step">Using a Script Step <a href="#using-a-script-step" class="anchor-symbol">⚓</a></h2>
 
-<p>If you want to control the whole download process, you can use the <code class="highlighter-rouge">Script</code> step
-and write your own download code, something like this:</p>
+<p>If you want to control the whole download process, you can use the <code class="highlighter-rouge">Script</code> step and write your own download code. For example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nb">set</span> <span class="nt">-ex</span>
 <span class="c"># Download your resource</span>
 curl <span class="nt">-fo</span> <span class="s2">"download/path"</span> <span class="s2">"https://url/of/your/resource"</span>
@@ -2137,7 +2135,7 @@ curl <span class="nt">-fo</span> <span class="s2">"download/path"</span> <span c
 unzip <span class="nt">-u</span> <span class="s2">"download/path"</span> <span class="nt">-d</span> <span class="s2">"uncompress/target/path"</span>
 </code></pre></div></div>
 
-<p><em>If you’d need an additional tool to download or uncompress the resources file, please see the <a href="/tips-and-tricks/install-additional-tools/">Install Any Additional Tool</a> guide.</em></p>
+<p><em>If you’d need an additional tool to download or uncompress the resources file, please see the</em> <a href="/tips-and-tricks/install-additional-tools/"><em>Install Any Additional Tool</em></a> <em>guide.</em></p>
 
 			</main>
 		</div>
