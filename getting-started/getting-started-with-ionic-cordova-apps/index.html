@@ -2226,11 +2226,11 @@
 <p>Before deploying your app to any marketplace you need to generate a codesigned .ipa and/or APK so make sure you perform these steps:</p>
 
 <ol>
-  <li>Add the <code class="highlighter-rouge">Cordova archive</code> or the <code class="highlighter-rouge">Ionic archive</code> step to your workflow.</li>
+  <li>Add the <code class="highlighter-rouge">Cordova archive</code> or the <code class="highlighter-rouge">Ionic archive</code> step to your workflow. (Note that  if you’re building for both iOS and Android in one project, and either of your apps fails, the whole <code class="highlighter-rouge">Cordova Archive/Ionic Archive</code> Step will fail.)</li>
   <li>Fill in the required inputs.
     <ul>
       <li>The <code class="highlighter-rouge">Platform</code> input needs to be set to <code class="highlighter-rouge">device</code>.</li>
-      <li>The <code class="highlighter-rouge">Build command configuration</code> input must match the <code class="highlighter-rouge">Build configuration</code> input of the <code class="highlighter-rouge">Generate cordova build configuration</code> step.</li>
+      <li>The <code class="highlighter-rouge">Build command configuration</code> input must match the <code class="highlighter-rouge">Build configuration</code> input of the <code class="highlighter-rouge">Generate cordova build configuration</code> Step.</li>
     </ul>
 
     <p>The archive step must come after the <code class="highlighter-rouge">Generate cordova build configuration</code> step in the workflow.</p>
