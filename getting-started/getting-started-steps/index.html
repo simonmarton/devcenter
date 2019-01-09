@@ -2097,7 +2097,7 @@
   <li>
     <p>Click the <code class="highlighter-rouge">+</code> symbol between two Steps to insert a Step at that position.</p>
 
-    <p><img src="/img/adding-step.png" alt="" /></p>
+    <p><img src="/img/adding-step-1.png" alt="Adding a step" /></p>
   </li>
 </ol>
 
@@ -2111,7 +2111,7 @@ You can search and filter these steps: enter a search expression in the <code cl
 <h3 id="removing-a-step">Removing a Step <a href="#removing-a-step" class="anchor-symbol">⚓</a></h3>
 
 <ol>
-  <li>Open your app by clicking on the app’s name on your <code class="highlighter-rouge">[Dashboard](https://app.bitrise.io/dashboard)</code>.</li>
+  <li>Open your app by clicking on the app’s name on your <a href="https://app.bitrise.io/dashboard">Dashboard</a>.</li>
   <li>Click the <code class="highlighter-rouge">Workflow</code> tab. Note that you cannot leave the Workflow editor without either saving or discarding any changes you made.</li>
   <li>Select the workflow you need in the <code class="highlighter-rouge">WORKFLOW</code> dropdown menu on the top left.</li>
   <li>Click the Step you want to remove.</li>
@@ -2128,13 +2128,13 @@ You can search and filter these steps: enter a search expression in the <code cl
   <li>Click on the Step then find the <code class="highlighter-rouge">Version</code> menu on the right. Open the dropdown menu and select the version you need. If you select <code class="highlighter-rouge">always latest</code>, the Step will always run the latest version available in our Step library.</li>
 </ul>
 
-<p><img src="/img/getting-started/update-steps.png" alt="Update steps in Workflow Editor" /></p>
+<p><img src="/img/update-version-1.png" alt="Managing step versions" /></p>
 
 <h3 id="step-inputs">Step inputs <a href="#step-inputs" class="anchor-symbol">⚓</a></h3>
 
 <p>Click on a Step to bring up its input variables on the right of the currently selected workflow. Steps have required and optional inputs: required inputs are marked as such in the Workflow Editor. <strong>If required inputs do not have valid values, the step will fail</strong>.</p>
 
-<p><img src="/img/getting-started/step-inputs.png" alt="Required input" /></p>
+<p><img src="/img/step-input.png" alt="Adding step input" /></p>
 
 <p>Modify a Step input by either:</p>
 
@@ -2147,9 +2147,9 @@ You can search and filter these steps: enter a search expression in the <code cl
 
 <h3 id="environment-variables-as-step-inputs">Environment variables as Step inputs <a href="#environment-variables-as-step-inputs" class="anchor-symbol">⚓</a></h3>
 
-<p>Click into any input field of a Step and a green <code class="highlighter-rouge">Insert Variable</code> button will appear.</p>
+<p>Click into any input field of a Step and a purple <code class="highlighter-rouge">Insert Variable</code> button will appear.</p>
 
-<p><img src="/img/getting-started/insert-variable.png" alt="Insert variable" /></p>
+<p><img src="/img/env-var.png" alt="Insert variable" /></p>
 
 <p>Click this button and you’ll get a full list of <a href="/builds/available-environment-variables">available Environment Variables</a>. You can search this list, and when you find the one you’re looking for just click it, and it’ll be inserted into the input field for you.</p>
 
@@ -2161,12 +2161,12 @@ You can search and filter these steps: enter a search expression in the <code cl
 </ul>
 
 <p>It’s the status of the <code class="highlighter-rouge">is_expand</code> option of the input.
-<em>You can change this only in YAML mode (</em><code class="highlighter-rouge">bitrise.yml</code> <em>tab of the editor).</em></p>
+<em>You can change this only in YAML mode (<code class="highlighter-rouge">bitrise.yml</code> tab of the editor).</em></p>
 
 <p>What does this option do?</p>
 
 <ul>
-  <li>If <strong>enabled</strong> it’ll replace Environment Variables (e.g. <code class="highlighter-rouge">$HOME</code> or <code class="highlighter-rouge">${HOME}</code>)
+  <li>If <strong>enabled</strong> it’ll replace Environment Variables (for example, <code class="highlighter-rouge">$HOME</code> or <code class="highlighter-rouge">${HOME}</code>)
 inside the input text with the Environment Variable’s value <strong>before</strong> it would be passed to the Step.</li>
   <li>If <strong>disabled</strong> it won’t replace anything in the input text, the whole text will be passed to the Step “as-it-is”.</li>
 </ul>
@@ -2188,7 +2188,15 @@ you can do that in YML mode, by adding <code class="highlighter-rouge">is_expand
 and you want to keep the <code class="highlighter-rouge">$</code> character in the input, instead of
 replacing it with an environment variable.</p>
 
-<p><strong>IMPORTANT:</strong> If you want to reference another environment variable, even if that one’s value includes the $ character, you have to <strong>enable</strong> this option, or else your reference won’t work. In such a case, <strong>disable this option where you specify the value with $ in it</strong>, and enable the option everywhere else where you reference that environment variable.</p>
+<div class="message-box important">
+<div class="message-title">
+    <p>Referencing another environment variable</p>
+  </div>
+
+<div class="message-content">
+    <p>If you want to reference another environment variable, even if that one’s value includes the $ character, you have to <strong>enable</strong> this option, or else your reference won’t work. In such a case, <strong>disable this option where you specify the value with $ in it</strong>, and enable the option everywhere else where you reference that environment variable.</p>
+  </div>
+</div>
 
 <h3 id="skipping-steps">Skipping Steps <a href="#skipping-steps" class="anchor-symbol">⚓</a></h3>
 
@@ -2199,14 +2207,14 @@ replacing it with an environment variable.</p>
 <p>This guide walks you through on how to skip a given Step that has been set to run even if the previous Step failed.</p>
 
 <ol>
-  <li>Open your app by clicking on the app’s name on your <code class="highlighter-rouge">[Dashboard](https://app.bitrise.io/dashboard)</code>.</li>
+  <li>Open your app by clicking on the app’s name on your <a href="https://app.bitrise.io/dashboard">Dashboard</a>.</li>
   <li>Click the <code class="highlighter-rouge">Workflow</code> tab. Note that you cannot leave the Workflow editor without either saving or discarding any changes you made.</li>
   <li>Select the workflow you need in the <code class="highlighter-rouge">WORKFLOW</code> dropdown menu on the top left.</li>
   <li>Click the Step you want to skip.</li>
   <li>
     <p>On the right, use the toggle to disable the <code class="highlighter-rouge">Run if previous Step failed</code> option.</p>
 
-    <p><img src="/img/getting-started/run-if-failed.png" alt="Run if previous failed" /></p>
+    <p><img src="/img/run-if-prev-version.png" alt="Run if previous step failed" /></p>
   </li>
 </ol>
 
