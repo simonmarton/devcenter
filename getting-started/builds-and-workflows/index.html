@@ -2078,12 +2078,12 @@
 
 <p>Once you added an app to Bitrise, your first build will be kicked off automatically.</p>
 
-<p>A <em>build</em> is the process specified by the app’s <a href="/getting-started/getting-started-workflows"><em>workflow</em></a>, which is a collection of <a href="getting-started/getting-started-steps"><em>steps</em></a>. The app’s build configuration is specified in the <a href="/bitrise-cli/basics-of-bitrise-yml"><code class="highlighter-rouge">bitrise.yml</code> configuration file</a> which you can modify in <a href="https://www.bitrise.io">bitrise.io</a>’s
+<p>A <em>build</em> is the process specified by the app’s <a href="/getting-started/getting-started-workflows"><em>workflow</em></a>, which is a collection of <a href="getting-started/getting-started-steps"><em>steps</em></a>. The app’s build configuration is specified in the <code class="highlighter-rouge">[bitrise.yml](/bitrise-cli/basics-of-bitrise-yml)</code><a href="/bitrise-cli/basics-of-bitrise-yml"> configuration file</a> which you can modify in <a href="https://www.bitrise.io">bitrise.io</a>’s
 graphical Workflow Editor UI,
 or in a <a href="http://blog.bitrise.io/2016/02/12/edit-your-yaml-files-like-a-boss.html">yaml editor</a> directly.</p>
 
 <p>On the graphical UI of the <a href="/getting-started/getting-started-workflows">Workflow editor</a>, you are able to add, remove, and reorder the build steps.
-Steps represent a block of script execution with predefined input and output variables. Steps can be written in various languages, like bash, Go, Ruby, Swift, and more.</p>
+Steps represent a block of script execution with predefined input and output variables. Steps can be written in various languages, like bash, Go, Ruby, <a href="https://go.bitrise.io/swift">Swift</a>, and more.</p>
 
 <p>When a build is running, these scripts will be downloaded and executed in the order you’ve defined in your workflow,
 with the input parameters you set. They will produce the predefined outputs set as <a href="/builds/available-environment-variables">environment variables</a>.</p>
