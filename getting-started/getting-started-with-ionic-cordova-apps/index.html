@@ -2107,9 +2107,9 @@
       <li>iOS and Android (where the Android build gets built first)</li>
     </ul>
 
-    <p><img src="/img/select-platform-cordova.jpg" alt="" /></p>
+    <p><img src="/img/project-build-cordova.png" alt="" /></p>
 
-    <p><img src="/img/select-platform-ionic.jpg" alt="" /></p>
+    <p><img src="/img/project-build-ionic.png" alt="" /></p>
   </li>
   <li>Register a webhook when prompted so that Bitrise can start a build automatically when code is pushed to your repository. This also kicks off your first build on the primary workflow - click the message and it will take you to the build page. The first build does not generate an APK and an .ipa yet, however, you can already check out the project’s logs on the Build’s page.</li>
 </ol>
@@ -2174,9 +2174,7 @@
   </li>
   <li>Make sure you have the <code class="highlighter-rouge">Certificate and profile installer</code> step in your workflow as this Step can download and install the certificates on the virtual machine.</li>
   <li>Add the <code class="highlighter-rouge">Generate cordova build configuration</code> step to your Workflow. (This step does all the configuration needed for the next step, which is <code class="highlighter-rouge">Cordova Archive</code> or <code class="highlighter-rouge">Ionic Archive</code>.) It <strong>must come after</strong> the <code class="highlighter-rouge">Certificate and profile installer</code> step.</li>
-  <li>
-    <p>Fill in the required input for the step. Please note that both the <code class="highlighter-rouge">Code Signing Identity</code> and the <code class="highlighter-rouge">Provisioning Profile</code> are required inputs for iOS apps even though they are not marked as such.</p>
-
+  <li>Fill in the required input for the step. Please note that both the <code class="highlighter-rouge">Code Signing Identity</code> and the <code class="highlighter-rouge">Provisioning Profile</code> are required inputs for iOS apps even though they are not marked as such.
     <ul>
       <li><code class="highlighter-rouge">Build configuration</code>: you can set it to either <code class="highlighter-rouge">debug</code> or <code class="highlighter-rouge">release</code>.</li>
       <li><code class="highlighter-rouge">Code Sign Identity</code>: enter a Developer or a Distribution identity.</li>
@@ -2195,16 +2193,18 @@
   <li>
     <p>Click or drag-and-drop your keystore file on the <code class="highlighter-rouge">Upload file</code> field of the <code class="highlighter-rouge">ANDROID KEYSTORE FILE</code> section.</p>
 
-    <p><img src="https://yv69yaruhkt48w.preview.forestry.io/img/android-code-signing/upload-file.png" alt="Screenshot" /></p>
+    <p><img src="/img/keystore-file.png" alt="" /></p>
   </li>
   <li>Fill out the displayed three input fields:
     <ul>
       <li><code class="highlighter-rouge">keystore password</code></li>
       <li><code class="highlighter-rouge">keystore alias</code></li>
-      <li><code class="highlighter-rouge">private key password</code></li>
-    </ul>
+      <li>
+        <p><code class="highlighter-rouge">private key password</code></p>
 
-    <p><img src="https://yv69yaruhkt48w.preview.forestry.io/img/android-code-signing/three-fields.png" alt="Screenshot" /></p>
+        <p><img src="/img/keystore.png" alt="" /></p>
+      </li>
+    </ul>
   </li>
   <li>Click <code class="highlighter-rouge">Save metadata</code>. Bitrise uploads your keystore file and assigns an environment variable (<code class="highlighter-rouge">BITRISEIO_ANDROID_KEYSTORE_URL</code>) to the download URL (which is a time-limited, read-only download URL) of the file as the value. You can use this URL to download the keystore file during a build in the future. The step will generate the following env vars which will be used at a later step:
     <ul>
