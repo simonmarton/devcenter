@@ -2094,60 +2094,147 @@
 
 <p>Let’s look into what you can do to make sure code signing works!</p>
 
-<h3 id="the-xcode-archive--export-for-ios-step-fails-with-the-error-message-code-signing-error">The <em>Xcode Archive &amp; Export for iOS</em> Step fails with the error message <em>Code signing error</em> <a href="#the-xcode-archive--export-for-ios-step-fails-with-the-error-message-code-signing-error" class="anchor-symbol">⚓</a></h3>
+<h2 id="the-xcode-archive--export-for-ios-step-fails">The <em>Xcode Archive &amp; Export for iOS</em> Step fails <a href="#the-xcode-archive--export-for-ios-step-fails" class="anchor-symbol">⚓</a></h2>
 
-<p>Most of the time, this error means your project is missing either the correct .p12 certificate file or the correct provisioning profile - or the <code class="highlighter-rouge">Select method for export</code> input of the Step is set incorrectly. Here’s what you can do:</p>
-
-<ul>
-  <li><strong>Check that you have both a .p12 certificate and a provisioning profile uploaded to Bitrise</strong>: go to your app’s <code class="highlighter-rouge">Workflow Editor</code> and check the <code class="highlighter-rouge">Code Signing</code> tab. If you use the <code class="highlighter-rouge">iOS Auto Provision</code> Step, you only need to upload a .p12 certificate file.</li>
-</ul>
+<p>If the Step fails, check the logs. If you see the message: <code class="highlighter-rouge">Code signing error</code> then this guide can hopefully help you find the solution!</p>
 
 <p><img src="/img/archive_fail.png" alt="" /></p>
 
-<ul>
-  <li>
-    <p><strong>Check that the provisioning profile and the .p12 certificate of your project match</strong>. A Development type provisioning profile requires a Development certificate. An App Store, Ad-hoc or Enterprise type provisioning profile requires a Distribution certificate.</p>
-  </li>
-  <li>
-    <p><strong>Check that the uploaded code signing files belong to the correct team IDs</strong>. Also, make sure the provisioning profile contains the correct App ID.</p>
-  </li>
-  <li>
-    <p>Check that your uploaded code signing files are valid! Remember that these files can and do expire or get revoked.</p>
-  </li>
-  <li>
-    <p><strong>Check the</strong> <code class="highlighter-rouge">Select method for export</code> <strong>input of the Step in the Workflow Editor</strong>. If, for example, it is set to <code class="highlighter-rouge">ad-hoc</code> or <code class="highlighter-rouge">app-store</code>, you need a Distribution type .p12 certificate file and either an Ad-hoc or an App Store type provisioning profile.</p>
-  </li>
-</ul>
+<p>Most of the time, this error means your project is missing either the correct .p12 certificate file or the correct provisioning profile - or the <code class="highlighter-rouge">Select method for export</code> input of the Step is set incorrectly.</p>
 
-<p><img src="/img/export_fail.png" alt="" /></p>
+<h3 id="manual-provisioning">Manual provisioning <a href="#manual-provisioning" class="anchor-symbol">⚓</a></h3>
 
-<ul>
-  <li><strong>Make sure that you do not have both the</strong> <code class="highlighter-rouge">iOS Auto Provision</code> and the <code class="highlighter-rouge">Certificate and profile installer</code> <strong>Steps in your workflow</strong>. You cannot use both in the same workflow - your build will definitely fail.</li>
-</ul>
+<p>If you manually upload your provisioning profiles and use the <code class="highlighter-rouge">Certificate and profile installer</code> Step to install your code signing files, read on.</p>
 
-<h3 id="the-ios-auto-provision-step-fails">The <em>iOS Auto Provision Step</em> fails <a href="#the-ios-auto-provision-step-fails" class="anchor-symbol">⚓</a></h3>
+<p>If you use the <code class="highlighter-rouge">iOS Auto Provision</code> Step, skip to <a href="/code-signing/ios-code-signing/ios-code-signing-troubleshooting/">Automatic provisioning</a>.</p>
+
+<ol>
+  <li>
+    <p>Check that you have both a .p12 certificate and a provisioning profile uploaded to Bitrise.</p>
+
+    <p>To do so, go to your app’s <code class="highlighter-rouge">Workflow Editor</code> and check the <code class="highlighter-rouge">Code Signing</code> tab.</p>
+  </li>
+  <li>
+    <p>Check that the provisioning profile and the .p12 certificate of your project match.</p>
+
+    <p>A Development type provisioning profile requires a Development certificate. An App Store, Ad-hoc or Enterprise type provisioning profile requires a Distribution certificate. You can check the compatibility on the Code Signing tab: click <code class="highlighter-rouge">Show matching Certificates, Devices &amp; Capabilities</code> under any provisioning profile.</p>
+  </li>
+  <li>
+    <p>Check that the uploaded code signing files belong to the correct team IDs.</p>
+
+    <p>Also, make sure the provisioning profile is for the correct Bundle ID.</p>
+  </li>
+  <li>
+    <p>Check that your uploaded code signing files are valid!</p>
+
+    <p>Remember that these files can and do expire or get revoked.</p>
+  </li>
+  <li>
+    <p>Check the <code class="highlighter-rouge">Select method for export</code> input of the Step in the Workflow Editor.</p>
+
+    <p>If, for example, it is set to <code class="highlighter-rouge">ad-hoc</code> or <code class="highlighter-rouge">app-store</code>, you need a Distribution type .p12 certificate file and either an Ad-hoc or an App Store type provisioning profile.</p>
+
+    <p><img src="/img/export_fail.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Check if the capability lists in the <strong>iOS app</strong> and in the <strong>provisioning profile uploaded to the Developer Portal</strong> match.</p>
+
+    <p><img src="/img/capapbilities_xcode.png" alt="" /></p>
+  </li>
+</ol>
+
+<div class="message-box info">
+<div class="message-title">
+    <p>Xcode managed signing</p>
+  </div>
+
+<div class="message-content">
+    <p>If you use Xcode managed signing, the Step only accepts an Xcode managed provisioning profile.</p>
+
+    <p>Read more about it in <a href="https://developer.apple.com/library/archive/qa/qa1814/_index.html">Apple’s Technical Q&amp;A</a>.</p>
+  </div>
+</div>
+
+<h3 id="automatic-provisioning">Automatic provisioning <a href="#automatic-provisioning" class="anchor-symbol">⚓</a></h3>
+
+<p>With the <code class="highlighter-rouge">iOS Auto Provision</code> Step, you do not need to manually upload a provisioning profile to Bitrise. You only need a certificate.</p>
+
+<ol>
+  <li>
+    <p>Check that you have a .p12 certificate uploaded to Bitrise.</p>
+
+    <p>To do so, go to your app’s <code class="highlighter-rouge">Workflow Editor</code> and check the <code class="highlighter-rouge">Code Signing</code> tab.</p>
+
+    <p>Check that the uploaded code signing files belong to the correct team IDs.</p>
+
+    <p>Also, make sure the provisioning profile is for the correct Bundle ID.</p>
+  </li>
+  <li>
+    <p>Check that your uploaded certificate is valid!</p>
+
+    <p>Remember that these files can and do expire or get revoked.</p>
+  </li>
+  <li>
+    <p>Check the <code class="highlighter-rouge">Select method for export</code> input of the Step in the Workflow Editor.</p>
+
+    <p>If, for example, it is set to <code class="highlighter-rouge">ad-hoc</code> or <code class="highlighter-rouge">app-store</code>, you need a Distribution type .p12 certificate file.</p>
+  </li>
+  <li>
+    <p>Check if the certificate is locked. If it is, check if the password is correct!</p>
+  </li>
+</ol>
+
+<p>When you use the <code class="highlighter-rouge">iOS Auto Provision</code> Step, using Xcode managed signing is an important factor. Let’s go through what can happen depending on whether you use the option.</p>
+
+<h4 id="if-xcode-managed-signing-is-enabled-in-the-ios-app">If Xcode managed signing is enabled in the iOS app <a href="#if-xcode-managed-signing-is-enabled-in-the-ios-app" class="anchor-symbol">⚓</a></h4>
+
+<ol>
+  <li>Check the value of the <code class="highlighter-rouge">Should the step try to generate Provisioning Profiles even if Xcode managed signing is enabled in the Xcode project?</code> input is set to in the <code class="highlighter-rouge">iOS Auto Provision</code> step.
+    <ul>
+      <li>If it’s set to <code class="highlighter-rouge">no</code>, the Step will look for an Xcode Managed Provisioning Profile on the Apple Developer Portal.</li>
+      <li>If it’s set to <code class="highlighter-rouge">yes</code>, the Step will generate a new manual provisioning profile on the Apple Developer portal for the project.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Check if the capability lists in the iOS app and in the provisioning profile on the Developer Portal match.</p>
+
+    <p>This is only relevant if the <code class="highlighter-rouge">iOS Auto Provision</code> Step is set to NOT generate a profile.</p>
+  </li>
+</ol>
+
+<h4 id="if-xcode-managed-signing-is-disabled-in-the-ios-app">If Xcode managed signing is disabled in the iOS app <a href="#if-xcode-managed-signing-is-disabled-in-the-ios-app" class="anchor-symbol">⚓</a></h4>
+
+<p>If you uncheck Xcode managed signing, the <code class="highlighter-rouge">iOS Auto Provision</code> step generates a new provisioning profile on the Apple Developer portal for the project when running a build. This profile will be up to date with all of the capabilities and developer devices.</p>
+
+<h2 id="the-ios-auto-provision-step-fails">The <em>iOS Auto Provision Step</em> fails <a href="#the-ios-auto-provision-step-fails" class="anchor-symbol">⚓</a></h2>
 
 <p>The <code class="highlighter-rouge">iOS Auto Provision</code> Step manages your provisioning profiles for you: it downloads the profiles from the Apple Developer portal and installs them for you. Here’s what you can do if this Step fails:</p>
 
 <ul>
-  <li>
-    <p><strong>If you are trying to use it with a Xamarin app</strong>, you will have to swap it for the <code class="highlighter-rouge">Certificate and profile installer</code> Step. Automatic provisioning is not supported for Xamarin apps.</p>
-  </li>
-  <li>
-    <p><strong>Before trying to use this Step, generate an .ipa file locally</strong> - with the same export method you want to use on Bitrise - to ensure that the profiles are uploaded to the Apple Developer portal.</p>
-  </li>
-  <li>
-    <p><strong>Make sure that your Bitrise account is connected to the Apple Developer portal</strong> and that you have at least an Admin role in your Apple Developer team.</p>
-  </li>
+  <li>If you are trying to use it with a Xamarin app, you will have to swap it for the <code class="highlighter-rouge">Certificate and profile installer</code> Step. Automatic provisioning is not supported for Xamarin apps.</li>
+  <li>Before trying to use this Step, generate an .ipa file locally - with the same export method you want to use on Bitrise - to ensure that the profiles are uploaded to the Apple Developer portal.</li>
+  <li>Make sure that your Bitrise account is connected to the Apple Developer portal and that you have at least an Admin role in your Apple Developer team.</li>
 </ul>
 
-<h3 id="i-uploaded-a-distribution-certificate-and-an-app-store-type-provisioning-profile-but-i-cannot-deploy-to-the-app-store-because-of-a-code-signing-error">I uploaded a Distribution certificate and an App Store type provisioning profile but I cannot deploy to the App Store because of a code signing error! <a href="#i-uploaded-a-distribution-certificate-and-an-app-store-type-provisioning-profile-but-i-cannot-deploy-to-the-app-store-because-of-a-code-signing-error" class="anchor-symbol">⚓</a></h3>
+<h2 id="could-not-install-the-app-on-a-device">Could not install the app on a device <a href="#could-not-install-the-app-on-a-device" class="anchor-symbol">⚓</a></h2>
 
-<p>To export an .ipa file with the app-store or ad-hoc export methods, you also need to upload a Development certificate and Development type provisioning profile, as the first step of the .ipa export process uses that to generate an .xcodearchive file.</p>
+<p>To install iOS apps on a given device, you have to either:</p>
 
-<h3 id="i-have-added-the-run-cocoapods-install-step-and-now-my-builds-are-failing">I have added the <em>Run Cocoapods Install</em> Step and now my builds are failing <a href="#i-have-added-the-run-cocoapods-install-step-and-now-my-builds-are-failing" class="anchor-symbol">⚓</a></h3>
+<ul>
+  <li>export an .ipa file with the <code class="highlighter-rouge">development</code> export method, with the device’s UDID registered in the provisioning profile used for the export</li>
+  <li>export an .ipa file with the <code class="highlighter-rouge">ad-hoc</code> export method and install the app via the public install page generated by the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step.</li>
+</ul>
 
-<p>Installing dependencies can result in a failed build for many reasons. When it comes to iOS code signing, problems can occur if you use the <code class="highlighter-rouge">iOS Auto Provision</code> Step. In practice, this means that in your Bitrise workflow, Steps that install dependencies - such as <code class="highlighter-rouge">Run Cocoapods Install</code> or <code class="highlighter-rouge">Carthage</code> - should be BEFORE the <code class="highlighter-rouge">iOS Auto Provision</code> Step.</p>
+<ol>
+  <li>Check that the device UDID is included in the app’s provisioning profile.
+    <ul>
+      <li>If you use manual provisioning, check the provisioning profile you uploaded to Bitrise.</li>
+      <li>If you use automatic provisioning, <code class="highlighter-rouge">Should the step try to generate Provisioning Profiles even if Xcode managed signing is enabled in the Xcode project?</code> input is set to <code class="highlighter-rouge">no</code> in the <code class="highlighter-rouge">iOS Auto Provision</code> step: check the provisioning profile on the Apple Developer Portal.</li>
+      <li>If you use automatic provisioning, and the <code class="highlighter-rouge">Should the step try to generate Provisioning Profiles even if Xcode managed signing is enabled in the Xcode project?</code> input is set to <code class="highlighter-rouge">yes</code> in the <code class="highlighter-rouge">iOS Auto Provision</code> step: check that the device is registered to the developer team on the Apple Developer portal.</li>
+    </ul>
+  </li>
+  <li>Check the logs to see if the <code class="highlighter-rouge">Xcode Archive &amp; Export for iOS</code> Step used the provisioning profile with the device’s UDID in it.</li>
+</ol>
 
 			</main>
 		</div>
