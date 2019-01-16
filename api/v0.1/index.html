@@ -2085,32 +2085,27 @@
 </div>
 
 <ul>
-  <li>Join the discussion at: <a href="https://discuss.bitrise.io/t/bitrise-api-v0-1-work-in-progress/1554">https://discuss.bitrise.io/t/bitrise-api-v0-1-work-in-progress/1554</a>.
-Follow it if you want to get notified about new endpoints and changes,
-we announce those there.</li>
-  <li>If you want to request a new API feature / endpoint,
-please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">http://discuss.bitrise.io/t/bitrise-public-api/37</a></li>
+  <li>Join the discussion at: <a href="https://discuss.bitrise.io/t/bitrise-api-v0-1-work-in-progress/1554" title="https://discuss.bitrise.io/t/bitrise-api-v0-1-work-in-progress/1554">https://discuss.bitrise.io/t/bitrise-api-v0-1-work-in-progress/1554</a>. Follow it if you want to get notified about new endpoints and changes, we announce those there.</li>
+  <li>If you want to request a new API feature / endpoint, please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37" title="http://discuss.bitrise.io/t/bitrise-public-api/37">http://discuss.bitrise.io/t/bitrise-public-api/37</a></li>
 </ul>
 
 <div class="message-box info">
 <div class="message-title">
-    <p>Endpoints</p>
+    <p>Bitrise API endpoint documentation</p>
   </div>
 
 <div class="message-content">
-    <p>The endpoint reference documentation has been moved to another location:</p>
-
-    <p><a href="https://api-docs.bitrise.io">Bitrise API endpoints</a></p>
+    <p>Check out the <a href="https://api-docs.bitrise.io">Bitrise API endpoint reference documentation</a> to see all currently available endpoints and their parameters!</p>
   </div>
 </div>
 
 <h2 id="api-domainhost-and-versioning">API domain/host and versioning <a href="#api-domainhost-and-versioning" class="anchor-symbol">⚓</a></h2>
 
-<p>The Bitrise API’s host is: <a href="https://api.bitrise.io/">https://api.bitrise.io/</a></p>
+<p>The Bitrise API’s host is: <a href="https://api.bitrise.io/" title="https://api.bitrise.io/">https://api.bitrise.io/</a></p>
 
 <p>Every endpoint except the root one is versioned, and the version have to be included in the URL right after the host.</p>
 
-<p>Example: <a href="https://api.bitrise.io/v0.1/me">https://api.bitrise.io/v0.1/me</a> (requires authentication)</p>
+<p>Example: <a href="https://api.bitrise.io/v0.1/me" title="https://api.bitrise.io/v0.1/me">https://api.bitrise.io/v0.1/me</a> (requires authentication)</p>
 
 <p>Right now we have only one version, <code class="highlighter-rouge">v0.1</code>.</p>
 
@@ -2118,15 +2113,19 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 
 <h2 id="authentication">Authentication <a href="#authentication" class="anchor-symbol">⚓</a></h2>
 
-<p>The current API supports only one type of authentication, user generated <strong>Personal Access Tokens</strong>.</p>
+<p>The current API supports only one type of authentication: user generated <strong>Personal Access Tokens</strong>.</p>
 
-<p>Right now <strong>every API endpoint requires authentication</strong>, there’s no endpoint which you can call without including the authentication information, except the “root” URL (<a href="https://api.bitrise.io">https://api.bitrise.io</a>).</p>
+<p>Right now <strong>every API endpoint requires authentication</strong>, except the “root” URL (<a href="https://api.bitrise.io" title="https://api.bitrise.io">https://api.bitrise.io</a>).</p>
 
-<p>To acquire a Personal Access Token for your user, sign in with that user on <a href="https://www.bitrise.io">bitrise.io</a>, go to your <strong>Account Settings</strong> page, and select the <a href="https://www.bitrise.io/me/profile#/security">Security</a> tab on the left side.</p>
+<h3 id="acquiring-a-personal-access-token">Acquiring a Personal Access Token <a href="#acquiring-a-personal-access-token" class="anchor-symbol">⚓</a></h3>
 
-<p>Here you can manage your account’s Two Factor Authentication settings, as well as your Personal Access Tokens.</p>
-
-<p>To get started with the API simply click the <strong>Generate new token</strong> button, and save the generated Personal Access Token somewhere safe.</p>
+<ol>
+  <li>Sign in on <a href="https://www.bitrise.io">bitrise.io</a>,</li>
+  <li>Go to your <strong>Account Settings</strong> page</li>
+  <li>Select the <a href="https://www.bitrise.io/me/profile#/security">Security</a> tab on the left side.</li>
+  <li>Click the <code class="highlighter-rouge">Generate new token</code> button to create a new Personal Access Token.</li>
+  <li>Save the generated token.</li>
+</ol>
 
 <div class="message-box important">
 <div class="message-title">
@@ -2138,13 +2137,13 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
   </div>
 </div>
 
-<p>Once you have the token you can start interacting with the API.</p>
+<h3 id="authenticating-with-the-api">Authenticating with the API <a href="#authenticating-with-the-api" class="anchor-symbol">⚓</a></h3>
 
-<p>To provide the required access token you have to add a <strong>HEADER</strong> to your requests, with the key <code class="highlighter-rouge">Authorization</code> and value <code class="highlighter-rouge">token THE-ACCESS-TOKEN</code>.</p>
+<p>To provide the required access token, you have to add a <strong>HEADER</strong> to your requests, with the key <code class="highlighter-rouge">Authorization</code> and value <code class="highlighter-rouge">token THE-ACCESS-TOKEN</code>.</p>
 
 <p>An example API call with auth, using <code class="highlighter-rouge">curl</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s1">'Authorization: token THE-ACCESS-TOKEN'</span> https://api.bitrise.io/v0.1/me
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -H 'Authorization: token THE-ACCESS-TOKEN' https://api.bitrise.io/v0.1/me
 </code></pre></div></div>
 
 <h2 id="response">Response <a href="#response" class="anchor-symbol">⚓</a></h2>
@@ -2153,61 +2152,60 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 
 <h3 id="pagination">Pagination <a href="#pagination" class="anchor-symbol">⚓</a></h3>
 
-<p>When you call an endpoint which returns a list of items you always have to be prepared that you might not get the whole list in a single response, you’ll have to iterate through the “pages” to retrieve all the items.</p>
+<p>When you call an endpoint that returns a list of items, you might not get the whole list in a single response. You’ll have to iterate through the “pages” to retrieve all the items.</p>
 
-<p>The response of the endpoint will include a <code class="highlighter-rouge">paging</code> object, with <code class="highlighter-rouge">total_item_count</code> and <code class="highlighter-rouge">page_item_limit</code> properties, and if there’s a “next” page available it’ll also include a <code class="highlighter-rouge">next</code> “anchor” item.</p>
+<p>The response of such endpoints include a <code class="highlighter-rouge">paging</code> object, with <code class="highlighter-rouge">total_item_count</code> and <code class="highlighter-rouge">page_item_limit</code> properties. If there is a “next” page available it’ll also include a <code class="highlighter-rouge">next</code> “anchor” item. For example, the response will show the app slug of the first app on the next page.</p>
 
-<p>Example:</p>
+<p><strong>Example</strong></p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"paging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"total_item_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"page_item_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"518e869d56f2adfd"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "data": [ ... ],
+  "paging": {
+    "total_item_count": 3,
+    "page_item_limit": 2,
+    "next": "518e869d56f2adfd"
+  }
+}
+</code></pre></div></div>
 
 <div class="message-box note">
 <div class="message-title">
-    <p><code class="highlighter-rouge">_next_</code> property of the <code class="highlighter-rouge">_paging_</code> object</p>
+    <p>The <code class="highlighter-rouge">next</code> property of the <code class="highlighter-rouge">paging</code> object</p>
   </div>
 
 <div class="message-content">
-    <p>The <code class="highlighter-rouge">_next_</code> property of the <code class="highlighter-rouge">_paging_</code> object is only included if there’s at least one more page available. If there’s no <code class="highlighter-rouge">_next_</code> property inside <code class="highlighter-rouge">_paging_</code> that means that there’s no more page to retrieve.</p>
-
+    <p>The <code class="highlighter-rouge">next</code> property of the <code class="highlighter-rouge">paging</code> object is only included if there’s at least one more page available. If there’s no <code class="highlighter-rouge">next</code> property inside <code class="highlighter-rouge">paging</code> that means that there’s no more page to retrieve.</p>
   </div>
 </div>
 
 <p>The <code class="highlighter-rouge">page_item_limit</code> property can be set with the query parameter named <code class="highlighter-rouge">limit</code> at the GET requests, so you can specify the size of the response pages. The default and also maximum value for this parameter is 50.</p>
 
-<p>Example:</p>
+<p><strong>Example</strong></p>
 
 <ul>
-  <li>Calling <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps</code> will retrieve you the first page of your apps with size of 50.</li>
-  <li>If you call <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps?limit=10</code>, the response is also the first page of your apps, but it will contain only 10 elements.</li>
+  <li>Calling <code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps](https://api.bitrise.io/v0.1/me/apps "https://api.bitrise.io/v0.1/me/apps")</code> will retrieve you the first page of your apps with size of 50.</li>
+  <li>If you call <code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps?limit=10](https://api.bitrise.io/v0.1/me/apps?limit=10 "https://api.bitrise.io/v0.1/me/apps?limit=10")</code>, the response is also the first page of your apps, but it will contain only 10 elements.</li>
 </ul>
 
-<p>If you want to iterate through all the items this is what you have to do:</p>
+<p>If you want to iterate through all the items, this is what you have to do:</p>
 
 <ol>
-  <li>First call the endpoint without any pagination parameters</li>
+  <li>Call the endpoint without any pagination parameters</li>
   <li>From the response process the <code class="highlighter-rouge">paging</code> object.</li>
-  <li>If the <code class="highlighter-rouge">paging</code> object includes a <code class="highlighter-rouge">next</code> item, simply call the exact same endpoint with an additional <code class="highlighter-rouge">next=</code> query parameter, and pass the value you got in the response as the value of the <code class="highlighter-rouge">next</code> parameter.</li>
+  <li>If the <code class="highlighter-rouge">paging</code> object includes a <code class="highlighter-rouge">next</code> item, call the exact same endpoint with an additional <code class="highlighter-rouge">next=</code> query parameter, and pass the value you got in the response as the value of the <code class="highlighter-rouge">next</code> parameter.</li>
 </ol>
 
-<p>That’s all.</p>
+<p><strong>Example</strong></p>
 
-<p>A quick example, iterating through all of your registered apps:</p>
+<p>Iterating through all your registered apps:</p>
 
 <ol>
-  <li>First call <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps</code></li>
+  <li>Call <code class="highlighter-rouge">[</code><code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps](https://api.bitrise.io/v0.1/me/apps "https://api.bitrise.io/v0.1/me/apps")</code><code class="highlighter-rouge">](</code><code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps](https://api.bitrise.io/v0.1/me/apps "https://api.bitrise.io/v0.1/me/apps")</code><code class="highlighter-rouge">)</code></li>
   <li>Process the items (<code class="highlighter-rouge">data</code> property)</li>
-  <li>Then check the <code class="highlighter-rouge">paging</code> (root) property.</li>
-  <li>If there’s a <code class="highlighter-rouge">next</code> property inside <code class="highlighter-rouge">paging</code> simply call the endpoint again, with the <code class="highlighter-rouge">next</code> query parameter
+  <li>Check the <code class="highlighter-rouge">paging</code> (root) property.</li>
+  <li>If there’s a <code class="highlighter-rouge">next</code> property inside <code class="highlighter-rouge">paging</code>, call the endpoint again, with the <code class="highlighter-rouge">next</code> query parameter
     <ul>
-      <li>Example: <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE</code>, where <code class="highlighter-rouge">NEXTVALUE</code> is the value of the <code class="highlighter-rouge">next</code> property you got in your previous response.</li>
+      <li>Example: <code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE](https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE "https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE")</code>, where <code class="highlighter-rouge">NEXTVALUE</code> is the value of the <code class="highlighter-rouge">next</code> property you got in your previous response.</li>
     </ul>
   </li>
   <li>Repeate this until the <code class="highlighter-rouge">paging</code> object does not include a <code class="highlighter-rouge">next</code> property, which means that the page you received was the last one.</li>
@@ -2215,9 +2213,37 @@ please do it here: <a href="http://discuss.bitrise.io/t/bitrise-public-api/37">h
 
 <h2 id="endpoints">Endpoints <a href="#endpoints" class="anchor-symbol">⚓</a></h2>
 
-<p>The endpoint reference documentation has been moved:</p>
+<p>The <a href="https://api-docs.bitrise.io">Bitrise API endpoint reference documentation</a> lists every available endpoint and their parameters, along with the possible responses. You can also try them out!</p>
 
-<p><a href="https://api-docs.bitrise.io/">Bitrise API endpoints</a></p>
+<h3 id="trying-the-api">Trying the API <a href="#trying-the-api" class="anchor-symbol">⚓</a></h3>
+
+<p>You can try out any endpoint in the reference documentation itself! All you need to do is authenticate yourself and provide the required parameters. The API will return the appropriate response based on the call.</p>
+
+<ol>
+  <li><a href="/api/v0.1#acquiring-a-personal-access-token">Acquire a Personal Access Token</a>.</li>
+  <li>Go to the <a href="https://api-docs.bitrise.io">Bitrise API endpoint reference documentation</a>.</li>
+  <li>
+    <p>Click <code class="highlighter-rouge">Authorize</code>.</p>
+
+    <p><img src="/img/authorize.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Paste your Personal Access Token to the <code class="highlighter-rouge">Value</code> field</p>
+
+    <p><img src="/img/available-auth.png" alt="" /></p>
+  </li>
+  <li>Click on the endpoint you want to try it out to open its details.</li>
+  <li>Fill in the required parameters.</li>
+  <li>Click <code class="highlighter-rouge">Execute</code>.</li>
+</ol>
+
+<p>The API will return:</p>
+
+<ul>
+  <li>the <code class="highlighter-rouge">curl</code> command of your request</li>
+  <li>the request URL</li>
+  <li>the server response</li>
+</ul>
 
 			</main>
 		</div>
