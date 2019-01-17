@@ -2183,8 +2183,8 @@
 <p><strong>Example</strong></p>
 
 <ul>
-  <li>Calling <code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps](https://api.bitrise.io/v0.1/me/apps "https://api.bitrise.io/v0.1/me/apps")</code> will retrieve you the first page of your apps with size of 50.</li>
-  <li>If you call <code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps?limit=10](https://api.bitrise.io/v0.1/me/apps?limit=10 "https://api.bitrise.io/v0.1/me/apps?limit=10")</code>, the response is also the first page of your apps, but it will contain only 10 elements.</li>
+  <li>Calling <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps</code> will retrieve you the first page of your apps with size of 50.</li>
+  <li>If you call <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps?limit=10</code>, the response is also the first page of your apps, but it will contain only 10 elements.</li>
 </ul>
 
 <p>If you want to iterate through all the items, this is what you have to do:</p>
@@ -2200,12 +2200,12 @@
 <p>Iterating through all your registered apps:</p>
 
 <ol>
-  <li>Call <code class="highlighter-rouge">[</code><code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps](https://api.bitrise.io/v0.1/me/apps "https://api.bitrise.io/v0.1/me/apps")</code><code class="highlighter-rouge">](</code><code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps](https://api.bitrise.io/v0.1/me/apps "https://api.bitrise.io/v0.1/me/apps")</code><code class="highlighter-rouge">)</code></li>
+  <li>Call <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps</code>.</li>
   <li>Process the items (<code class="highlighter-rouge">data</code> property)</li>
   <li>Check the <code class="highlighter-rouge">paging</code> (root) property.</li>
   <li>If there’s a <code class="highlighter-rouge">next</code> property inside <code class="highlighter-rouge">paging</code>, call the endpoint again, with the <code class="highlighter-rouge">next</code> query parameter
     <ul>
-      <li>Example: <code class="highlighter-rouge">[https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE](https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE "https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE")</code>, where <code class="highlighter-rouge">NEXTVALUE</code> is the value of the <code class="highlighter-rouge">next</code> property you got in your previous response.</li>
+      <li>Example: <code class="highlighter-rouge">https://api.bitrise.io/v0.1/me/apps?next=NEXTVALUE</code>, where <code class="highlighter-rouge">NEXTVALUE</code> is the value of the <code class="highlighter-rouge">next</code> property you got in your previous response.</li>
     </ul>
   </li>
   <li>Repeate this until the <code class="highlighter-rouge">paging</code> object does not include a <code class="highlighter-rouge">next</code> property, which means that the page you received was the last one.</li>
