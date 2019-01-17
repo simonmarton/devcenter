@@ -2078,15 +2078,15 @@
 
 <p>Please note that manual and scheduled builds are also cancelled if you start a new build with the <code class="highlighter-rouge">Rolling builds</code> option enabled.</p>
 
-<p>Also, builds running on the same branch will be cancelled even if they run different workflows!</p>
-
-<div class="message-box important">
+<div class="message-box info">
 <div class="message-title">
-    <p>Bitrise Start Build step</p>
+    <p>When is a build aborted?</p>
   </div>
 
 <div class="message-content">
-    <p>This step allows users to trigger a different workflow as one of the steps of a given workflow. Unfortunately, if the Rolling Builds feature is enabled, the triggered workflow will cancel the previous workflows.</p>
+    <p>If you trigger a build on a branch where a build is already running, the running build is aborted only if it runs the same workflow.</p>
+
+    <p>For example, if you trigger a build on the <strong>master</strong> branch of your repository with the <strong>deploy</strong> workflow, it will not cancel a build running on the same <strong>master</strong> branch with the <strong>primary</strong> workflow.</p>
   </div>
 </div>
 
@@ -2098,16 +2098,14 @@
   <li>Scroll down to the <code class="highlighter-rouge">ENABLE ROLLING BUILDS</code> option and toggle it.</li>
 </ol>
 
-<p><img src="/img/getting-started/rolling-builds.png" alt="Rolling Builds" /></p>
-<ol>
-  <li>Select the type(s) of builds you wish to abort when a new build is started.
-    <ul>
-      <li><code class="highlighter-rouge">Pull Requests</code>: will cancel all previous builds for Pull Requests and all related Pushes</li>
-      <li><code class="highlighter-rouge">Pushes</code>: will cancel all previous builds for Pushes to the same branch</li>
-      <li><code class="highlighter-rouge">Running builds</code>: will also auto-cancel running builds in addition to on-hold ones</li>
-    </ul>
-  </li>
-</ol>
+<p><img src="/img/getting-started/rolling-builds.png" alt="Rolling Builds" />
+4. Select the type(s) of builds you wish to abort when a new build is started.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Pull Requests</code>: will cancel all previous builds for Pull Requests and all related Pushes</li>
+  <li><code class="highlighter-rouge">Pushes</code>: will cancel all previous builds for Pushes to the same branch</li>
+  <li><code class="highlighter-rouge">Running builds</code>: will also auto-cancel running builds in addition to on-hold ones</li>
+</ul>
 
 <p>And done! From now on, you don’t have to wait for a triggered build to finish if you do not need it!</p>
 
