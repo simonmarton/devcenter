@@ -2074,7 +2074,7 @@
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/testing/device-testing-for-android.md" target="_blank"></a>
 					</div>
 				
-				<p>With Bitrise’s Android virtual device testing solution, you can run UI tests on emulators without having to set up and register your own devices: you just need to use our dedicated Steps and set the device type(s) on which you want to test your app.</p>
+				<p>With Bitrise’s Android virtual device testing solution, you can run UI tests on emulators without having to set up and register your own devices.</p>
 
 <div class="message-box note">
 <div class="message-title">
@@ -2090,15 +2090,13 @@
 
 <h2 id="enabling-device-testing">Enabling device testing <a href="#enabling-device-testing" class="anchor-symbol">⚓</a></h2>
 
-<p>First you need to enable device testing to your app, then select a build whose primary workflow Bitrise will extend with our <code class="highlighter-rouge">Gradle Runner</code> and <code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step.</p>
-
 <ol>
   <li>
     <p>First you have to turn on <code class="highlighter-rouge">Device Testing</code> on the app’s <code class="highlighter-rouge">Settings</code> tab. Toggle the switch to the right in the upper right corner of <code class="highlighter-rouge">Device Testing</code>.</p>
 
     <p><img src="/img/settings-device-testing.png" alt="" /></p>
   </li>
-  <li>From <code class="highlighter-rouge">Settings</code> go to your app’s <code class="highlighter-rouge">Build</code> page.</li>
+  <li>From <code class="highlighter-rouge">Settings</code>, go to your app’s <code class="highlighter-rouge">Build</code> page.</li>
   <li>Click on a build you want to test.</li>
   <li>
     <p>If you have enabled device testing in Step 1., you should find <code class="highlighter-rouge">DEVICE TESTS BETA</code> next to <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> as a third tab. Click it!</p>
@@ -2107,8 +2105,8 @@
   </li>
   <li>Click <code class="highlighter-rouge">add step to primary workflow</code> to add two steps that you need for device testing to your primary workflow:
     <ul>
-      <li><code class="highlighter-rouge">Android Build</code> Step to generate an APK for testing</li>
-      <li><code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step to run the tests and create the test reports<img src="/img/primary-virtual-device.png" alt="" /></li>
+      <li><code class="highlighter-rouge">Android Build</code> Step for <code class="highlighter-rouge">robo</code> test or <code class="highlighter-rouge">Android Build for UI Testing</code> Step for <code class="highlighter-rouge">instrumentation</code> test</li>
+      <li><code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step to run tests and create test reports.<img src="/img/primary-virtual-device.png" alt="" /></li>
     </ul>
   </li>
 </ol>
@@ -2131,60 +2129,53 @@
 
 <ol>
   <li>Open the primary workflow of your build in <code class="highlighter-rouge">Workflow Editor</code>.</li>
-  <li>Add an <code class="highlighter-rouge">Android Build</code> Step after the <code class="highlighter-rouge">Android Unit Test</code> Step to export an APK.</li>
+  <li>Add the <code class="highlighter-rouge">Android Build</code> Step after the <code class="highlighter-rouge">Android Unit Test</code> Step to export an APK.</li>
   <li>
     <p>Add the <code class="highlighter-rouge">Debug</code> task to the <code class="highlighter-rouge">Variant</code> Step input field. This will prepare an env var containing the APK path of your build. You will need this env var in the next step.</p>
 
     <p><img src="/img/robo-test.png" alt="" /></p>
   </li>
-  <li>Add <code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step after <code class="highlighter-rouge">Android Build</code> Step.</li>
+  <li>Add <code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step after the <code class="highlighter-rouge">Android Build</code> Step.</li>
   <li>Set the <code class="highlighter-rouge">APK path</code> input field.</li>
-  <li>Check if <code class="highlighter-rouge">robo</code> is the selected <code class="highlighter-rouge">Test type</code>. It should be since it is the default test type.</li>
+  <li>Check if <code class="highlighter-rouge">robo</code> is the selected <code class="highlighter-rouge">Test type</code>.</li>
   <li>
     <p>Add the type of test device in the <code class="highlighter-rouge">Test devices</code> input field. If choosing a different device than the default, your input should have the format of <code class="highlighter-rouge">deviceID,version,language,orientation</code> separated with <code class="highlighter-rouge">,</code>.</p>
 
-    <p><img src="/img/test-devices-android.png" alt="" /></p>
+    <p><img src="/img/robo-test-1.png" alt="" /></p>
 
     <p>Find the list of the available devices <a href="https://firebase.google.com/docs/test-lab/android/available-testing-devices">here</a>.</p>
   </li>
-  <li>Start a build.</li>
+  <li>Start a build and <a href="/testing/device-testing-for-android/#running-instrumentation-tests">check your test results</a>.</li>
 </ol>
 
 <h3 id="running-instrumentation-tests">Running instrumentation tests <a href="#running-instrumentation-tests" class="anchor-symbol">⚓</a></h3>
 
 <ol>
   <li>Open the <code class="highlighter-rouge">primary workflow</code> of your build in <code class="highlighter-rouge">Workflow Editor</code>.</li>
-  <li>Add two <code class="highlighter-rouge">Android Build</code> Steps after <code class="highlighter-rouge">Android Unit Test</code> Step. We will export an APK in the first build step and a test APK in the second build step.</li>
-  <li>In the first <code class="highlighter-rouge">Android Build</code> Step, add the <code class="highlighter-rouge">Debug</code> task to the <code class="highlighter-rouge">Variant</code> field.</li>
-  <li>
-    <p>In the second <code class="highlighter-rouge">Android Build</code> Step, add the <code class="highlighter-rouge">DebugAndroidTest</code> task into the <code class="highlighter-rouge">Variant</code> field.</p>
+  <li>Add the <code class="highlighter-rouge">Android Build for UI testing</code> Step to your workflow.</li>
+  <li>To export an APK and a Test APK, you have to set the following input fields in the <code class="highlighter-rouge">Android Build for UI testing</code> Step.
+    <ul>
+      <li><code class="highlighter-rouge">Project Location</code>: the root directory of your Android project</li>
+      <li><code class="highlighter-rouge">Module</code>: set the module you wish to build</li>
+      <li><code class="highlighter-rouge">Variant</code>: set the variant you wish to build (usually <code class="highlighter-rouge">debug</code>)</li>
+    </ul>
 
-    <p><img src="/img/instrumentation-test-1.png" alt="" /></p>
+    <p><img src="/img/android-build-ui-testing.png" alt="" /></p>
+
+    <p>The step outputs will be <code class="highlighter-rouge">BITRISE_APK_PATH</code> (which is the path of the generated APK after filtering) and <code class="highlighter-rouge">BITRISE_TEST_APK_PATH</code> (which is the path of the generated test APK after filtering).</p>
   </li>
+  <li>Add the <code class="highlighter-rouge">[BETA] Virtual Device Testing</code> Step right after the <code class="highlighter-rouge">Android Build for UI testing</code> Step.</li>
   <li>
-    <p>Click <code class="highlighter-rouge">bitrise.yml</code> tab and edit the primary workflow by adding the <a href="https://devcenter.bitrise.io/bitrise-cli/step-outputs/#exporting-step-outputs-in-output-aliases/">output alias</a> for instrumentation testing to your second <code class="highlighter-rouge">Android Build</code> step. This will replicate to the <code class="highlighter-rouge">Test APK path</code> field of the <code class="highlighter-rouge">Instrumentation Test</code> section of the <code class="highlighter-rouge">[BETA] Virtual Device Testing</code> step. With this little trick, you will be able to output a test APK as well.</p>
+    <p>Set the <code class="highlighter-rouge">Test type</code> to <code class="highlighter-rouge">instrumentation</code>.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> - android-build@0.9.5:
-        inputs:
-        - variant: Debug
-        - module: app
-    - android-build@0.9.5:
-        inputs:
-        - variant: DebugAndroidTest
-        - module: app
-        outputs:
-        - BITRISE_APK_PATH: BITRISE_TEST_APK_PATH
-</code></pre></div>    </div>
-
-    <p><img src="/img/virtual-device.png" alt="" /></p>
+    <p>Our <code class="highlighter-rouge">Android Build for UI Testing</code> Step exports an APK and a Test APK and their paths get automatically set in the <code class="highlighter-rouge">APK path</code> and <code class="highlighter-rouge">Test APK path</code> input fields of the <code class="highlighter-rouge">[BETA] Virtual Device Testing</code> Step.</p>
   </li>
-  <li>Select <code class="highlighter-rouge">instrumentation</code> as <code class="highlighter-rouge">Test type</code> in <code class="highlighter-rouge">[BETA] Virtual Device Testing</code> step.</li>
   <li>
     <p>Add the type of test device in the <code class="highlighter-rouge">Test devices</code> input field. If choosing a different device than the default, your input should have the format of  <code class="highlighter-rouge">deviceID,version,language,orientation</code> separated with <code class="highlighter-rouge">,</code>.</p>
 
-    <p><img src="/img/instrumentation-test.png" alt="" /></p>
+    <p><img src="/img/instrumentation-test-2.png" alt="" /></p>
   </li>
-  <li>Start a build.</li>
+  <li>Start a build and <a href="/testing/device-testing-for-android/#running-instrumentation-tests">check your test results</a>.</li>
 </ol>
 
 <h2 id="checking-test-results">Checking test results <a href="#checking-test-results" class="anchor-symbol">⚓</a></h2>
