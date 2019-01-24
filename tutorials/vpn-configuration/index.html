@@ -2074,42 +2074,89 @@
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/tutorials/vpn-configuration.md" target="_blank"></a>
 					</div>
 				
-				<p>Do you require a VPN connection for your build, to be able to connect to your server,
-either to <code class="highlighter-rouge">git clone</code> your repository or to access a private API?
-If yes, then this tutorial is for you!</p>
+				<p>Do you require a VPN connection for your build, to be able to connect to your server, either to <code class="highlighter-rouge">git clone</code> your repository or to access a private API? If yes, then this tutorial is for you!</p>
 
-<h2 id="technical-infos">Technical infos <a href="#technical-infos" class="anchor-symbol">⚓</a></h2>
+<h2 id="technical-information">Technical information <a href="#technical-information" class="anchor-symbol">⚓</a></h2>
 
-<p>Connecting to a VPN, in short, works like this:</p>
+<p>To connect to a VPN, you need to:</p>
 
 <ol>
-  <li>the build starts</li>
-  <li>you install &amp; configure the VPN components you need</li>
-  <li>you start the VPN</li>
-  <li>you proceed with the build</li>
+  <li>Install and configure the required VPN components</li>
+  <li>Connect to the VPN</li>
 </ol>
 
-<p>Obviously, if you require a VPN connection in order to access your code repository,
-you have to connect to the VPN <strong>before</strong> the <code class="highlighter-rouge">Git Clone</code> step, but in general
-you can configure &amp; connect to the VPN anywhere in your Workflow, <strong>before</strong> you’d use the
-connection.</p>
+<p>You can configure and connect a VPN anywhere in your Workflow - BEFORE you would use the VPN connection, of course. For example, if you require a VPN connection to access your repository, you have to connect before the <code class="highlighter-rouge">Git Clone</code> Step.</p>
 
-<p><em>You can choose other VPN tools, not just the one shown here (<a href="https://www.strongswan.org">strongswan</a>),
-this is just one example setup which works on <a href="https://www.bitrise.io">bitrise.io</a>.</em></p>
+<div class="message-box important">
+<div class="message-title">
+    <p>SSH sessions</p>
+  </div>
 
-<p><strong>One important note</strong>: when you choose your VPN tool and do the setup/configuration,
-you have to be careful to <strong>not to restart / abort</strong> existing SSH sessions!
-The <a href="https://www.bitrise.io">bitrise.io</a> workers will abort the build
-if the SSH connection between the build’s Control/Master machine and
-the Build virtual machine terminates!</p>
+<div class="message-content">
+    <p>When you choose your VPN tool and do the setup/configuration, you have to be careful <strong>not to restart or abort</strong> existing SSH sessions! The <a href="https://www.bitrise.io">bitrise.io</a> workers will abort the build if the SSH connection between the build’s Control/Master machine and the build virtual machine terminates!</p>
+  </div>
+</div>
 
-<h2 id="example">Example <a href="#example" class="anchor-symbol">⚓</a></h2>
+<h2 id="example-configurations">Example configurations <a href="#example-configurations" class="anchor-symbol">⚓</a></h2>
 
-<p>This is an example script which you can either save into your repository and run
-it from there, or just copy paste its content into a <code class="highlighter-rouge">Script Step</code> in your <code class="highlighter-rouge">bitrise</code>
-configuration (<code class="highlighter-rouge">bitrise.yml</code> / Workflow).</p>
+<h3 id="using-the-connect-to-openvpn-server-step">Using the <code class="highlighter-rouge">Connect to OpenVPN Server</code> Step <a href="#using-the-connect-to-openvpn-server-step" class="anchor-symbol">⚓</a></h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+<p>To use the <code class="highlighter-rouge">Connect to OpenVPN Server</code> Step, you need to build an OpenVPN server in advance. <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-18-04">Read more about how to set up an OpenVPN server</a>.</p>
+
+<p>Once the server is ready, encode the following in Base64:</p>
+
+<ul>
+  <li>CA certificate</li>
+  <li>client certificate</li>
+  <li>client private key</li>
+</ul>
+
+<p>You can base64 encode files with the following command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ base64 &lt;filepath&gt;
+</code></pre></div></div>
+
+<p>Now you are ready to set up the VPN on Bitrise, in the Workflow Editor of your app:</p>
+
+<ol>
+  <li>
+    <p>Register the encoded certificates and the key as <a href="https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/#adding-a-secret-env-var">Secrets</a> on <a href="">bitrise.io</a>.</p>
+
+    <p>We recommend using the following keys as they are the default inputs for the VPN Step:</p>
+    <ul>
+      <li>CA certificate: <code class="highlighter-rouge">$VPN_CA_CRT_BASE64</code></li>
+      <li>Client certificate: <code class="highlighter-rouge">$VPN_CLIENT_CRT_BASE64</code></li>
+      <li>Private key: <code class="highlighter-rouge">VPN_CLIENT_KEY_BASE64</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Add the <code class="highlighter-rouge">Connect to OpenVPN Server</code> Step to your workflow.</p>
+
+    <p>Don’t forget to add the Step before any Steps that might require VPN connection.</p>
+  </li>
+  <li><a href="https://devcenter.bitrise.io/getting-started/getting-started-steps/#environment-variables-as-step-inputs">Add the previously created Secrets</a> to their respective inputs:
+    <ul>
+      <li><code class="highlighter-rouge">Base64 encoded CA Certificate</code></li>
+      <li><code class="highlighter-rouge">Base64 encoded Client Certificate</code></li>
+      <li><code class="highlighter-rouge">Base64 encoded Client Private Key</code></li>
+    </ul>
+
+    <p>If you created the Secrets with the recommended keys, you do not have to change the inputs.</p>
+  </li>
+  <li>Fill in the other required inputs.
+    <ul>
+      <li><code class="highlighter-rouge">Host</code>: the Open VPN Server IP or hostname</li>
+      <li><code class="highlighter-rouge">Port</code>: OpenVPN Server Port number</li>
+      <li><code class="highlighter-rouge">Protocol</code>: OpenVPN Server Protocol</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="strongswan-vpn-setup">Strongswan VPN setup <a href="#strongswan-vpn-setup" class="anchor-symbol">⚓</a></h3>
+
+<p>This is an example script which you can either save into your repository and run it from there, or just copy paste its content into a <code class="highlighter-rouge">Script Step</code> in your <code class="highlighter-rouge">bitrise</code> configuration (<code class="highlighter-rouge">bitrise.yml</code> / Workflow).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
 <span class="nb">set</span> <span class="nt">-e</span>
 
 <span class="nb">echo</span> <span class="s2">"WAN IP"</span>
@@ -2227,8 +2274,20 @@ render_template <span class="nv">$temp_dir</span>/ipsec.secrets.template <span c
 <span class="k">esac</span>
 
 <span class="c"># Your VPN connection should be up and running. Any following steps of your Bitrise workflow can access devices over your VPN connection 🎉</span>
-
 </code></pre></div></div>
+
+<h3 id="cisco-vpn-connect">Cisco VPN connect <a href="#cisco-vpn-connect" class="anchor-symbol">⚓</a></h3>
+
+<p>You can use the <code class="highlighter-rouge">Cisco VPN connect</code> Step: it connects with Cisco VPN provided by VPN3000 Concentrator, Juniper/Netscreen, IOS and PIX using <strong>vpnc</strong>.</p>
+
+<p>To provide VPN client settings and credentials required for the Step, you can:</p>
+
+<ul>
+  <li>use the existing vpnc configuration file: <code class="highlighter-rouge">vpnc.conf</code></li>
+  <li>use the <code class="highlighter-rouge">Command line options</code> input of the Step. The options specified in this input will take precedence over the configuration file!</li>
+</ul>
+
+<p>For more information on setting up vpnc, check the <a href="https://www.unix-ag.uni-kl.de/\~massar/vpnc/">vpnc homepage</a> and the <a href="https://linux.die.net/man/8/vpnc">vpnc manual</a>.</p>
 
 			</main>
 		</div>
