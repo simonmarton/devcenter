@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Signing up with GitLab - Bitrise DevCenter
+				Getting started with Flutter apps - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Signing up with GitLab
+							Getting started with Flutter apps
 						
 					</div>
 				</div>
@@ -116,7 +116,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/getting-started/signing-up/signing-up-with-gitlab/" title="Signing up with GitLab" class="current">Signing up with GitLab</a>
+				<a href="/getting-started/signing-up/signing-up-with-gitlab/" title="Signing up with GitLab">Signing up with GitLab</a>
 			
 		
 		
@@ -335,7 +335,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/getting-started/getting-started-with-flutter-apps/" title="Getting started with Flutter apps">Getting started with Flutter apps</a>
+				<a href="/getting-started/getting-started-with-flutter-apps/" title="Getting started with Flutter apps" class="current">Getting started with Flutter apps</a>
 			
 		
 		
@@ -2079,65 +2079,230 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Signing up with GitLab</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/getting-started/signing-up/signing-up-with-gitlab.md" target="_blank"></a>
+						<h1>Getting started with Flutter apps</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/getting-started/getting-started-with-flutter-apps.md" target="_blank"></a>
 					</div>
 				
-				<p>You are able to authenticate yourself with your GitLab user against <strong>Bitrise</strong>. It brings some practical benefits, like logging in with one click and of course you won’t have to authorize your GitLab account when adding repositories hosted by these providers again.</p>
+				<p>Flutter is a mobile app SDK that allows developers to create native apps for both iOS and Android. Bitrise supports Flutter apps: we have dedicated Steps to help you with all your Flutter needs. This guide walks you through setting up, testing, building and deploying a simple Flutter app on Bitrise.</p>
+
+<h2 id="adding-a-flutter-app">Adding a Flutter app <a href="#adding-a-flutter-app" class="anchor-symbol">⚓</a></h2>
 
 <div class="message-box note">
 <div class="message-title">
-    <p>Signing up with email address</p>
+    <p>Do you have a Bitrise account?</p>
   </div>
 
 <div class="message-content">
-    <p>If you’d like to sign up with your email address, please follow the instructions in <a href="/getting-started/signing-up/signing-up-with-email">signing up with email address</a>.</p>
+    <p>Make sure you have signed up to <a href="https://www.bitrise.io">bitrise.io</a> and can access your Bitrise account. Here are <a href="https://devcenter.bitrise.io/getting-started/index#signing-up-to-bitrise">4 ways</a> on how to connect your Bitrise account to your account found on a Git service provider.</p>
   </div>
 </div>
+
+<ol>
+  <li>Click the <code class="highlighter-rouge">+</code> sign on the top menu bar and select <code class="highlighter-rouge">Add app</code>.</li>
+  <li>On the <code class="highlighter-rouge">Create New App</code> page, choose the account you wish to add the app to.</li>
+  <li>Set the privacy of the app to either Private or <a href="/getting-started/adding-a-new-app/public-apps">Public</a> and click <code class="highlighter-rouge">Next</code>.</li>
+  <li>Select the Git hosting service that hosts your repository, then find and select your repository that hosts the project. Read more about <a href="/getting-started/adding-a-new-app/connecting-your-repository">connecting your repository</a>.</li>
+  <li>When prompted to set up repository access, click <code class="highlighter-rouge">No, auto-add SSH key</code>. Read more about <a href="/getting-started/adding-a-new-app/setting-up-ssh-keys/">SSH keys</a>.</li>
+  <li>Type the name of the branch that includes your project’s configuration - master, for example - then click <code class="highlighter-rouge">Next</code>.</li>
+  <li>
+    <p>Wait while Bitrise is validating your project.</p>
+
+    <p>We look for your configuration files and set up your app based on them. In the case of Flutter apps, you definitely need a <code class="highlighter-rouge">pubspec.yaml</code> file in your project.</p>
+  </li>
+  <li>
+    <p>If your app has tests in the repository, you will be prompted to decide if you want to run them.</p>
+
+    <p><img src="/img/select_test.png" alt="" /></p>
+  </li>
+  <li>
+    <p>If you have an iOS project in your Flutter project, you will have to select an .ipa export method.</p>
+
+    <p><img src="https://cdn.buttercms.com/rOAuKJ2jToSecv2pEs7g" alt="undefined" /></p>
+  </li>
+  <li>
+    <p>Register a webhook when prompted.</p>
+
+    <p>With a webhook, Bitrise can start a build automatically when code is pushed to your repository, or a pull request is created. This also kicks off your first build - click the message and it will take you to the build page.</p>
+  </li>
+</ol>
+
+<h2 id="testing-a-flutter-app">Testing a Flutter app <a href="#testing-a-flutter-app" class="anchor-symbol">⚓</a></h2>
+
+<p>You can write and run <strong>unit-</strong>, <strong>widget-,</strong> and <strong>integration</strong> tests with Flutter. For more information, check out <a href="https://flutter.io/docs/testing">Flutter’s official documentation</a>.</p>
+
+<p>You can use our automatically generated <code class="highlighter-rouge">primary</code> workflow to test your Flutter app. By default, it will include the <code class="highlighter-rouge">Flutter Analyze</code> Step which runs static code tests.</p>
 
 <div class="message-box info">
 <div class="message-title">
-    <p>Trial after signing up</p>
+    <p>Flutter tests</p>
   </div>
 
 <div class="message-content">
-    <p>If you sign up for a free account, you will automatically be granted a two-week trial on our Developer plan. This includes:</p>
-
-    <ul>
-      <li>45 minutes of build time</li>
-      <li>1000 builds a month</li>
-      <li>a maximum of 100 team members</li>
-    </ul>
-
-    <p>Read more about the available plans on the <a href="https://www.bitrise.io/pricing/teams">Pricing</a> page!</p>
+    <p>If you have tests in your repository, and selected <strong>yes</strong> when prompted, during app creation, whether you want to run these tests, the primary workflow will include the <code class="highlighter-rouge">Flutter Test</code> Step by default. If you add tests to your app later, add the <code class="highlighter-rouge">Flutter Test</code> Step to your workflow manually.</p>
   </div>
 </div>
 
-<h2 id="sign-up">Sign up <a href="#sign-up" class="anchor-symbol">⚓</a></h2>
+<ol>
+  <li>Open your app’s Workflow Editor and open the <code class="highlighter-rouge">primary</code> workflow.</li>
+  <li>
+    <p>In the <code class="highlighter-rouge">Flutter Install</code> Step, fill in the <code class="highlighter-rouge">Flutter SDK Version</code> input.</p>
 
-<p>Go to the Sign up page by clicking <code class="highlighter-rouge">Sign up!</code> on the landing page of <a href="https://bitrise.io">bitrise.io</a>.</p>
+    <p>You can specify either tags or branches of the Flutter SDK’s git repository. The default value is <code class="highlighter-rouge">stable</code>. This will use the latest stable branch of Flutter.</p>
+    <ul>
+      <li>To find the available version tags, check: <a href="https://github.com/flutter/flutter/releases" title="https://github.com/flutter/flutter/releases">https://github.com/flutter/flutter/releases</a></li>
+      <li>To see the the available branches, check: <a href="https://github.com/flutter/flutter/branches" title="https://github.com/flutter/flutter/branches">https://github.com/flutter/flutter/branches</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>To the <code class="highlighter-rouge">Flutter Analyze</code> Step, add any flags you wish to use to the <code class="highlighter-rouge">Additional parameters</code> input.</p>
 
-<p><img src="/img/sign-up.jpg" alt="" /></p>
+    <p>The Step runs the <code class="highlighter-rouge">flutter analyze</code> command with the specified flags. To check the available flags, open a command line interface on your own machine and run <code class="highlighter-rouge">flutter analyze --help</code>.</p>
+  </li>
+  <li>
+    <p>To the <code class="highlighter-rouge">Flutter Test</code> Step - if you have it -, add any flags you wish to use to the <code class="highlighter-rouge">Additional parameters</code> input.</p>
 
-<p>Select <code class="highlighter-rouge">GitLab</code> for authenticating yourself with this service.</p>
+    <p>The Step runs the <code class="highlighter-rouge">flutter test</code> command with the specified flags. To check the available flags, open a command line interface on your own machine and run <code class="highlighter-rouge">flutter test --help</code>.</p>
 
-<h2 id="authorize-bitrise">Authorize Bitrise <a href="#authorize-bitrise" class="anchor-symbol">⚓</a></h2>
+    <p><img src="/img/flutter_test.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Make sure the <code class="highlighter-rouge">Project Location</code> input of the <code class="highlighter-rouge">Flutter Test</code> Step is correct.</p>
 
-<p>You have to authorize Bitrise before we can establish the connection. This means you give permission to Bitrise to access (read) your repositories.</p>
+    <p>The default value is the the environment variable created for your Flutter project’s location.</p>
+  </li>
+</ol>
 
-<p><img src="/img/signing-up/gitlab_authorization.png" alt="Screenshot" /></p>
+<p>Run a build! Once it’s done, you can find your test results on the <code class="highlighter-rouge">Apps and Artifacts</code> tab of the <strong>Build</strong> page of the app.</p>
 
-<p>If you press the <code class="highlighter-rouge">Authorize</code> button, you will be redirected to Bitrise.</p>
+<h2 id="deploying-a-flutter-app">Deploying a Flutter app <a href="#deploying-a-flutter-app" class="anchor-symbol">⚓</a></h2>
 
-<h2 id="finish-signup">Finish signup <a href="#finish-signup" class="anchor-symbol">⚓</a></h2>
+<p>To build and deploy a Flutter app, a workflow must contain these Flutter Steps:</p>
 
-<p>You will have to pick a username and a password for your Bitrise account. This way you are free from relying on the given service’s availability. You are also able to connect more accounts from other Git providers like GitHub and Bitbucket, for example.</p>
+<ul>
+  <li><code class="highlighter-rouge">Flutter Install</code></li>
+  <li><code class="highlighter-rouge">Flutter Build</code></li>
+</ul>
 
-<p>After that, you are ready to roll.</p>
+<p>If you have platforms specified in your repository, a <code class="highlighter-rouge">deploy</code> workflow will be automatically generated when adding the app on Bitrise. The content of this workflow depends on the platform: for example, if your app contains only an iOS project, the workflow will contain the <code class="highlighter-rouge">Certificate and profile installer</code> and the <code class="highlighter-rouge">Xcode Archive &amp; Export for iOS</code> Steps.</p>
 
-<p>From now on, you are able to sign in with a click of a button. Choose your favorite!</p>
+<p>You can build both iOS and Android projects at the same time or you can build them separately, each using their own workflow. <strong>You can set this in the</strong> <code class="highlighter-rouge">Platform</code> <strong>input of the</strong> <code class="highlighter-rouge">**Flutter Build**</code> <strong>Step any time</strong>. By default, the Step is configured according to the platform or platforms that the scanner detected when adding the app on Bitrise.</p>
 
-<p><img src="/img/signing-up/signup_success.png" alt="Screenshot" /></p>
+<p>Here’s an example workflow we’ll use in this configuration, with all the necessary Steps:</p>
+
+<p><img src="/img/flutter-workflow.png" alt="" />We’ll discuss the Steps specific to iOS and Android deployment in their respective sections!</p>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Packages and libraries</p>
+  </div>
+
+<div class="message-content">
+    <p>We also support building Flutter packages and libraries. Unlike in the case of apps, there is no artifact to build so there is no need for a <code class="highlighter-rouge">Flutter Build</code> Step in your workflow.</p>
+  </div>
+</div>
+
+<h3 id="deploying-a-flutter-app-to-bitrise">Deploying a Flutter app to Bitrise <a href="#deploying-a-flutter-app-to-bitrise" class="anchor-symbol">⚓</a></h3>
+
+<p>The <code class="highlighter-rouge">Deploy to bitrise.io</code> step uploads all the artifacts related to your build into the<a href="/builds/build-artifacts-online/"> APPS &amp; ARTIFACTS </a>tab on your Build’s page.</p>
+
+<p>You can share the generated APK/.ipa file with your team members using the build’s URL. You can also notify user groups or individual users that your APK/.ipa file has been built.</p>
+
+<ol>
+  <li>Go to the <code class="highlighter-rouge">Deploy to bitrise.io</code> step.</li>
+  <li>In the <code class="highlighter-rouge">Notify: User Roles</code>, add the role so that only those get notified who have been granted with this role. Or fill out the <code class="highlighter-rouge">Notify: Emails</code> field with email addresses of the users you want to notify. Make sure you set those email addresses as <a href="/builds/env-vars-secret-env-vars/">secret env vars</a>! These details can be also modified under <code class="highlighter-rouge">Notifications</code> if you click the <code class="highlighter-rouge">eye</code> icon next to your generated APK/.ipa file in the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab.</li>
+</ol>
+
+<h3 id="deploying-a-flutter-app-to-app-store-connect">Deploying a Flutter app to App Store Connect <a href="#deploying-a-flutter-app-to-app-store-connect" class="anchor-symbol">⚓</a></h3>
+
+<p>To deploy your iOS Flutter project to the App Store, you’ll need to build the app, export an .ipa file and submit it to the App Store.</p>
+
+<p>Unlike testing, this requires code signing files:</p>
+
+<ul>
+  <li>an iOS Distribution Certificate (a .p12 file)</li>
+  <li>an App Store Provisioning Profile</li>
+</ul>
+
+<p>Read more about iOS code signing on Bitrise in <a href="https://devcenter.bitrise.io/code-signing/ios-code-signing/code-signing/">our detailed guides</a>!</p>
+
+<ol>
+  <li>Make sure you have the <code class="highlighter-rouge">Certificate and profile installer</code> Step in your workflow.</li>
+  <li><a href="/code-signing/ios-code-signing/ios-manual-provisioning/">Upload the required code signing files</a> to Bitrise.</li>
+  <li>Open the <code class="highlighter-rouge">Flutter Build</code> Step and find the <code class="highlighter-rouge">iOS Platform Configs</code> input group.</li>
+  <li>Make sure the <code class="highlighter-rouge">Additional parameters</code> input has the value <code class="highlighter-rouge">--release</code>.</li>
+  <li>Check the <code class="highlighter-rouge">Platform</code> input of the Step: make sure it’s set to either <code class="highlighter-rouge">iOS</code> or <code class="highlighter-rouge">both</code>.</li>
+  <li>
+    <p>Make sure you have the <code class="highlighter-rouge">Xcode Archive &amp; Export for iOS</code> Step in your workflow.</p>
+
+    <p>It should be after the <code class="highlighter-rouge">Flutter Build</code> Step.</p>
+  </li>
+  <li>Set the <code class="highlighter-rouge">Select method for export</code> input of the Step to <code class="highlighter-rouge">app-store</code>.</li>
+  <li>Add the <code class="highlighter-rouge">Deploy to iTunes Connect</code> Step to the end of the workflow.</li>
+  <li>Provide your Apple credentials in the respective input fields.
+    <ul>
+      <li>Apple ID</li>
+      <li>password or, if you use two-factor authentication on iTunes Connect, your application password.</li>
+    </ul>
+
+    <p>Don’t worry, the password will not be visible in the logs or exposed - <a href="/builds/env-vars-secret-env-vars#about-secrets">that’s why it is marked SENSITIVE</a>.</p>
+  </li>
+  <li><a href="">Start a build</a>!</li>
+</ol>
+
+<p>If all goes well, the Step will submit the app to App Store Connect. You can, from the App Store Connect page, distribute the app to external testers via Testflight, or release it to the App Store itself.</p>
+
+<h3 id="deploying-a-flutter-app-to-google-play">Deploying a Flutter app to Google Play <a href="#deploying-a-flutter-app-to-google-play" class="anchor-symbol">⚓</a></h3>
+
+<p>To deploy your app to Google Play, you need to export an APK file and sign it.</p>
+
+<p>You can <a href="https://flutter.io/docs/deployment/android#configure-signing-in-gradle">configure the signing</a> in the app’s <code class="highlighter-rouge">build.gradle</code> file and then Flutter will sign your app during the build phase.</p>
+
+<p>In this guide, we’ll walk you through the other option: how to sign your APK file on Bitrise and then deploy the app to Google Play. First, you will need to <a href="https://flutter.io/docs/deployment/android#create-a-keystore">create a keystore file</a> and then upload it to Bitrise.</p>
+
+<ol>
+  <li>Open your app’s Workflow Editor.</li>
+  <li>Go to the <code class="highlighter-rouge">Code Signing</code> tab.</li>
+  <li>Drag-and-drop your keystore file to the <code class="highlighter-rouge">ANDROID KEYSTORE FILE</code> field.</li>
+  <li>Fill out the <code class="highlighter-rouge">Keystore password</code>, <code class="highlighter-rouge">Keystore alias</code>, and <code class="highlighter-rouge">Private key password</code> fields and click <code class="highlighter-rouge">Save metadata</code>.</li>
+</ol>
+
+<p>Once that is done, you are ready to configure a workflow to deploy the app.</p>
+
+<ol>
+  <li>
+    <p>Make sure you are in sync with Google Play Store!</p>
+
+    <p>Learn how to:</p>
+    <ul>
+      <li><a href="https://devcenter.bitrise.io/tutorials/deploy/android-deployment/#register-to-google-play-store-and-set-up-your-first-project">register to Google Play Store and set up your project</a></li>
+      <li>set up <a href="https://devcenter.bitrise.io/tutorials/deploy/android-deployment/#set-up-google-play-api-access">Google Play API access</a></li>
+    </ul>
+  </li>
+  <li>In your Bitrise <code class="highlighter-rouge">Dashboard</code>, go to <code class="highlighter-rouge">Code Signing</code> tab and upload the service account JSON key into the <code class="highlighter-rouge">GENERIC FILE STORAGE.</code></li>
+  <li>
+    <p>Copy the env key which stores your uploaded file’s url.</p>
+
+    <p>For example: <code class="highlighter-rouge">BITRISEIO_SERVICE_ACCOUNT_JSON_KEY_URL</code></p>
+  </li>
+  <li>
+    <p>Make sure you have the <code class="highlighter-rouge">Sign APK</code> Step in your workflow.</p>
+
+    <p>It should be after the <code class="highlighter-rouge">Flutter Build</code> Step.</p>
+  </li>
+  <li>Open the <code class="highlighter-rouge">Flutter Build</code> Step and find the <code class="highlighter-rouge">Android Platform Configs</code> input group.</li>
+  <li>Make sure the <code class="highlighter-rouge">Additional parameters</code> input has the value <code class="highlighter-rouge">--release</code>.</li>
+  <li>Check the <code class="highlighter-rouge">Platform</code> input of the Step: make sure it’s set to either <code class="highlighter-rouge">android</code> or <code class="highlighter-rouge">both</code>.</li>
+  <li>Make sure you have the <code class="highlighter-rouge">Google Play Deploy</code> Step after the <code class="highlighter-rouge">Sign APK</code> Step to your workflow.</li>
+  <li>Fill out the required input fields as follows:
+    <ul>
+      <li><code class="highlighter-rouge">Service Account JSON key file path</code>: This field can accept a remote URL so you have to provide the environment variable which contains your uploaded service account JSON key. For example: <code class="highlighter-rouge">$BITRISEIO_SERVICE_ACCOUNT_JSON_KEY_URL</code></li>
+      <li><code class="highlighter-rouge">Package name</code>: the package name of your Android app</li>
+      <li><code class="highlighter-rouge">Track</code>: the track where you want to deploy your APK (alpha/beta/rollout/production)</li>
+    </ul>
+  </li>
+</ol>
+
+<p>And that’s it! Start a build and release your Android app to the app store of your choice.</p>
 
 			</main>
 		</div>
