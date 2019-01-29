@@ -2099,28 +2099,20 @@
 <p>You can set up and configure the webhooks sent by Bitrise on the web UI. Let’s see how!</p>
 
 <ol>
-  <li>
-    <p>Go to your app’s page on <a href="https://www.bitrise.io">bitrise.io</a> and open the <code class="highlighter-rouge">Code</code> tab.</p>
-  </li>
+  <li>Go to your app’s page on <a href="https://www.bitrise.io">bitrise.io</a> and open the <code class="highlighter-rouge">Code</code> tab.</li>
   <li>
     <p>Click <code class="highlighter-rouge">+ Add webhook</code>.</p>
 
-    <p><img src="/img/webhooks/adding-outgoing.png" alt="Adding outgoing webhook" /></p>
+    <p><img src="/img/outgoing-webhook.png" alt="" /></p>
   </li>
-  <li>
-    <p>Enter the URL of the service where you wish to send the notification in the <code class="highlighter-rouge">URL</code> field.</p>
-  </li>
-  <li>
-    <p>Select either the <code class="highlighter-rouge">Send me everything</code> or the <code class="highlighter-rouge">Select individual events</code> option.</p>
-
+  <li>Enter the URL of the service where you wish to send the notification in the <code class="highlighter-rouge">URL</code> field.</li>
+  <li>Select either the <code class="highlighter-rouge">Send me everything</code> or the <code class="highlighter-rouge">Select individual events</code> option.
     <ul>
       <li><code class="highlighter-rouge">Send me everything</code>: every supported event type will trigger the webhook. Currently, only build events are supported but there will be other options in the future!</li>
       <li><code class="highlighter-rouge">Select individual events</code>: you can specify the individual events that should trigger the webhook.</li>
     </ul>
   </li>
-  <li>
-    <p>Click <code class="highlighter-rouge">Create Webhook</code>.</p>
-  </li>
+  <li>Click <code class="highlighter-rouge">Create Webhook</code>.</li>
 </ol>
 
 <p>And you’re done! You can modify your webhook at any time by clicking <code class="highlighter-rouge">Edit</code> next to the webhook URL displayed.</p>
@@ -2142,17 +2134,11 @@
   <li>
     <p>Find the <code class="highlighter-rouge">WEBHOOK HEADERS</code> section.</p>
 
-    <p><img src="/img/webhooks/webhook-headers.png" alt="Webhook headers" /></p>
+    <p><img src="/img/webhook-headers.png" alt="" /></p>
   </li>
-  <li>
-    <p>Add a key and a value to the header. You need both to be able to save the header.</p>
-  </li>
-  <li>
-    <p>Click <code class="highlighter-rouge">Add header</code>.</p>
-  </li>
-  <li>
-    <p>Click <code class="highlighter-rouge">Create webhook</code>/<code class="highlighter-rouge">Update webhook</code>.</p>
-  </li>
+  <li>Add a key and a value to the header. You need both to be able to save the header.</li>
+  <li>Click <code class="highlighter-rouge">Add header</code>.</li>
+  <li>Click <code class="highlighter-rouge">Create webhook</code>/<code class="highlighter-rouge">Update webhook</code>.</li>
 </ol>
 
 <h2 id="checking-and-resending-webhook-deliveries">Checking and resending webhook deliveries <a href="#checking-and-resending-webhook-deliveries" class="anchor-symbol">⚓</a></h2>
@@ -2160,9 +2146,7 @@
 <p>You can check if the notifications were successfully sent or not, and you can check both the payload and the response. The deliveries are marked with appropriate status code, depending on whether the delivery was successful. If it was, you will see a green check mark; if it failed, you will see an orange triangle.</p>
 
 <ol>
-  <li>
-    <p>Go to the <code class="highlighter-rouge">Recent deliveries</code> section of the <code class="highlighter-rouge">Outgoing Webhooks</code> menu.</p>
-  </li>
+  <li>Go to the <code class="highlighter-rouge">Recent deliveries</code> section of the <code class="highlighter-rouge">Outgoing Webhooks</code> menu.</li>
   <li>
     <p>Click an outgoing webhook.</p>
 
@@ -2186,9 +2170,7 @@
  }
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>Select the <code class="highlighter-rouge">RESPONSE</code> tab to see the response from the service you sent the notification to.</p>
-  </li>
+  <li>Select the <code class="highlighter-rouge">RESPONSE</code> tab to see the response from the service you sent the notification to.</li>
   <li>
     <p>You can redeliver any delivery. Open the delivery you need and click <code class="highlighter-rouge">Redeliver</code>.</p>
 
