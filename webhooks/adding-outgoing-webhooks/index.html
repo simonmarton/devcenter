@@ -2150,31 +2150,34 @@
   <li>
     <p>Click an outgoing webhook.</p>
 
-    <p><img src="/img/webhooks/outgoing-webhook.jpeg" alt="Outgoing webhook" /></p>
+    <p><img src="/img/response-webhook.png" alt="" /></p>
   </li>
   <li>
     <p>Select the <code class="highlighter-rouge">REQUEST</code> tab to see and, if you wish, modify the payload that was sent to the specified URL.</p>
 
     <p>An example payload:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {
-   "build_slug":"1234abcd",
-   "build_number":3,
-   "app_slug":"abcd1234",
-   "git": {
-     "provider":"github",
-     "src_branch":"feature/branch",
-     "dst_branch":master, # If the build was triggered by a pull request
-     "pull_request_id":32 # If the build was triggered by a pull request
-   }
- }
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "build_slug": "58f4da148d884d68",
+  "build_number": 3,
+  "app_slug": "de7829a7317d976e",
+  "build_status": 0,
+  "build_triggered_workflow": "primary",
+  "git": {
+    "provider": "github",
+    "src_branch": "master",
+    "dst_branch": "master",
+    "pull_request_id": 0,
+    "tag": null
+  }
+}
 </code></pre></div>    </div>
   </li>
   <li>Select the <code class="highlighter-rouge">RESPONSE</code> tab to see the response from the service you sent the notification to.</li>
   <li>
     <p>You can redeliver any delivery. Open the delivery you need and click <code class="highlighter-rouge">Redeliver</code>.</p>
 
-    <p><img src="/img/webhooks/redeliver-payload.jpeg" alt="Redeliver" /></p>
+    <p><img src="/img/payload-redelivery.png" alt="" /></p>
   </li>
 </ol>
 
