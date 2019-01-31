@@ -2225,6 +2225,28 @@
   <li>Make sure that your Bitrise account is connected to the Apple Developer portal and that you have at least an Admin role in your Apple Developer team.</li>
 </ul>
 
+<h3 id="test-device-already-registered">Test device already registered <a href="#test-device-already-registered" class="anchor-symbol">⚓</a></h3>
+
+<p>If the <code class="highlighter-rouge">iOS Auto Provision</code> Step fails with this error message, it is likely that you registered a specific test device on Bitrise twice.</p>
+
+<p><img src="/img/device-2.png" alt="" /></p>
+
+<p>Check out if the same UDID has been registered twice:</p>
+
+<ol>
+  <li>Open the app on Bitrise.</li>
+  <li>Go to the <code class="highlighter-rouge">Team</code> tab.</li>
+  <li>Scroll down and click the <code class="highlighter-rouge">Download list of test devices</code> button.</li>
+</ol>
+
+<p>The result will be in json format: check if the same UDID appears twice. If so, it has to be removed from the account to which it was registered.</p>
+
+<ol>
+  <li>Open the top-right menu and click <code class="highlighter-rouge">Account settings</code>.</li>
+  <li>On the left, click <code class="highlighter-rouge">Test devices</code>.</li>
+  <li>Remove one of the duplicated devices.</li>
+</ol>
+
 <h2 id="could-not-install-the-app-on-a-device">Could not install the app on a device <a href="#could-not-install-the-app-on-a-device" class="anchor-symbol">⚓</a></h2>
 
 <p>To install iOS apps on a given device, you have to either:</p>
