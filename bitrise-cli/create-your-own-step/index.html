@@ -2224,11 +2224,21 @@ bitrise :step create
 
 <ol>
   <li>Make sure your Step is stored in a public git repository.</li>
-  <li>Fork the StepLib repository you want to have your step in. The official Bitrise StepLib can be found here: <a href="https://github.com/bitrise-io/bitrise-steplib" title="https://github.com/bitrise-io/bitrise-steplib">https://github.com/bitrise-io/bitrise-steplib</a></li>
-  <li>Call <code class="highlighter-rouge">$ bitrise share start -c </code><code class="highlighter-rouge">[https://github.com/](https://github.com/ "https://github.com/")</code><code class="highlighter-rouge">[your-username]/bitrise-steplib.git</code>, with the git clone URL of your forked StepLib repository. This will prepare your forked StepLib locally for sharing.</li>
+  <li>Fork the StepLib repository you want to have your step in. We recommend using the <a href="https://github.com/bitrise-io/bitrise-steplib">The official Bitrise StepLib</a>!</li>
+  <li>Prepare your forked StepLib locally for sharing:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bitrise share start -c https://github.com/[your-username]/bitrise-steplib.git
+</code></pre></div>    </div>
+  </li>
   <li>Add the step version tag to your Step’s repository.</li>
-  <li>Call <code class="highlighter-rouge">$ bitrise share create --tag [step-version-tag] --git [step-git-uri].git --stepid [step-id]</code>, to add your Step to your forked StepLib repository (locally).</li>
-  <li>You can call <code class="highlighter-rouge">$ bitrise audit -c </code><code class="highlighter-rouge">[https://github.com/](https://github.com/ "https://github.com/")</code><code class="highlighter-rouge">[your-username]/bitrise-steplib.git</code> to perform a complete health-check on your forked StepLib.</li>
+  <li>Add the Step to your forked StepLib repository:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bitrise share create --tag [step-version-tag] 
+--git [step-git-uri].git --stepid [step-id]
+</code></pre></div>    </div>
+  </li>
+  <li>Optionally, perform a complete health check on your forked StepLib:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bitrise audit -c https://github.com/[your-username]/bitrise-steplib.git
+</code></pre></div>    </div>
+  </li>
   <li>Create a Pull Request in the original StepLib repository.</li>
 </ol>
 
