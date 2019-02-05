@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				最初のビルドを実行する - Bitrise DevCenter
+				Stack update and removal policy  - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							最初のビルドを実行する
+							Stack update and removal policy 
 						
 					</div>
 				</div>
@@ -368,7 +368,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/infrastructure/stack-update-and-removal-policy/" title="Stack update and removal policy ">Stack update and removal policy </a>
+				<a href="/infrastructure/stack-update-and-removal-policy/" title="Stack update and removal policy " class="current">Stack update and removal policy </a>
 			
 		
 		
@@ -2097,47 +2097,163 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>最初のビルドを実行する</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/translations/bitrise-cli/run-your-first-build.md" target="_blank"></a>
+						<h1>Stack update and removal policy </h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/infrastructure/stack-update-and-removal-policy.md" target="_blank"></a>
 					</div>
 				
-				<p>Bitriseビルドを実行するために必要なものは2つだけです：</p>
+				<p>Stacks on <a href="https://www.bitrise.io">bitrise.io</a> are generally updated every weekend, but what’s updated depends on the stack. There are stacks where only certain caches are updated and there are stacks which are completely re-built every week. Check out our Stacks in our <a href="https://github.com/bitrise-io/bitrise.io/tree/master/system_reports">system reports Github site</a>.</p>
 
-<ol>
-  <li>Bitrise CLI - <a href="/bitrise-cli/installation/">インストールガイド</a></li>
-  <li>ビルド設定 (<code class="highlighter-rouge">bitrise.yml</code>)</li>
-</ol>
+<h2 id="xcode-stacks">Xcode stacks <a href="#xcode-stacks" class="anchor-symbol">⚓</a></h2>
 
-<p>Bitrise CLIをインストールしたら、あとはビルドの設定ファイル <code class="highlighter-rouge">bitrise.yml</code> を作成するだけです（インストール状況を確認するためには <code class="highlighter-rouge">bitrise setup</code> を実行します）。
-これで準備完了です！</p>
+<p>We use two types of Xcode stacks; Stable stacks and Edge stacks.</p>
 
-<p>もしあなたが <a href="https://www.bitrise.io">bitrise.io</a> を使用している場合は、そこから <code class="highlighter-rouge">bitrise.yml</code> をダウンロードし、ローカルで実行することができます。
-<code class="highlighter-rouge">bitrise.yml</code> は <a href="https://www.bitrise.io">bitrise.io</a> に登録したアプリケーションのワークフローエディタを開き、<code class="highlighter-rouge">bitrise.yml</code> セクションを開くと見つけることができます。</p>
+<ul>
+  <li>Xcode Stable stacks are <strong>built once, and are not updated</strong> at all (except with Bitrise CLI related updates, <a href="/infrastructure/stack-update-and-removal-policy/#about-dependency-manager-cache-updates">dependency manager cache updates</a> and with critical fixes). These stacks are designed so that if a build worked on the stack, the same build should run the same way as long as the stack is available.</li>
+  <li>Xcode “Edge” stack is <strong>re-built every week</strong>. It includes the latest-and-greatest versions of the pre-installed tools and the <a href="/infrastructure/stack-update-and-removal-policy/#about-dependency-manager-cache-updates">dependency manager cache updates</a>. The stack uses the same <a href="https://github.com/bitrise-io/osx-box-bootstrap">scripts</a> we use for creating new Xcode stacks.</li>
+</ul>
 
-<p>もし <code class="highlighter-rouge">bitrise.yml</code> ファイルを自分で作成したい場合は、プロジェクトのルートに <code class="highlighter-rouge">bitrise.yml</code> ファイルを作成してください。
-これを <code class="highlighter-rouge">bitrise.yml</code> の基本設定として使うことができます：</p>
+<h3 id="about-dependency-manager-cache-updates"><strong>About dependency manager cache updates</strong> <a href="#about-dependency-manager-cache-updates" class="anchor-symbol">⚓</a></h3>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">format_version</span><span class="pi">:</span> <span class="s">1.3.1</span>
-<span class="na">default_step_lib_source</span><span class="pi">:</span> <span class="s">https://github.com/bitrise-io/bitrise-steplib.git</span>
+<p>All of the macOS stacks receive a dependency manager cache update (brew, cocoapods and bitrise CLI) every week. These cache updates do not change the pre-installed tool versions, they <strong>only update the package manager caches</strong> for faster dependency installs.</p>
 
-<span class="na">app</span><span class="pi">:</span>
-  <span class="na">envs</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">MY_NAME</span><span class="pi">:</span> <span class="s">My Name</span>
+<p>For more information on what else we use for provisioning the macOS VMs, head over to the weekly cache update <code class="highlighter-rouge">Ansible</code> playbook on <a href="https://github.com/bitrise-io/osx-box-bootstrap/blob/master/weekly-cache-update-playbook.yml">GitHub</a>.</p>
 
-<span class="na">workflows</span><span class="pi">:</span>
-  <span class="na">test</span><span class="pi">:</span>
-    <span class="na">steps</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">script@1.1.3</span><span class="pi">:</span>
-        <span class="na">inputs</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">content</span><span class="pi">:</span> <span class="s">echo "Hello ${MY_NAME}!"</span>
-</code></pre></div></div>
+<h2 id="android--linux-docker-stacks">Android / Linux (Docker) stacks <a href="#android--linux-docker-stacks" class="anchor-symbol">⚓</a></h2>
 
-<p>このビルドを実行するには、ターミナルまたはコマンドラインを開き、<code class="highlighter-rouge">bitrise.yml</code> を保存した場所まで <code class="highlighter-rouge">cd</code> で移動して <code class="highlighter-rouge">bitrise run test</code> を実行してください。</p>
+<p>The Android / Linux stacks are prepared with <code class="highlighter-rouge">docker</code>, using multiple separate docker images, built on top of each other. You can find these docker images on <a href="https://github.com/bitrise-docker">GitHub</a>.</p>
 
-<p>これで終わりです。Bitrise CLIを使った最初のビルドを実行できました！</p>
+<ul>
+  <li>The <strong>Android (Ubuntu 16.04)</strong> stack is a <strong>rolling release stack</strong>, rebuilt automatically from a base Ubuntu image.</li>
+  <li>The <strong>Android LTS (Long Term Support) (Ubuntu 14.04)</strong> image is a “frozen” version of a previous rolling release image, and is not updated at all (except with Bitrise CLI related updates and with critical fixes).</li>
+</ul>
 
-<p>さらに詳しくBitrise CLIと <code class="highlighter-rouge">bitrise.yml</code> の設定方法について知るために、このドキュメントを読み進めてください。
-あなたはすぐに多機能なビルドを作成し、実行することができるでしょう！</p>
+<h2 id="hybrid-visual-studio-for-mac-stacks">Hybrid (Visual Studio for Mac) stacks <a href="#hybrid-visual-studio-for-mac-stacks" class="anchor-symbol">⚓</a></h2>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Deprecated Xamarin Studio Stacks</p>
+  </div>
+
+<div class="message-content">
+    <p>Please note that Xamarin Studio stacks have been deprecated and replaced with the new Visual Studio for Mac stack. Make sure you switch to the Visual Studio for Mac one if you’ve been using the Xamarin Studio one before!</p>
+  </div>
+</div>
+
+<p>The Visual Studio for Mac stacks are built on top of the latest Stable Xcode stack, so the preinstalled building tools of the base Xcode stack are not updated and are the same as in the base Xcode stack. The Xamarin specific bits are applied on top of the base Xcode image <strong>every week</strong> when generating the Visual Studio for Mac stacks (<a href="https://github.com/bitrise-io/osx-box-bootstrap/blob/master/xamarin-playbook.yml">using this Ansible playbook</a>).</p>
+
+<p>The <a href="infrastructure/stack-update-and-removal-policy/#about-dependency-manager-cache-updates">dependency manager cache updates</a> are applied on these stacks too. Visual Studio for Mac stacks are upgraded to the latest Visual Studio for Mac versions on <strong>every weekend</strong>.</p>
+
+<p>This means that the Visual Studio for Mac stacks are <a href="/infrastructure/stack-update-and-removal-policy/#hybrid-stacks"><strong>hybrid</strong> stacks</a>, built on a Stable base Xcode stack, but applying certain Visual Studio for Mac and Xamarin specific bits and updates every week.</p>
+
+<h2 id="deprecating-and-removing-stacks">Deprecating and removing stacks <a href="#deprecating-and-removing-stacks" class="anchor-symbol">⚓</a></h2>
+
+<h3 id="xcode-stacks-1">Xcode Stacks <a href="#xcode-stacks-1" class="anchor-symbol">⚓</a></h3>
+
+<p>We keep the latest patch version of every minor Xcode version as long as that Xcode version is the latest major version.</p>
+
+<p>In addition, we keep the very last minor+patch version of the previous two major Xcode versions</p>
+
+<div class="message-box example">
+<div class="message-title">
+    <p>Example for maintaining Xcode stacks</p>
+  </div>
+
+<div class="message-content">
+    <p>When the latest Xcode version was 8.3.3 we kept:</p>
+
+    <p>All the latest patch releases for every minor version of Xcode 8:</p>
+
+    <ul>
+      <li>8.3.x (8.3.3)</li>
+      <li>8.2.x (8.2.1)</li>
+      <li>8.1.x (8.1)</li>
+      <li>8.0.x (8.0)</li>
+    </ul>
+
+    <p>And the latest versions from the previous two Xcode major versions:</p>
+
+    <ul>
+      <li>7.3.1</li>
+      <li>6.4</li>
+    </ul>
+
+    <p>We will carry this example through our guide to illustrate stack removal and deprecation processes below.</p>
+
+  </div>
+</div>
+
+<h4 id="deprecating-and-removing-xcode-stacks"><strong>Deprecating and removing Xcode stacks</strong> <a href="#deprecating-and-removing-xcode-stacks" class="anchor-symbol">⚓</a></h4>
+
+<p>When the first <strong>beta of the next major Xcode version</strong> is released, we <strong>deprecate</strong> all the minor versions of the last major version, except the very last version</p>
+
+<div class="message-box example">
+<div class="message-title">
+    <p>Example for deprecating Xcode stacks when beta Xcode version is released</p>
+  </div>
+
+<div class="message-content">
+    <p>When Xcode 9 was released, we deprecated</p>
+
+    <ul>
+      <li>all the Xcode 8 stacks except the very last one (8.3.x)</li>
+      <li>the oldest major version (Xcode 6.4).</li>
+    </ul>
+  </div>
+</div>
+
+<p>When the first <strong>final (non beta) version</strong> of the new major Xcode version is released, we <strong>remove</strong> the deprecated stacks; the oldest major version as well as the minor versions of the last major version except the latest minor version.</p>
+
+<div class="message-box example">
+<div class="message-title">
+    <p>Example for removing stacks when final Xcode version is released</p>
+  </div>
+
+<div class="message-content">
+    <p>For example, when Xcode 9 (final, non beta) was released, we removed:</p>
+
+    <ul>
+      <li>the oldest major version (the Xcode 6 (6.4) stack)</li>
+      <li>the minor versions of the last major version (Xcode 8.0, 8.1 and 8.2 stacks) except for the latest minor version (Xcode 8.3)</li>
+    </ul>
+  </div>
+</div>
+
+<p>This means that the latest patch release version of Xcode is <strong>supported for about 2.5 years</strong>, in sync with Xcode major version releases.</p>
+
+<h3 id="hybrid-stacks">Hybrid Stacks <a href="#hybrid-stacks" class="anchor-symbol">⚓</a></h3>
+
+<p>Altogether we have 4 Hybrid stacks:</p>
+
+<ul>
+  <li>The <strong>Hybrid Visual Studio for Mac Stable</strong> and <strong>Hybrid Visual Studio for Mac Beta</strong> Stacks are updated every weekend with the current Visual Studio 4 Mac Stable and Beta releases.</li>
+  <li>The <strong>Hybrid stack, with both Android tools and Xcode 8</strong> is affected by a long term support and deprecation policy, so it only gets the latest Bitrise CLI and critical updates.</li>
+  <li>The <strong>Previous Hybrid stack with Xamarin and vs4mac</strong> is kept on the previous version of Visual Studio for Mac.</li>
+</ul>
+
+<p>So when a new version of Visual Studio for Mac (vs4mac) comes out:</p>
+
+<ul>
+  <li>the current vs4mac Stable becomes the Previous Hybrid stack with Xamarin and vs4mac and</li>
+  <li>the current Previous Hybrid stack with Xamarin and vs4mac gets deprecated.</li>
+</ul>
+
+<p>This means that the <strong>Hybrid Visual Studio for Mac Stable</strong> is <strong>supported for about 1 year</strong>, in sync with the major Xcode version releases.</p>
+
+<h3 id="androidlinux-stacks">Android/Linux Stacks <a href="#androidlinux-stacks" class="anchor-symbol">⚓</a></h3>
+
+<p>The <strong>Android/Linux LTS</strong> stack is upgraded when we release the first non LTS stack update with a new Ubuntu LTS version.</p>
+
+<div class="message-box example">
+<div class="message-title">
+    <p>My message</p>
+  </div>
+
+<div class="message-content">
+    <p>The <strong>Android/Linux LTS</strong> stack was upgraded to the last version built on Ubuntu 16.04 when we released the first non LTS Android/Linux stack update built on Ubuntu 18.04.</p>
+  </div>
+</div>
+
+<p>This means that an Android/Linux LTS stack is <strong>supported for about 2 years</strong>, roughly in sync with Ubuntu LTS (long term support) releases.</p>
 
 			</main>
 		</div>
