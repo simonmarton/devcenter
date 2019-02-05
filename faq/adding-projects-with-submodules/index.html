@@ -2141,6 +2141,18 @@ git repository URL you want to use with the SSH key you register on <a href="htt
   <li>If you have a <strong>public</strong> app: <strong>use HTTPS URLs everywhere!</strong> SSH URLs require SSH keys even if the repository is public. For security reasons, public apps CANNOT have SSH keys. As HTTPS git clone URLs do not require any authentication in the case of public repositories, they should be used for public Bitrise apps.</li>
 </ul>
 
+<div class="message-box info">
+<div class="message-title">
+    <p>Cloning issues</p>
+  </div>
+
+<div class="message-content">
+    <p>If you encounter issues with git cloning - for example, not all submodules are cloned - try the following command after cloning:</p>
+
+    <p><code class="highlighter-rouge">git submodule update --recursive --remote --merge --force</code></p>
+  </div>
+</div>
+
 <h2 id="creating-ssh-keys-for-a-new-private-app">Creating SSH keys for a new private app <a href="#creating-ssh-keys-for-a-new-private-app" class="anchor-symbol">⚓</a></h2>
 
 <p>There are three options to grant <a href="https://www.bitrise.io">Bitrise</a> access to your repository:</p>
