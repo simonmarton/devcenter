@@ -2113,7 +2113,7 @@
     <p>If an app has multiple builds on <a href="https://www.bitrise.io">bitrise.io</a> and you want to pick a specific build out of those, then these filters will help you a lot. Click on your app in your <code class="highlighter-rouge">Dashboard</code> and use the following fields:</p>
 
     <ul>
-      <li>You can search for a build number or commit message in the<code class="highlighter-rouge">Try build number or commit message</code> grey field.</li>
+      <li>You can search for a build number or commit message in the <code class="highlighter-rouge">Try build number or commit message</code> grey field.</li>
       <li>You can pick which of these triggers was used for your build: <code class="highlighter-rouge">Pushes</code>, <code class="highlighter-rouge">Pull Requests</code>, <code class="highlighter-rouge">Tags</code> or all of these.</li>
       <li>You can pick which <code class="highlighter-rouge">branch</code> the build was started on.</li>
       <li>You can select either the <code class="highlighter-rouge">primary</code> or the <code class="highlighter-rouge">deploy workflow</code> of the build.</li>
@@ -2121,14 +2121,12 @@
   </div>
 </div>
 
-<p><img src="/img/bitrise-cli-bitrise-yml/build-filters.png" alt="Screenshot" /></p>
+<p><img src="/img/builds.png" alt="" /></p>
 
 <h2 id="accessing-a-builds-bitriseyml">Accessing a build’s bitrise.yml <a href="#accessing-a-builds-bitriseyml" class="anchor-symbol">⚓</a></h2>
 
 <ol>
-  <li>
-    <p>Select an application on your <code class="highlighter-rouge">Dashboard</code> and select one of its builds.</p>
-  </li>
+  <li>Select an application on your <code class="highlighter-rouge">Dashboard</code> and select one of its builds.</li>
   <li>
     <p>Click the <code class="highlighter-rouge">Show bitrise.yml</code> button at the top OR at the bottom of your inline log.</p>
 
@@ -2143,10 +2141,10 @@
 <ul>
   <li>green means added content</li>
   <li>blue means modified content</li>
-  <li>orange means deleted content</li>
+  <li>red means deleted content</li>
 </ul>
 
-<p><img src="/img/bitrise-cli-bitrise-yml/bitrise-yml-changes.png" alt="Screenshot" /></p>
+<p><img src="/img/bitrise-yml-changes.png" alt="" /></p>
 
 <h2 id="restoring-and-undoing-changes-in-bitriseyml-online">Restoring and undoing changes in bitrise.yml online <a href="#restoring-and-undoing-changes-in-bitriseyml-online" class="anchor-symbol">⚓</a></h2>
 
@@ -2158,11 +2156,13 @@
   <li>Hit <code class="highlighter-rouge">OK</code> in the <code class="highlighter-rouge">Are you sure?</code> pop-up window to confirm and override the current bitrise.yml.</li>
 </ol>
 
-<p><img src="/img/bitrise-cli-bitrise-yml/confirm-bitrise-yml-changes.png" alt="Screenshot" /></p>
+<p><img src="/img/bitrise-yml-changes-are-you-sure.png" alt="" /></p>
 
 <h2 id="editing-and-downloading-bitriseyml-online">Editing and downloading bitrise.yml online <a href="#editing-and-downloading-bitriseyml-online" class="anchor-symbol">⚓</a></h2>
 
 <p>You can <strong>edit</strong> your build config in yml format in the <code class="highlighter-rouge">bitrise.yml editor</code> if you go to your app’s <code class="highlighter-rouge">Workflow Editor</code> and click the <code class="highlighter-rouge">bitrise.yml</code> tab.</p>
+
+<p><img src="/img/bitrise-yml-tab.png" alt="" /></p>
 
 <ul>
   <li>press <code class="highlighter-rouge">F1</code> for the full command list</li>
@@ -2180,15 +2180,13 @@
 <p>If you wish, you can simply delete a build’s <code class="highlighter-rouge">bitrise.yml</code> file. But please note that this action cannot be undone: nobody will be able to view that particular build’s <code class="highlighter-rouge">bitrise.yml</code> file once you delete it.</p>
 
 <ol>
-  <li>
-    <p>Select an application on your <code class="highlighter-rouge">Dashboard</code> and select one of its builds.</p>
-  </li>
+  <li>Select an application on your <code class="highlighter-rouge">Dashboard</code> and select one of its builds.</li>
   <li>
     <p>Click the <code class="highlighter-rouge">Delete bitrise.yml</code> button.</p>
+
+    <p><img src="/img/delete-bitrise-yml.png" alt="" /></p>
   </li>
-  <li>
-    <p>In the confirmation window, click <code class="highlighter-rouge">Yes</code>.</p>
-  </li>
+  <li>In the confirmation window, click <code class="highlighter-rouge">Yes</code>.</li>
 </ol>
 
 			</main>
