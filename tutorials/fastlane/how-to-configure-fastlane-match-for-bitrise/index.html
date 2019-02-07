@@ -2105,13 +2105,15 @@
 in your <a href="https://www.bitrise.io/">bitrise.io</a> build you only have to do three things:</p>
 
 <ol>
-  <li>Make sure that a single SSH key can be used to <code class="highlighter-rouge">git clone</code> both your main repository (the one
+  <li>
+    <p>Make sure that a single SSH key can be used to <code class="highlighter-rouge">git clone</code> both your main repository (the one
 you register on <a href="https://www.bitrise.io/">bitrise.io</a>) and the <code class="highlighter-rouge">match</code> repository.
-You can find more info <a href="/faq/adding-projects-with-submodules/">in this guide</a>.</li>
+You can find more info <a href="/faq/adding-projects-with-submodules/">in this guide</a>.</p>
+  </li>
   <li>
     <p>Add an environment variable <code class="highlighter-rouge">MATCH_PASSWORD</code>, as
-<a href="https://github.com/fastlane/fastlane/tree/master/match#encryption-password">described in </a><code class="highlighter-rouge">[match](https://github.com/fastlane/fastlane/tree/master/match#encryption-password)</code><a href="https://github.com/fastlane/fastlane/tree/master/match#encryption-password">’s docs</a>,
-to specify the <code class="highlighter-rouge">Encryption password</code> you used for <code class="highlighter-rouge">match</code>.
+<a href="https://docs.fastlane.tools/actions/match/#passphrase">described in <em>match</em>’s docs</a>,
+to specify the <code class="highlighter-rouge">passphrase</code> you used for <code class="highlighter-rouge">match</code>.
 On <a href="https://www.bitrise.io/">bitrise.io</a> you should add this as a <code class="highlighter-rouge">Secret Environment Variable</code>,
 in the <a href="http://devcenter.bitrise.io/docs/add-your-first-step-to-your-apps-workflow">Workflow Editor</a>.
 <em>Make sure to disable</em> the <code class="highlighter-rouge">Replace variables in input?</code> option of the environment
@@ -2120,9 +2122,10 @@ for environment variable expansion.</p>
 
     <p><img src="/img/matchpassword.png" alt="" /></p>
   </li>
-  <li>Make sure to use <code class="highlighter-rouge">match</code>’s <code class="highlighter-rouge">readonly</code> mode, or else <code class="highlighter-rouge">match</code> will try to connect
+  <li>
+    <p>Make sure to use <code class="highlighter-rouge">match</code>’s <code class="highlighter-rouge">readonly</code> mode, or else <code class="highlighter-rouge">match</code> will try to connect
 to the Apple Developer Portal, which requires further authorization (providing additional
-username and password for Apple Dev Portal login)!
+username and password for Apple Dev Portal login)!</p>
     <ul>
       <li>If you use <code class="highlighter-rouge">match</code> in your <code class="highlighter-rouge">Fastfile</code> or <code class="highlighter-rouge">fastlane</code> config: <code class="highlighter-rouge">match(app_identifier: "my.domain", type: "appstore", readonly: true)</code></li>
       <li>If you use it as a command line tool: <code class="highlighter-rouge">match development --readonly</code></li>
