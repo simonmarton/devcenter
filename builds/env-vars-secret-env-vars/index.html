@@ -2114,6 +2114,8 @@ As an example, if you click into an input of the third step of your workflow, th
 
 <p>You can also replace the variable for a new one in <code class="highlighter-rouge">Env Vars</code>. Delete the old value and set the new one. If you toggle the <code class="highlighter-rouge">Replace variables in inputs</code> to the right, the new value will be used everywhere in your workflow.</p>
 
+<p><img src="/img/env-vars.png" alt="" /></p>
+
 <div class="message-box important">
 <div class="message-title">
     <p>Protect your secrets</p>
@@ -2128,11 +2130,9 @@ As an example, if you click into an input of the third step of your workflow, th
 
 <p>Under <code class="highlighter-rouge">App Environmental Variables</code>, you can set all the env vars you wish to use later on in <strong>all your workflows</strong>.</p>
 
-<p><img src="/img/builds/app-env-var.png" alt="Screenshot" /></p>
-
 <p>You can set env vars for any of your workflows separately as well. If you wish to set an env var with a variable which will be <strong>only used in a particular workflow</strong>, then select the respective workflow from the list and add the env var there. The list is comprised of the workflows you named for your app. (In this example below, the app has a <code class="highlighter-rouge">deploy</code>, <code class="highlighter-rouge">primary</code> and <code class="highlighter-rouge">dummy</code> workflow.)</p>
 
-<p><img src="/img/builds/workflow-env-var.png" alt="Screenshot" /></p>
+<p><img src="/img/env-var-workflows.png" alt="" /></p>
 
 <p>Check out our list of <a href="/builds/available-environment-variables/">Available Environment Variables</a> exposed by Bitrise CLI and bitrise.io.</p>
 
@@ -2146,10 +2146,12 @@ As an example, if you click into an input of the third step of your workflow, th
 
 <ol>
   <li>Click <code class="highlighter-rouge">Add new</code> on the <code class="highlighter-rouge">Secrets</code> tab.</li>
-  <li>Set the <code class="highlighter-rouge">key</code> and <code class="highlighter-rouge">value</code> fields.</li>
-</ol>
+  <li>
+    <p>Set the <code class="highlighter-rouge">key</code> and <code class="highlighter-rouge">value</code> fields.</p>
 
-<p><img src="/img/locked-secret.png" alt="" /></p>
+    <p><img src="/img/secrets-dummy.png" alt="" /></p>
+  </li>
+</ol>
 
 <p>You can also add a secret env var directly in a <a href="/builds/sensitive-input-field/#set-a-sensitive-input-in-a-step/">step’s</a> <code class="highlighter-rouge">SENSITIVE</code> input.</p>
 
@@ -2172,17 +2174,18 @@ As an example, if you click into an input of the third step of your workflow, th
 <div class="message-content">
     <p>Please note if you clicked this button, <strong>neither you nor anybody with the access to the app can unlock or check the value again</strong>.</p>
 
-    <p><img src="/img/make-it-protected2.png" alt="" /></p>
+    <p><img src="/img/test-key-make-it-protected.png" alt="" /></p>
 
     <p>Since this change is irreversible, a confirmation pop-up window will be displayed prior to saving your changes.</p>
 
-    <p><img src="/img/make-it-protected.png" alt="" /></p>
+    <p><img src="/img/protected.png" alt="" /></p>
+
   </div>
 </div>
 
 <p>You can <strong>show</strong> and <strong>hide</strong> the value of an env var with the <code class="highlighter-rouge">eye</code> icon. This feature is useful if you have a long list of secret env vars in <code class="highlighter-rouge">Secrets</code> and you wish to check the value of only one secret env var while leaving the other values hidden. If a value is hidden, it’s represented with the <code class="highlighter-rouge">crossed out eye</code> icon.</p>
 
-<p><img src="/img/hidden-value-1.png" alt="" /></p>
+<p><img src="/img/eye-icon.png" alt="" /></p>
 
 <p>If you toggle the <code class="highlighter-rouge">Replace variables in inputs</code> to the right, the new value will be used everywhere in your workflow.</p>
 
