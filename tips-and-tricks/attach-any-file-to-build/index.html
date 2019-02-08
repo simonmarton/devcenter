@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				Attach any file as an Artifact to the Build - Bitrise DevCenter
+				Attaching files as artifacts to a build - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							Attach any file as an Artifact to the Build
+							Attaching files as artifacts to a build
 						
 					</div>
 				</div>
@@ -1739,7 +1739,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/tips-and-tricks/attach-any-file-to-build/" title="Attach any file as an Artifact to the Build" class="current">Attach any file as an Artifact to the Build</a>
+				<a href="/tips-and-tricks/attach-any-file-to-build/" title="Attaching files as artifacts to a build" class="current">Attaching files as artifacts to a build</a>
 			
 		
 		
@@ -2097,58 +2097,53 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>Attach any file as an Artifact to the Build</h1>
+						<h1>Attaching files as artifacts to a build</h1>
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/tips-and-tricks/attach-any-file-to-build.md" target="_blank"></a>
 					</div>
 				
-				<p>For this example we’ll attach the OS X <code class="highlighter-rouge">system.log</code> to the Build as an Artifact,
-but this works for any file, even for ones that you generate during the build,
-you just have to replace the example path we use (<code class="highlighter-rouge">/var/log/system.log</code>) with the path you want to deploy.
-You can of course use Environment Variables in the path too, like <code class="highlighter-rouge">$HOME/</code>.</p>
+				<p>You can attach any file to a build as an artifact with Bitrise, even files that you generate during the build. Deployed Artifacts appear on the Build’s page, in the <code class="highlighter-rouge">Artifacts &amp; Apps</code> section, and anyone who has access to the Build page can download it from there.</p>
 
-<p><em>Deployed Artifacts appear on the Build’s page, in the Artifacts &amp; Apps section,
-and anyone who has access to the Build page can download it from there.</em></p>
+<p>We’ll go through an example of how to do this.</p>
 
-<p>To do this:</p>
+<ol>
+  <li>
+    <p>Add a <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step to your workflow.</p>
 
-<ul>
-  <li>Add a new <a href="https://github.com/bitrise-io/steps-deploy-to-bitrise-io">Deploy to Bitrise.io</a> step to your workflow, to any point you want to (can be the very last step in the workflow, but of course if you want to deploy a file which is generated during the build you should add the step <strong>after</strong> the file is generated and available).</li>
-  <li>Change the <code class="highlighter-rouge">Deploy directory or file path</code> input of the Step to: <code class="highlighter-rouge">/var/log/system.log</code></li>
-</ul>
+    <p>If you want to attach a file you generated during the build, add this Step after the Step that generates the file or makes it available. Otherwise it can be at any point</p>
+  </li>
+  <li>
+    <p>Change the <code class="highlighter-rouge">Deploy directory or file path</code> input of the Step to the path of the file you want to deploy.
+An example in yaml format:</p>
 
-<p>A YAML configuration example of the step &amp; input:</p>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">deploy-to-bitrise-io</span><span class="pi">:</span>
+   <span class="na">inputs</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="na">deploy_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/system.log"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run your build.</p>
+  </li>
+</ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - deploy-to-bitrise-io:
-        inputs:
-        - deploy_path: "/var/log/system.log"
-</code></pre></div></div>
-
-<p>That’s all, your next build will attach the OS X system log file
-to your build - you’ll see it at the top of the Build’s page.</p>
+<p>That’s it! Your next build will attach your file - in our example, the OS X system log file - to your build and you will see on the Build’s page.</p>
 
 <div class="message-box note">
 <div class="message-title">
-    <p>By default the <strong>Deploy to Bitrise.io</strong> will always run</p>
+    <p>By default the <strong>Deploy to Bitrise.io</strong> Step will always run</p>
   </div>
 
 <div class="message-content">
-
-    <p>By default the <code class="highlighter-rouge">Deploy to Bitrise.io</code> will always run, even if a previous step fails, <strong>so you can deploy failed step/tool logs too.</strong></p>
-
+    <p>By default the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step will always run, even if a previous step fails, <strong>so you can deploy failed Step/tool logs too.</strong></p>
   </div>
 </div>
 
-<h2 id="deploy-a-directory">Deploy a directory <a href="#deploy-a-directory" class="anchor-symbol">⚓</a></h2>
+<h3 id="deploying-to-a-directory">Deploying to a directory <a href="#deploying-to-a-directory" class="anchor-symbol">⚓</a></h3>
 
-<p>The <code class="highlighter-rouge">Deploy to Bitrise.io</code> step accepts both file and directory path as its input,
-but by default <strong>it does not deploy files recursively</strong>, from sub directories
-if you specify a directory as it’s <code class="highlighter-rouge">deploy_path</code> input.</p>
+<p>The <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step accepts both file and directory paths as its input, but by default <strong>it does not deploy files recursively</strong>, from sub directories if you specify a directory as its <code class="highlighter-rouge">deploy_path</code> input.</p>
 
-<p>If you want to do that and deploy the whole directory with every sub directory
-and the files in the sub directories, you have to enable the “Compress” option of the step.</p>
+<p>If you want to do that and deploy the whole directory with every sub directory and the files in the sub directories, you have to enable the “Compress” option of the Step.</p>
 
-<p>In this mode the step will compress (zip) the whole directory, and deploy
-the compressed file, instead of deploying files one by one.</p>
+<p>In this mode the Step will compress (zip) the whole directory, and deploy the compressed file, instead of deploying files one by one.</p>
 
 <p>An example configuration:</p>
 
@@ -2158,15 +2153,23 @@ the compressed file, instead of deploying files one by one.</p>
         - is_compress: 'true'
 </code></pre></div></div>
 
-<p><em>Note: as every input’s,</em> <code class="highlighter-rouge">is_compress</code><em>’s value have to be a <strong>string</strong>, that’s why</em> <code class="highlighter-rouge">_true_</code> <em>is surrounded with quotes.</em></p>
-
 <div class="message-box note">
 <div class="message-title">
-    <p>Using more than one <code class="highlighter-rouge">Deploy to Bitrise.io</code> step</p>
+    <p>Make sure input values are in the correct format!</p>
   </div>
 
 <div class="message-content">
-    <p>You can use as many <code class="highlighter-rouge">Deploy to Bitrise.io</code> steps as you want to, even in a single build / workflow. Alternatively of course you can move all the files you want to deploy into a single directory, and deploy that directory with the step, it’s up to you to decide which solution works best for you.</p>
+    <p>All input values have to be strings. This is why <code class="highlighter-rouge">is_compress</code>’s value - <code class="highlighter-rouge">true</code> - is surrounded with quotes.</p>
+  </div>
+</div>
+
+<div class="message-box note">
+<div class="message-title">
+    <p>Using more than one <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step</p>
+  </div>
+
+<div class="message-content">
+    <p>You can use as many <code class="highlighter-rouge">Deploy to Bitrise.io</code> Steps as you want to, even in a single build or workflow. Alternatively, you can move all the files you want to deploy into a single directory, and deploy that directory with the Step.</p>
   </div>
 </div>
 
