@@ -2101,53 +2101,69 @@
 						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/bitrise-cli/index.md" target="_blank"></a>
 					</div>
 				
-				<p>Bitrise is a collection of tools and services to help you with the development
-and automation of your software projects, with a main focus on mobile apps.</p>
+				<p>Bitrise is a <a href="https://devcenter.bitrise.io/tools/bitrise-tools/">collection of tools</a> and <a href="https://www.bitrise.io">services</a> to help you with the development and automation of your software projects, with a main focus on mobile apps. Most of our DevCenter describes functionalities related to <a href="https://www.bitrise.io">bitrise.io</a>, the hosted automation service, however, the heart of Bitrise is the <a href="https://github.com/bitrise-io/bitrise">open source Bitrise CLI / runner</a>, which is responsible for interpreting and executing the build configuration.</p>
 
-<p>Most of this DevCenter describes things related to <a href="https://www.bitrise.io">bitrise.io</a>,
-the hosted automation service, but the heart of Bitrise is the
-<a href="https://github.com/bitrise-io/bitrise">open source Bitrise CLI / runner</a>,
-which is responsible for interpreting the build configuration and executing it.</p>
+<h2 id="bitrise-cli---the-open-source-offline-automation-runner">Bitrise CLI - the open source, offline, automation runner <a href="#bitrise-cli---the-open-source-offline-automation-runner" class="anchor-symbol">⚓</a></h2>
 
-<p>This open source runner is referred to as <code class="highlighter-rouge">Bitrise CLI</code> or <code class="highlighter-rouge">Bitrise</code>,
-and <strong>it’s a tool which you can install and run on your own Mac/PC!</strong></p>
-
-<p>This section of the DevCenter is dedicated to this runner (<code class="highlighter-rouge">Bitrise CLI</code>) and the
-<code class="highlighter-rouge">bitrise.yml</code> configuration format, <strong>the things described here don’t even require a</strong>
-<a href="https://www.bitrise.io"><strong>bitrise.io</strong></a> <strong>account</strong>, the only requirement is that
-you install the <code class="highlighter-rouge">Bitrise CLI</code> on your Mac/PC.</p>
+<p>This open source runner, referred to as <code class="highlighter-rouge">Bitrise CLI</code> or <code class="highlighter-rouge">Bitrise</code>, is a tool which you can install and run on your own Mac/PC! <strong>This CLI is exactly the same as what’s used on</strong> <a href="https://www.bitrise.io">bitrise.io</a>. What it means is that when a build starts on <a href="https://www.bitrise.io">bitrise.io</a>, a virtual machine is created for the build with the <code class="highlighter-rouge">Bitrise CLI</code> preinstalled. Once the virtual machine is ready, the build is performed through the <code class="highlighter-rouge">Bitrise CLI</code>.</p>
 
 <div class="message-box note">
 <div class="message-title">
-    <p>Bitrise CLI on bitrise.io</p>
+    <p>Do I need a bitrise.io account to use the Bitrise CLI offline runner?</p>
+  </div>
+
+<div class="message-content">
+    <p>You do not need a <a href="https://www.bitrise.io">bitrise.io</a> account to use the offline automation runner, the only requirement is to install <code class="highlighter-rouge">Bitrise CLI</code> on your Mac/PC.</p>
+  </div>
+</div>
+
+<p>To run a Bitrise build on your machine, you can install our <a href="https://www.bitrise.io/cli">open source runner</a> and use the <code class="highlighter-rouge">bitrise</code> command to <strong>execute your workflows locally</strong>. It’s a great help when you’re developing steps, debugging builds, or just want to use Bitrise for any kind of automation on your machine.</p>
+
+<div class="message-box info">
+<div class="message-title">
+    <p>Explore Bitrise CLI</p>
   </div>
 
 <div class="message-content">
 
-    <p>The CLI you can install is exactly the same as what’s used on <a href="https://www.bitrise.io">bitrise.io</a>. When a build starts on <a href="https://www.bitrise.io">bitrise.io</a>, a virtual machine is created for the build with the Bitrise CLI preinstalled, and once the virtual machine is ready, the build is performed through the Bitrise CLI.</p>
+    <p>Learn more about what else you can do with <code class="highlighter-rouge">Bitrise CLI</code>:</p>
+
+    <ul>
+      <li><a href="/bitrise-cli/installation/">Installing and updating the Bitrise CLI</a></li>
+      <li><a href="/bitrise-cli/offline-workflow-editor/">Installing and upgrading the offline Workflow Editor</a></li>
+      <li><a href="/bitrise-cli/initializing-a-bitrise-project-locally/">Initializing a Bitrise project locally</a></li>
+      <li><a href="/bitrise-cli/run-your-first-build/">Running your first build</a></li>
+    </ul>
+
   </div>
 </div>
 
-<h2 id="bitrise-cli---the-open-source-offline-automation-runner">Bitrise CLI - the open source, offline, automation runner <a href="#bitrise-cli---the-open-source-offline-automation-runner" class="anchor-symbol">⚓</a></h2>
-
-<p>To run a Bitrise build on your machine, you can install our <a href="https://www.bitrise.io/cli">open source runner</a>
-and use the <code class="highlighter-rouge">bitrise</code> command to execute your <em>workflows</em> locally.
-It’s a great help when you’re developing steps, debugging builds,
-or just want to use Bitrise for <em>any kind of automation</em> on your machine.</p>
-
 <h2 id="bitriseyml---the-configuration-format">bitrise.yml - the configuration format <a href="#bitriseyml---the-configuration-format" class="anchor-symbol">⚓</a></h2>
 
-<p>The configuration format of the <code class="highlighter-rouge">Bitrise CLI</code> is referred to as <code class="highlighter-rouge">bitrise.yml</code>,
-as that’s the expected file name the configuration should be saved with.</p>
+<p>The configuration format of the <code class="highlighter-rouge">Bitrise CLI</code> is referred to as <code class="highlighter-rouge">bitrise.yml</code>. This is the expected file name the configuration should be saved with.</p>
 
-<p><em>Technically the CLI can also accept the configuration in JSON format, and the file name can be changed too, but if you save the configuration into a file named</em> <code class="highlighter-rouge">_bitrise.yml_</code><em>, you can simply</em> <code class="highlighter-rouge">_bitrise run_</code> <em>in that directory, without specifying any configuration path, and the CLI will read the configuration from</em> <code class="highlighter-rouge">_bitrise.yml_</code> <em>automatically.</em></p>
+<p>If you save the configuration into a file named <code class="highlighter-rouge">bitrise.yml</code>, you can simply <code class="highlighter-rouge">bitrise run</code> in that directory without specifying any configuration path! This way the CLI will read the configuration from <code class="highlighter-rouge">bitrise.yml</code> automatically.  (Technically the <code class="highlighter-rouge">Bitrise CLI</code> can also accept the configuration in JSON format.)</p>
+
+<div class="message-box info">
+<div class="message-title">
+    <p>Explore bitrise.yml</p>
+  </div>
+
+<div class="message-content">
+
+    <p>Learn more about what else you can do with <code class="highlighter-rouge">bitrise.yml</code>:</p>
+
+    <ul>
+      <li><a href="/bitrise-cli/basics-of-bitrise-yml/">Basics of bitrise.yml</a></li>
+      <li><a href="/bitrise-cli/customizing-bitrise-yml/">Customizing bitrise.yml</a></li>
+    </ul>
+
+  </div>
+</div>
 
 <h2 id="step-library-steplib">Step Library (StepLib) <a href="#step-library-steplib" class="anchor-symbol">⚓</a></h2>
 
-<p>The StepLib is the collection of the build steps you can use in your
-<code class="highlighter-rouge">bitrise.yml</code>. The steps in the official <a href="https://github.com/bitrise-io/bitrise-steplib">Bitrise StepLib</a>
-are all open source, <strong>you can write your own</strong> too and then share it with others!
-See the <a href="https://github.com/bitrise-steplib/step-template">step-template</a> for more information.</p>
+<p>The StepLib is the collection of the build steps you can use in your <code class="highlighter-rouge">bitrise.yml</code>. The steps in the official <a href="https://github.com/bitrise-io/bitrise-steplib">Bitrise StepLib</a> are all open source. You <a href="/bitrise-cli/create-your-own-step/">can write your own too and then share</a> it with others!</p>
 
 <p>You can also create your own Step Library if you want to, but it’s usually easier to just reference your steps with their <code class="highlighter-rouge">git clone</code> URL directly if you don’t want to share it with others.</p>
 
@@ -2157,34 +2173,40 @@ See the <a href="https://github.com/bitrise-steplib/step-template">step-template
   </div>
 
 <div class="message-content">
-
     <p>The Bitrise CLI tools can work with custom step libraries, but other tools like the Visual Workflow Editor on <a href="https://www.bitrise.io">bitrise.io</a> might be limited in functionality for steps not available in the main <a href="https://github.com/bitrise-io/bitrise-steplib">Bitrise StepLib</a>.</p>
   </div>
 </div>
 
-<p>If possible, you should share your steps in the main <a href="https://github.com/bitrise-io/bitrise-steplib">Bitrise StepLib</a>,
-to help others as well as for the extra reliability the StepLib offers.</p>
+<p>Custom StepLibs can also provide fallbacks (alternative download URLs, caches), automatic and periodic checks to provide the best reliability, but you get all these for free if you use the main <a href="https://github.com/bitrise-io/bitrise-steplib">Bitrise StepLib</a>.</p>
 
-<p><em>Custom StepLibs can also provide fallbacks (alternative download URLs, caches),
-automatic and preiodic checks etc. to provide the best reliability, but you get all these for free
-if you use the main Bitrise StepLib.</em></p>
+<div class="message-box info">
+<div class="message-title">
+    <p>About Steps</p>
+  </div>
+
+<div class="message-content">
+    <p>Learn more about Steps here:</p>
+
+    <ul>
+      <li><a href="/bitrise-cli/steps/">Steps in YAML</a></li>
+      <li><a href="/bitrise-cli/step-properties/">Step properties</a></li>
+      <li><a href="/bitrise-cli/step-inputs/">Step inputs</a></li>
+      <li><a href="/bitrise-cli/step-outputs/">Step outputs</a></li>
+    </ul>
+  </div>
+</div>
 
 <h3 id="why-to-use-the-steplib-and-steps-instead-of-ad-hoc-build-scripts">Why to use the StepLib and Steps instead of ad-hoc build scripts? <a href="#why-to-use-the-steplib-and-steps-instead-of-ad-hoc-build-scripts" class="anchor-symbol">⚓</a></h3>
 
 <p>Same reason why code libraries / dependencies are awesome:</p>
 
-<p>You have a code which can be updated independently from other parts,
-and <strong>you can re-use/share</strong> this between your configurations.</p>
+<ul>
+  <li><strong>Re-use and share</strong>: You have a code which can be updated independently from other parts, and you can re-use/share this between your configurations.</li>
+  <li><strong>Shared maintenance</strong>: when you use Steps created by others you don’t have to maintain the codes, but you can contribute to it if you want to, or create and use your own.</li>
+  <li><strong>Versioned</strong>: If a new version doesn’t work for you, you can always go back to a previous one.</li>
+</ul>
 
-<p><strong>Shared maintenance</strong>: when you use Steps created by others you don’t have to maintain
-the codes, but you can contribute to it if you want to, or create and use your own.</p>
-
-<p><strong>Versioned</strong>: If a new version doesn’t work for you, <strong>you can always go back to a previous one</strong>.</p>
-
-<p><em>We frequently push features as Steps instead of building it into the core tools.
-This allows faster and versioned iterations, and updating the parts independently.
-We try to maintain compatibility as much as possible, so older versions can work too,
-providing a way to upgrade when it’s appropriate for you.</em></p>
+<p>We frequently push features as Steps instead of building it into the core tools. This allows faster and versioned iterations, and updating the parts independently. We try to maintain compatibility as much as possible, so older versions can work too, providing a way to upgrade when it’s appropriate for you.</p>
 
 			</main>
 		</div>
