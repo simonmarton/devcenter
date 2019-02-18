@@ -2121,19 +2121,23 @@
   <li>
     <p>First you have to turn on <code class="highlighter-rouge">Device Testing</code> on the app’s <code class="highlighter-rouge">Settings</code> tab. Toggle the switch to the right in the upper right corner of <code class="highlighter-rouge">Device Testing</code>.</p>
 
-    <p><img src="/img/settings-device-testing.png" alt="" /></p>
+    <p><img src="/img/enable-ui-test-on-virtual-devices.png" alt="" /></p>
   </li>
   <li>From <code class="highlighter-rouge">Settings</code>, go to your app’s <code class="highlighter-rouge">Build</code> page.</li>
   <li>Click on a build you want to test.</li>
   <li>
     <p>If you have enabled device testing in Step 1., you should find <code class="highlighter-rouge">DEVICE TESTS BETA</code> next to <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> as a third tab. Click it!</p>
 
-    <p><img src="/img/build-device-test.jpg" alt="" /></p>
+    <p><img src="/img/builds-device tests.png" alt="" /></p>
   </li>
   <li>Click <code class="highlighter-rouge">add step to primary workflow</code> to add two steps that you need for device testing to your primary workflow:
     <ul>
       <li><code class="highlighter-rouge">Android Build</code> Step for <code class="highlighter-rouge">robo</code> test or <code class="highlighter-rouge">Android Build for UI Testing</code> Step for <code class="highlighter-rouge">instrumentation</code> test</li>
-      <li><code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step to run tests and create test reports.<img src="/img/primary-virtual-device.png" alt="" /></li>
+      <li>
+        <p><code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step to run tests and create test reports.</p>
+
+        <p><img src="/img/add-step-to-primary-workflow.png" alt="" /></p>
+      </li>
     </ul>
   </li>
 </ol>
