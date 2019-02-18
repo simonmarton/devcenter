@@ -2113,20 +2113,8 @@
 				<p>If you want to do manual SSH key configuration on <a href="https://www.bitrise.io">bitrise.io</a>
 you can generate an appropriate SSH keypair with a simple Command Line / Terminal command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen -t rsa -b 4096 -P '' -f ./bitrise-ssh
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen -t rsa -b 4096 -P '' -f ./bitrise-ssh -m PEM
 </code></pre></div></div>
-
-<div class="message-box info">
-<div class="message-title">
-    <p>Mojave issues</p>
-  </div>
-
-<div class="message-content">
-    <p>If you are on the Mojave OS, and having difficulties with the above command, use the following:</p>
-
-    <p><code class="highlighter-rouge">ssh-keygen -t rsa -b 4096 -P '' -f ./bitrise-ssh -m PEM</code></p>
-  </div>
-</div>
 
 <p>This will generate two files in the current directory (the directory where
 you run the command):</p>
