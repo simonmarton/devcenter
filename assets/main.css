@@ -117,17 +117,6 @@ header.top-bar {
           cursor: pointer; }
           header.top-bar .middle-aligner .search-bar .input-wrapper .search-clear:before {
             content: ""; }
-    header.top-bar .middle-aligner .lang-selector {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0; }
-      header.top-bar .middle-aligner .lang-selector a {
-        margin-left: 1rem;
-        color: white;
-        text-decoration: none;
-        font-size: 1.4rem; }
-        header.top-bar .middle-aligner .lang-selector a.active {
-          font-weight: bold; }
     header.top-bar .middle-aligner .source-code {
       display: flex;
       align-items: center;
