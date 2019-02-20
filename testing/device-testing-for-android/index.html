@@ -2188,6 +2188,45 @@
   <li>Start a build and <a href="/testing/device-testing-for-android/#running-instrumentation-tests">check your test results</a>.</li>
 </ol>
 
+<h4 id="setting-user-input-with-robo-directives-for-successful-robo-tests">Setting user input with Robo directives for successful robo tests <a href="#setting-user-input-with-robo-directives-for-successful-robo-tests" class="anchor-symbol">⚓</a></h4>
+
+<p>If your app needs specific user interaction for a successful robo test, you can use the <code class="highlighter-rouge">Robo Directives</code> input field to set those necessary inputs. For example, certain UI elements of the app are only accessible for robo testing if the required user inputs (username and email address) are populated for log in.</p>
+
+<ol>
+  <li>Click the <code class="highlighter-rouge">[BETA] Virtual Device Testing for Android</code> Step in your workflow.</li>
+  <li>Click the <code class="highlighter-rouge">Robo Test</code> section.</li>
+  <li>Find the <code class="highlighter-rouge">Robo directives</code> input field and set your required user input directives.
+    <ul>
+      <li>
+        <p>provide a comma-separated list of key-value pairs, where the <strong>key</strong> is the Android resource name of the target UI element, and the <strong>value</strong> is the text string. EditText fields are supported but not text fields in WebView UI elements. For example, you could use the following parameter for custom login:</p>
+
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>username_resource,username,ENTER_TEXT
+password_resource,password,ENTER_TEXT
+loginbtn_resource,,SINGLE_CLICK
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>One directive per line, the parameters are separated with <code class="highlighter-rouge">,</code> character. For example: <code class="highlighter-rouge">ResourceName,InputText,ActionType</code></p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><img src="/img/robo-directives.png" alt="" /></p>
+
+<p>Based on the input you provide, you can successfully run a robo test (even on pages that are only accessible with a specific user input) and check the test results on the <code class="highlighter-rouge">DEVICE TESTS</code> tab of your Build’s page. The test results can be, for example:</p>
+
+<ul>
+  <li>screenshots of the final state of the Emulator screen</li>
+  <li>recorded video</li>
+  <li>logs</li>
+  <li>files</li>
+</ul>
+
+<p>Here is a screenshot of a successful robo test, where the robo test got all the way through to <code class="highlighter-rouge">My application</code> by populating the <code class="highlighter-rouge">email</code> and <code class="highlighter-rouge">password</code> fields first with the pre-defined directives from the <code class="highlighter-rouge">Robo directives</code>.</p>
+
+<p><img src="/img/successful-robo-test.jpg" alt="" /></p>
+
 <h3 id="running-instrumentation-tests">Running instrumentation tests <a href="#running-instrumentation-tests" class="anchor-symbol">⚓</a></h3>
 
 <ol>
