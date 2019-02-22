@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			
-				User roles on app teams - Bitrise DevCenter
+				Screen recording your UI tests with Appium - Bitrise DevCenter
 			
 		</title>
 		<meta property="og:title" content="Bitrise DevCenter">
@@ -35,7 +35,7 @@
 					<button class="burger material-icon" onclick="toggleSideBar()"></button>
 					<div class="title">
 						
-							User roles on app teams
+							Screen recording your UI tests with Appium
 						
 					</div>
 				</div>
@@ -419,7 +419,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/team-management/user-roles-on-app-teams/" title="User roles on app teams" class="current">User roles on app teams</a>
+				<a href="/team-management/user-roles-on-app-teams/" title="User roles on app teams">User roles on app teams</a>
 			
 		
 		
@@ -1739,7 +1739,7 @@
 	<li class="menu-item">
 		
 			
-				<a href="/tips-and-tricks/screen-recording-your-ui-tests-with-appium/" title="Screen recording your UI tests with Appium">Screen recording your UI tests with Appium</a>
+				<a href="/tips-and-tricks/screen-recording-your-ui-tests-with-appium/" title="Screen recording your UI tests with Appium" class="current">Screen recording your UI tests with Appium</a>
 			
 		
 		
@@ -2115,95 +2115,53 @@
 			<main class="content">
 				
 					<div class="title-with-source-edit">
-						<h1>User roles on app teams</h1>
-						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/team-management/user-roles-on-app-teams.md" target="_blank"></a>
+						<h1>Screen recording your UI tests with Appium</h1>
+						<a class="material-icon" href="https://github.com/bitrise-io/devcenter/blob/master/_articles/tips-and-tricks/screen-recording-your-ui-tests-with-appium.md" target="_blank"></a>
 					</div>
 				
-				<p>Roles are very important on Bitrise. They limit what you can and cannot do with an application.</p>
+				<p><a href="http://appium.io/">Appium</a> is a popular testing framework to catch defects in native, hybrid, and web apps. You can easily integrate your Appium UI tests into your own Bitrise workflow using our <code class="highlighter-rouge">Script</code> Step. This way you can have the whole testing screen recorded and can visually verify if your app is doing what it’s supposed to do.</p>
 
-<p>Roles work on an application basis: the same user can have different roles on different applications. As such, organizations have no inherent “roles”, apart from that of the organization owners: organizations have groups and different groups can be assigned different roles.</p>
+<p>In this guide we’ll show how to kickstart Appium and run your UI test specified in the <code class="highlighter-rouge">test.js</code> file, then retrieve the test results and view them on <a href="https://www.bitrise.io">bitrise.io</a>.</p>
 
-<p>Bitrise has the following roles:</p>
+<div class="message-box note">
+<div class="message-title">
+    <p>ADB workaround for Javascript</p>
+  </div>
 
-<ul>
-  <li><a href="/team-management/user-roles-on-app-teams/#owners">Owners</a></li>
-  <li><a href="/team-management/user-roles-on-app-teams/#admins">Admins</a></li>
-  <li><a href="/team-management/user-roles-on-app-teams/#developers">Developers</a></li>
-  <li><a href="/team-management/user-roles-on-app-teams/#testersqa">Testers/QA</a></li>
-</ul>
+<div class="message-content">
+    <p>Javascript does not support the in-built screen recording and screen capturing commands so we’re using ADB shell commands as a workaround. For all the other languages, check out <a href="http://appium.io/docs/en/commands/device/recording-screen/start-recording-screen/">Appium’s Start Recording Screen</a> guide.</p>
+  </div>
+</div>
 
-<h3 id="owners">Owners <a href="#owners" class="anchor-symbol">⚓</a></h3>
-
-<p>There are two types of owners: <strong>application owners</strong> and <strong>organization owners</strong>.</p>
-
-<p>By the default, the owner of an application is the account that created the application. This can be either an individual user or an organization. <strong>An owner of an organization has owner rights to all the apps owned by the organization.</strong></p>
-
-<p>Here’s the role cheatsheet for owners:</p>
-
-<p><img src="/img/owners.png" alt="" /></p>
-
-<p>Owners have unlimited access to applications. Only owners can destroy apps or <a href="/team-management/changing-the-owner-of-an-app/">transfer the ownership of apps</a>, and <strong>only they have access to payment information</strong>.</p>
-
-<p>If an organization owns the app, only the owners of the organization can transfer or destroy the app.</p>
-
-<h3 id="admins">Admins <a href="#admins" class="anchor-symbol">⚓</a></h3>
-
-<p>Admins can be assigned to applications, either in groups or individually. Organizations do not have admins: organization groups can be assigned to applications as admins.</p>
-
-<p>Here’s the role cheatsheet for admins:</p>
-
-<p><img src="/img/admins.png" alt="" /></p>
-
-<p>So, for example, an admin cannot delete an application but can invite other members to work on the app. The admin can also give admin rights to other users - however, <a href="/team-management/changing-the-owner-of-an-app/">they cannot transfer ownership</a> of the app!</p>
-
-<h3 id="developers">Developers <a href="#developers" class="anchor-symbol">⚓</a></h3>
-
-<p>Developers can be assigned to applications, either in groups or individually. Organizations do not have developers: organization groups can be assigned to applications as developers.</p>
-
-<p>Here’s the role cheatsheet for developers:</p>
-
-<p><img src="/img/developers.png" alt="" /></p>
-
-<p>So, for example, developers cannot change team member roles, add new team members, remove existing team members or create, edit or delete workflows. They can, however, run builds and view build logs.</p>
-
-<p>They have no access to sensitive data such as payment information, access tokens or even webhooks.</p>
-
-<h3 id="testersqa">Testers/QA <a href="#testersqa" class="anchor-symbol">⚓</a></h3>
-
-<p>Testers can be assigned to applications, either in groups or individually. Organizations do not have testers: organization groups can be assigned to applications as testers.</p>
-
-<p>Here’s the role cheatsheet for testers/QA:</p>
-
-<p><img src="/img/testers.png" alt="" /></p>
-
-<p>Testers can only view builds. They cannot access build logs and they cannot modify the app in any way or form.</p>
-
-<p>They have no access to sensitive data such as payment information, access tokens or even webhooks.</p>
-
-<h3 id="assigning-roles-to-users">Assigning roles to users <a href="#assigning-roles-to-users" class="anchor-symbol">⚓</a></h3>
-
-<p>There are three ways to assign roles to users:</p>
+<p>We will use our <code class="highlighter-rouge">Script</code> and <code class="highlighter-rouge">Deploy to Bitrise.io</code> Steps. Here is why:</p>
 
 <ul>
-  <li>Invite an individual user account to work on the app, and assign it a certain role: we’ll cover that in this guide!</li>
-  <li><a href="/team-management/organizations/managing-apps/#assigning-groups-to-apps">Assign a group of the organization that owns the app a certain role</a>.</li>
+  <li>the <code class="highlighter-rouge">Script</code> Step executes what you insert in its input field</li>
+  <li>the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step delivers your test result to the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab of your Build’s page.</li>
 </ul>
 
-<p>Users who have <strong>owner</strong> or <strong>admin</strong> rights to the applications can invite new team members and assign them roles. Let’s see how to assign individual users to apps!</p>
+<p>Let’s put this all together!</p>
 
 <ol>
-  <li>Open the app’s page on Bitrise.</li>
-  <li>Click the <code class="highlighter-rouge">Team</code> tab.</li>
+  <li>Insert the <code class="highlighter-rouge">Script</code> Step as the first Step in your workflow.</li>
+  <li>Click the Step.</li>
   <li>
-    <p>In the <code class="highlighter-rouge">Add users to this app</code> box, type the username or the email of the user you want to invite.</p>
+    <p>Insert the following command to the <code class="highlighter-rouge">Script content</code> input field.</p>
 
-    <p><img src="/img/add-users.png" alt="" /></p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>appium &amp;&gt; $BITRISE_DEPLOY_DIR/logs.txt &amp; 
+disown
+npm test
+</code></pre></div>    </div>
 
-    <p>Note that <a href="/team-management/organizations/managing-apps/#adding-outside-contributors-to-an-app">the process is the same if the app is owned by an organization</a> except you will see <code class="highlighter-rouge">Add outside contributors to this app</code> above the box where you enter the username or email.</p>
+    <p>You will find the above mentioned logs.txt file in the Bitrise deploy directory (<code class="highlighter-rouge">BITRISE_DEPLOY_DIR</code>). This logs.txt file contains the outputs of the Appium server. With the help of the <code class="highlighter-rouge">Deploy to Bitrise.io</code> Step you will be able to download this file from the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab.</p>
   </li>
-  <li>Select the role you want to assign.</li>
-  <li>Click <code class="highlighter-rouge">Grant Access</code>.</li>
+  <li>Since screen recoding is not supported through Javascript, we advise you to add the <a href="http://adbshell.com/commands/adb-shell-screenrecord">screen recording</a> / <a href="http://adbshell.com/commands/adb-shell-screencap">screen capturing</a> and the<a href="http://adbshell.com/commands/adb-pull"> file retrieving</a> shell commands to your own <code class="highlighter-rouge">test.js</code> file.</li>
+  <li>Once you have pulled the test results (which in this case can be videos and screenshots) from the emulator, make sure you move them to the Bitrise deploy directory (<code class="highlighter-rouge">BITRISE_DEPLOY_DIR</code>).</li>
+  <li>Insert the <code class="highlighter-rouge">Deploy to Bitrise.io - Apps, Logs, Artifacts</code> Step to your workflow so that it can export your test results to the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab on your Build’s page.</li>
+  <li>Start a build!</li>
 </ol>
+
+<p>If all went well, you should be able to view the generated test results on the <code class="highlighter-rouge">APPS &amp; ARTIFACTS</code> tab of your Build’s page.</p>
 
 			</main>
 		</div>
