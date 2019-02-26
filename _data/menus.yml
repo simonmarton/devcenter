@@ -30,7 +30,7 @@ main:
   weight: 13
 - title: Builds
   identifier: builds
-  weight: 6
+  weight: 7
 - title: Testing
   identifier: testing
   weight: 9
@@ -54,7 +54,7 @@ main:
   weight: 5
 - title: Code signing
   identifier: code-signing
-  weight: 7
+  weight: 6
 - title: Caching
   identifier: caching
   weight: 8
