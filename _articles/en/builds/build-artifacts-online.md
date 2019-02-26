@@ -1,13 +1,10 @@
 ---
 title: Build artifacts online
-menu:
-  builds:
-    weight: 6
 
 ---
 If you select a build of your app, in the `APPS & Artifacts` tab of your build's page you can check out the artifacts (for example, files & reports) which have been generated during the build. All files are destroyed at the end of the build so if you want to view or download any files, insert `Deploy to bitrise.io` step to your workflow so that it can help you access the artifacts.
 
-## Deploying files into artifacts
+## x Deploying files into artifacts
 
 Artifacts are deployed into the `APPS & Artifacts` section in your build's page with the help of the `Deploy to Bitrise.io` step. It deploys all the files which have been generated during the build and stores them in the `$BITRISE_DEPLOY_DIR` directory. You can change the target directory path in the `Deploy directory or file path` field under the `Config` section of the step.
 
