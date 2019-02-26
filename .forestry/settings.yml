@@ -4,6 +4,11 @@ auto_deploy: false
 admin_path: ''
 webhook_url: 
 sections:
+- type: directory
+  path: _articles/jp
+  label: articles jp
+  create: all
+  match: "**/*"
 - type: document
   path: forestry-help.md
   label: Forestry User Guide
