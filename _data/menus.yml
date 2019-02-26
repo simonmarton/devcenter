@@ -2,10 +2,10 @@
 code-signing:
 - title: iOS code signing
   identifier: ios-code-signing
-  weight: 2
+  weight: 1
 - title: Android code signing
   identifier: android-code-signing
-  weight: 1
+  weight: 2
 deployment:
 - title: Android deployment
   identifier: android-deploy
