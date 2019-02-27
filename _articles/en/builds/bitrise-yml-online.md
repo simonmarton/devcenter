@@ -1,5 +1,5 @@
 ---
-title: Accessing the bitrise.yml file online
+title: Accessing the bitrise.yml file online x
 redirect_from:
 - "/bitrise-cli/bitrise-yml-online/"
 - "/bitrise-cli/bitrise-yml-online"
