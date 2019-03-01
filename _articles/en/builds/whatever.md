@@ -8,4 +8,4 @@ menu:
     title: whateverke??
 
 ---
-Whatever \~macska\~ kutya
+Whatever ~macska~ kutya
