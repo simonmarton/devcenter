@@ -21,3 +21,4 @@ fields:
         required: true
 pages:
 - _articles/en/builds/bitrise-yml-online.md
+- _articles/en/webhooks/adding-a-bitbucket-webhook.md
