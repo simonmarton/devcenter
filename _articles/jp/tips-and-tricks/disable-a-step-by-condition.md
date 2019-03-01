@@ -2,7 +2,7 @@
 title: Enable/Disable a step (optionally, based on a condition)
 menu:
   tips-and-tricks:
-    weight: 12
+    weight: 16
 
 ---
 {% include not_translated_yet.html %}

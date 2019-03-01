@@ -2,7 +2,7 @@
 title: Optimize your build times
 menu:
   tips-and-tricks:
-    weight: 17
+    weight: 21
 
 ---
 ビルド時間の改善には、以下のような方法が有効です。

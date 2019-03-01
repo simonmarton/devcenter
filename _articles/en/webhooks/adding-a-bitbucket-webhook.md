@@ -4,7 +4,7 @@ menu:
   builds:
     weight: 4
   webhooks:
-    weight: 4
+    weight: 5
 
 ---
 To have Bitrise automatically start a build every time you push code into your repository you

@@ -4,7 +4,7 @@ redirect_from:
 - "/xamarin/run-your-tests-in-the-app-center"
 menu:
   testing:
-    weight: 3
+    weight: 4
 
 ---
 {% include not_translated_yet.html %}

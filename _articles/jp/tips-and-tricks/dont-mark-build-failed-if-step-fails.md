@@ -2,7 +2,7 @@
 title: 指定されたステップが失敗してもそのビルドを失敗としてマークしないでください(そのステップのエラーを無視してください)
 menu:
   tips-and-tricks:
-    weight: 10
+    weight: 13
 
 ---
 *これを行うには`bitrise.yml`モードに切り替えてください(bitrise.ioのWorkflow Editorを開いて -> 左側:`bitrise.yml`をクリックして、`bitrise.yml`のインタラクティブエディターに切り替えてください)。*

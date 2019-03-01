@@ -2,7 +2,7 @@
 title: Installing any additional tools
 menu:
   tips-and-tricks:
-    weight: 16
+    weight: 20
 
 ---
 {% include not_translated_yet.html %}

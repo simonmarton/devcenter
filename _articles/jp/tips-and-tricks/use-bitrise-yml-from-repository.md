@@ -2,7 +2,7 @@
 title: Use bitrise.yml from repository
 menu:
   tips-and-tricks:
-    weight: 18
+    weight: 22
 
 ---
 {% include not_translated_yet.html %}

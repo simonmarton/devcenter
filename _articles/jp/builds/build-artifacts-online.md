@@ -2,7 +2,7 @@
 title: Build artifacts online asd
 menu:
   builds:
-    weight: 9
+    weight: 15
 
 ---
 {% include not_translated_yet.html %}

@@ -2,7 +2,7 @@
 title: Xcodeアーカイブ：書き出し
 menu:
   tips-and-tricks:
-    weight: 14
+    weight: 18
 
 ---
 [Bitrise.io](https://www.bitrise.io/)でiOS用の新しいアプリを作成した場合、

@@ -2,7 +2,7 @@
 title: Exposing env vars and using them in another step
 menu:
   tips-and-tricks:
-    weight: 9
+    weight: 11
 
 ---
 {% include not_translated_yet.html %}
