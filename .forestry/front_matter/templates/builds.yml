@@ -20,6 +20,6 @@ fields:
       config:
         required: false
 pages:
+- _articles/en/builds/rolling-builds.md
 - _articles/en/webhooks/adding-a-bitbucket-webhook.md
 - _articles/en/builds/bitrise-yml-online.md
-- _articles/en/builds/rolling-builds.md
